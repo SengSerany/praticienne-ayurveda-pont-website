@@ -1,0 +1,22 @@
+# Fichiers Claude Code - non versionnes
+CLAUDE.md
+CONTEXT.md
+
+# Documentation de travail et specs
+docs/
+
+# Dependances (a adapter selon la techno)
+node_modules/
+.env
+.env.local
+.env*.local
+
+# Build (a adapter selon la techno)
+dist/
+build/
+.next/
+.nuxt/
+
+# OS
+.DS_Store
+Thumbs.db
