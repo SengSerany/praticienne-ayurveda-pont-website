@@ -1,1 +1,20 @@
+# Fichiers Claude Code - non versionnes
+CLAUDE.md
+CONTEXT.md
+
+# Documentation de travail et specs
 docs/
+
+# Dependances
+node_modules/
+.env
+.env.local
+.env*.local
+
+# Build Astro
+dist/
+.astro/
+
+# OS
+.DS_Store
+Thumbs.db
