@@ -1,0 +1,48 @@
+---
+interface Props {
+  titre: string;
+  cest: string[];
+  cestPas: string[];
+}
+const { titre, cest, cestPas } = Astro.props;
+---
+
+<section class="pratfall">
+  <h2>{titre}</h2>
+  <div class="pratfall__colonnes">
+    <ul class="pratfall__col">
+      {cest.map((item) => <li>{item}</li>)}
+    </ul>
+    <ul class="pratfall__col pratfall__col--pas">
+      {cestPas.map((item) => <li>{item}</li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .pratfall {
+    padding: var(--espace-section) clamp(1.5rem, 5vw, 4rem);
+  }
+  .pratfall__colonnes {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 48rem) {
+    .pratfall__colonnes {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .pratfall__col {
+    list-style: none;
+    margin: 0;
+    padding: 1.5rem;
+    border: 1px solid var(--c-brun-reliure);
+  }
+  .pratfall__col li {
+    margin-bottom: 0.75rem;
+  }
+  .pratfall__col--pas {
+    color: var(--c-muted);
+  }
+</style>
