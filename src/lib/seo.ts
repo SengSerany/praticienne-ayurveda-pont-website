@@ -21,3 +21,36 @@ const SUFFIXE_MARQUE = 'Celine Lefevre - Ayurveda & Sante feminine';
 export function buildPageTitle(title?: string): string {
   return title ? `${title} | ${SUFFIXE_MARQUE}` : SUFFIXE_MARQUE;
 }
+
+export interface PersonJsonLdInput {
+  name: string;
+  jobTitle: string;
+  url: string;
+}
+
+export function buildPersonJsonLd(input: PersonJsonLdInput): string {
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: input.name,
+    jobTitle: input.jobTitle,
+    url: input.url,
+  });
+}
+
+export interface WebPageJsonLdInput {
+  name: string;
+  description: string;
+  url: string;
+  medical?: boolean;
+}
+
+export function buildWebPageJsonLd(input: WebPageJsonLdInput): string {
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': input.medical ? 'MedicalWebPage' : 'WebPage',
+    name: input.name,
+    description: input.description,
+    url: input.url,
+  });
+}

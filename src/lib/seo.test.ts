@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { buildBreadcrumbJsonLd, buildPageTitle } from './seo';
+import {
+  buildBreadcrumbJsonLd,
+  buildPageTitle,
+  buildPersonJsonLd,
+  buildWebPageJsonLd,
+} from './seo';
 
 describe('buildBreadcrumbJsonLd', () => {
   it('genere un BreadcrumbList ordonne', () => {
@@ -25,5 +30,36 @@ describe('buildPageTitle', () => {
 
   it('renvoie le suffixe seul sans titre', () => {
     expect(buildPageTitle()).toBe('Celine Lefevre - Ayurveda & Sante feminine');
+  });
+});
+
+describe('buildPersonJsonLd', () => {
+  it('genere un Person', () => {
+    const json = JSON.parse(
+      buildPersonJsonLd({
+        name: 'Céline Lefèvre',
+        jobTitle: 'Praticienne en Ayurveda',
+        url: 'https://x.fr/qui-je-suis',
+      }),
+    );
+    expect(json['@type']).toBe('Person');
+    expect(json.name).toBe('Céline Lefèvre');
+    expect(json.jobTitle).toBe('Praticienne en Ayurveda');
+  });
+});
+
+describe('buildWebPageJsonLd', () => {
+  it('genere une WebPage standard', () => {
+    const json = JSON.parse(
+      buildWebPageJsonLd({ name: 'Hub', description: 'd', url: 'https://x.fr/sante-feminine' }),
+    );
+    expect(json['@type']).toBe('WebPage');
+  });
+
+  it('genere une MedicalWebPage quand medical', () => {
+    const json = JSON.parse(
+      buildWebPageJsonLd({ name: 'Endo', description: 'd', url: 'https://x.fr/e', medical: true }),
+    );
+    expect(json['@type']).toBe('MedicalWebPage');
   });
 });
