@@ -1,0 +1,109 @@
+---
+import Button from '../ui/Button.astro';
+
+interface CTA {
+  label: string;
+  href: string;
+  variant?: 'filled' | 'outline';
+}
+interface Props {
+  eyebrow?: string;
+  titre: string;
+  sousLignes?: string[];
+  signature?: string;
+  cta?: CTA;
+  microcopy?: string;
+  variante?: 'couverture' | 'papier';
+}
+const {
+  eyebrow,
+  titre,
+  sousLignes = [],
+  signature,
+  cta,
+  microcopy,
+  variante = 'couverture',
+} = Astro.props;
+---
+
+<section class:list={['hero', `hero--${variante}`]}>
+  <div class="hero__corps">
+    {eyebrow && <p class="hero__eyebrow">{eyebrow}</p>}
+    <h1>{titre}</h1>
+    {sousLignes.map((ligne) => <p class="hero__sous-ligne" set:html={ligne} />)}
+    {signature && <p class="hero__signature">{signature}</p>}
+    {
+      cta && (
+        <p class="hero__cta">
+          <Button href={cta.href} label={cta.label} variant={cta.variant ?? 'outline'} />
+          {microcopy && <span class="hero__microcopy">{microcopy}</span>}
+        </p>
+      )
+    }
+    <div class="hero__texte"><slot /></div>
+  </div>
+  <div class="hero__media">
+    <slot name="media" />
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    gap: 2rem;
+    padding: var(--espace-section) clamp(1rem, 4vw, 3rem);
+  }
+  @media (min-width: 52rem) {
+    .hero {
+      grid-template-columns: 1.4fr 1fr;
+      align-items: center;
+    }
+  }
+  .hero--couverture {
+    background-color: var(--c-couverture);
+    color: var(--c-encre);
+  }
+  .hero--papier {
+    background-color: var(--c-papier);
+  }
+  .hero__eyebrow {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+    margin: 0 0 1rem;
+  }
+  .hero__sous-ligne {
+    max-width: 34rem;
+    font-size: var(--t-lead-size);
+    line-height: var(--t-lead-lh);
+  }
+  .hero__signature {
+    font-family: var(--f-quote);
+    font-style: italic;
+    font-size: var(--t-quote-size);
+    max-width: 34rem;
+  }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .hero__microcopy {
+    font-family: var(--f-quote);
+    font-style: italic;
+    color: var(--c-brun-reliure);
+  }
+  .hero__media:empty {
+    display: none;
+  }
+  .hero__texte {
+    max-width: 34rem;
+  }
+  .hero__texte:empty {
+    display: none;
+  }
+</style>

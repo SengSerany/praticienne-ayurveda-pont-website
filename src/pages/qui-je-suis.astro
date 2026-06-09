@@ -1,0 +1,202 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/page/Hero.astro';
+import SectionEditoriale from '../components/page/SectionEditoriale.astro';
+import Photo from '../components/ui/Photo.astro';
+import Seuil from '../components/sections/Seuil.astro';
+import { SITE } from '../data/site';
+import { buildPersonJsonLd } from '../lib/seo';
+
+const description =
+  "Dix ans en laboratoire de référence, puis l'Ayurveda. Spécialisée en santé féminine, avec une sensibilité particulière à l'endométriose. La cause avant le symptôme.";
+
+const personJsonLd = buildPersonJsonLd({
+  name: 'Céline Lefèvre',
+  jobTitle: 'Praticienne en médecine traditionnelle ayurvédique, spécialisée en santé féminine',
+  url: new URL('/qui-je-suis', SITE.url).href,
+});
+---
+
+<BaseLayout title="Qui je suis" description={description}>
+  <script type="application/ld+json" set:html={personJsonLd} is:inline />
+
+  <Hero
+    variante="papier"
+    eyebrow="QUI JE SUIS"
+    titre="Une scientifique qui a appris à écouter autrement."
+    sousLignes={[
+      "Céline Lefèvre, spécialisée en santé féminine, avec une sensibilité particulière à l'endométriose.",
+    ]}
+  >
+    <Photo slot="media" ref="PHOTO·03" alt="Mains, herbier et plan de travail" ratio="3 / 4" />
+    <p>
+      On me décrit souvent comme posée. C'est vrai, mais ce n'est pas de la réserve. C'est une
+      manière de tenir : ne pas précipiter, ne pas conclure trop vite, rester là le temps qu'il
+      faut.
+    </p>
+    <p>
+      Je préfère une présence stable à une chaleur qui déborde. Ce que je cherche à être, pour les
+      femmes que j'accompagne, c'est une <strong>force tranquille</strong> : pas la force qui impose,
+      pas la douceur qui cède.
+    </p>
+  </Hero>
+
+  <SectionEditoriale numero="01" surtitre="LA LIGNÉE" titre="Du laboratoire à l'herbier.">
+    <p>
+      Avant l'Ayurveda, il y a eu le laboratoire. Pendant dix ans, au CNRGS, j'ai analysé des
+      groupes sanguins rares, un travail de minutie où une conclusion hâtive n'a pas sa place. J'y
+      ai gagné un réflexe qui ne m'a jamais quittée : observer longtemps, vraiment, avant de nommer
+      quoi que ce soit.
+    </p>
+    <p>
+      Quand je suis venue à l'Ayurveda, je n'ai rien renié de cette exigence. J'ai simplement
+      découvert qu'elle pouvait s'appliquer autrement : non plus pour mesurer un marqueur isolé,
+      mais pour lire un terrain entier, le cycle, la digestion, le système nerveux, et la façon dont
+      tout cela se répond.
+    </p>
+    <p>
+      Le jour où ces deux mondes se sont assemblés, j'ai eu cette sensation très simple :
+      <em>bah oui, c'est logique.</em> C'est exactement ce que je cherche à provoquer chez vous.
+    </p>
+    <Photo slot="marge" ref="PHOTO·02" alt="Herbier et laboratoire" />
+  </SectionEditoriale>
+
+  <SectionEditoriale numero="02" surtitre="LA TRAVERSÉE" titre="L'endométriose, je vis avec.">
+    <p>
+      Je ne vais pas vous raconter mon histoire en détail. Ce n'est pas le sujet, et vous avez la
+      vôtre.
+    </p>
+    <p>
+      Ce que je veux vous dire tient en peu de mots. Je sais ce que c'est que de ne pas être crue,
+      d'enchaîner les rendez-vous, de s'entendre dire que « c'est normal ». Et je sais aussi, parce
+      que je l'ai cherché pendant des années, ce que la physiologie et l'Ayurveda peuvent éclairer
+      là où on m'avait dit qu'il n'y avait rien à comprendre.
+    </p>
+    <p>
+      Je ne vous promettrai jamais la guérison, personne ne le devrait. Mais mieux vivre avec, ça,
+      c'est possible. Et c'est déjà beaucoup.
+    </p>
+    <p>
+      C'est de là que vient ma manière de travailler. Pas d'une théorie apprise, d'un chemin que je
+      marche encore.
+    </p>
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="03"
+    surtitre="LES MOTS QUE JE CHOISIS"
+    titre="Je pèse mes mots, c'est un engagement, pas une coquetterie."
+  >
+    <p>
+      Vous remarquerez que je dis « spécialisée en santé féminine », mais « sensibilité particulière
+      à l'endométriose ». Ce n'est pas un détail de style. C'est une ligne que je tiens.
+    </p>
+    <p>
+      Sur la santé féminine (le cycle, les hormones, la digestion, leur dialogue), je suis
+      spécialisée, et je l'assume pleinement. Sur l'endométriose, je marche encore le chemin
+      moi-même. Je peux vous accompagner, et je le fais avec sérieux, mais je ne me présenterai
+      jamais comme experte de quelque chose que personne ne maîtrise entièrement.
+    </p>
+    <p>
+      Ce que je sais, je vous le dis avec netteté. Ce que j'apprends encore, je vous le dis aussi.
+      Dans un marché où l'on promet beaucoup, c'est peut-être ma façon la plus honnête de mériter
+      votre confiance.
+    </p>
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="04"
+    surtitre="MES CONVICTIONS"
+    titre="Quatre convictions qui guident tout ce que je fais."
+  >
+    <div class="convictions">
+      <div>
+        <h4>I · La cause prime.</h4>
+        <p>
+          On peut soulager un symptôme sans jamais le comprendre. Je préfère l'inverse : remonter à
+          la cause, même quand c'est plus long. La cause avant le symptôme, toujours.
+        </p>
+      </div>
+      <div>
+        <h4>II · Le simple n'est pas le faux.</h4>
+        <p>
+          Un conseil peut paraître modeste et changer beaucoup de choses. Ce n'est pas parce qu'un
+          geste est simple qu'il est sans effet, souvent, c'est même le contraire.
+        </p>
+      </div>
+      <div>
+        <h4>III · L'écoute est l'instrument.</h4>
+        <p>
+          On ne dit la vérité de son corps que lorsqu'on ne se sent pas jugée. Mon premier outil
+          n'est pas une plante : c'est le temps, et l'attention.
+        </p>
+      </div>
+      <div>
+        <h4>IV · L'autonomie est le but.</h4>
+        <p>
+          Mon métier n'est pas de vous rendre dépendante de moi. C'est de vous apprendre à lire
+          votre corps, pour qu'un jour, vous n'ayez plus besoin de moi.
+        </p>
+      </div>
+    </div>
+    <p>
+      Deux choses, enfin, que je refuse par principe : transformer l'alimentation en contrôle
+      anxieux (vous n'avez pas besoin d'un régime de plus) et opposer l'Ayurveda à votre médecine.
+      Les deux peuvent tenir ensemble. C'est dans la continuité, pas opposé.
+    </p>
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="05"
+    surtitre="CE QU'ON DIT DE MOI"
+    titre="Ce qu'on en dit, quand je n'écris pas à leur place."
+  >
+    <p class="note-lancement">
+      Je préfère ne pas mettre dans votre bouche ce que vous ressentirez. Les premiers retours
+      arrivent, je les publierai ici tels quels, sans en retoucher un mot. Y compris ceux que je ne
+      me permettrais pas d'employer pour me décrire moi-même.
+    </p>
+  </SectionEditoriale>
+
+  <Seuil
+    titre="Si cette manière de travailler vous parle, parlons-nous."
+    repli="Pas encore prête ? Gardez le fil avec La lettre."
+  >
+    <p>
+      Vous savez maintenant qui je suis, et comment je travaille. Si cela résonne avec ce que vous
+      cherchez, le plus simple est qu'on se parle : trente minutes, posément, gratuites et sans
+      engagement.
+    </p>
+    <p><a href="/sante-feminine">Voir tout ce que j'accompagne</a></p>
+    <p class="seuil-b2b">
+      Vous êtes un professionnel de santé ?
+      <a href="/professionnels-de-sante">Travaillons ensemble</a>
+    </p>
+  </Seuil>
+</BaseLayout>
+
+<style>
+  .convictions {
+    display: grid;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  @media (min-width: 48rem) {
+    .convictions {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .convictions h4 {
+    margin-bottom: 0.25rem;
+  }
+  .note-lancement {
+    color: var(--c-muted);
+    border-left: 2px solid var(--c-creme);
+    padding-left: 1rem;
+  }
+  .seuil-b2b {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    margin-top: 2rem;
+  }
+</style>

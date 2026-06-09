@@ -1,0 +1,281 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/page/Hero.astro';
+import SectionEditoriale from '../../components/page/SectionEditoriale.astro';
+import BandeauReassurance from '../../components/page/BandeauReassurance.astro';
+import Photo from '../../components/ui/Photo.astro';
+import Schema from '../../components/ui/Schema.astro';
+import Illustration from '../../components/ui/Illustration.astro';
+import ClauseYmyl from '../../components/ui/ClauseYmyl.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import Pratfall from '../../components/sections/Pratfall.astro';
+import BlocLettre from '../../components/sections/BlocLettre.astro';
+import Seuil from '../../components/sections/Seuil.astro';
+import { SITE } from '../../data/site';
+import { buildWebPageJsonLd } from '../../lib/seo';
+
+const description =
+  "Endométriose : une lecture de la cause racine (inflammation, digestion, système nerveux), en complément de votre suivi médical. Mieux vivre avec, c'est déjà beaucoup.";
+
+const medicalJsonLd = buildWebPageJsonLd({
+  name: 'Endométriose & Ayurveda, comprendre la cause, mieux vivre avec',
+  description,
+  url: new URL('/sante-feminine/endometriose', SITE.url).href,
+  medical: true,
+});
+
+const articles = [
+  'Endométriose : pourquoi la digestion change tout.',
+  'Douleurs de règles : ce que leur moment vous apprend.',
+  "Apaiser l'inflammation au quotidien : trois gestes simples.",
+];
+---
+
+<BaseLayout
+  title="Endométriose & Ayurveda, comprendre la cause, mieux vivre avec"
+  description={description}
+>
+  <script type="application/ld+json" set:html={medicalJsonLd} is:inline />
+
+  <Breadcrumb
+    items={[
+      { name: 'Accueil', url: '/' },
+      { name: "Ce que j'accompagne", url: '/sante-feminine' },
+      { name: 'Endométriose', url: '/sante-feminine/endometriose' },
+    ]}
+  />
+
+  <Hero
+    variante="papier"
+    eyebrow="SANTÉ FÉMININE · ENDOMÉTRIOSE"
+    titre="Endométriose : comprendre ce qui se joue, pour mieux vivre avec."
+  >
+    <Photo slot="media" ref="PHOTO·04" alt="Herbier documentaire, lumière rasante" ratio="3 / 4" />
+    <p>
+      Si vous êtes ici, vous savez déjà ce que c'est. Les douleurs qu'on minimise, les rendez-vous
+      où l'on vous dit que « c'est dans la moyenne », les années parfois avant un diagnostic. Vous
+      n'avez rien exagéré.
+    </p>
+    <p>
+      Ce que je vous propose ici n'est pas une promesse de plus. C'est une autre manière de regarder
+      votre endométriose : comprendre ce qui, dans votre corps, entretient l'inflammation et la
+      douleur, pour agir là où cela compte, en complément de votre suivi médical.
+    </p>
+    <p>
+      Soyons claires, tout de suite : je ne vous promets pas la guérison. Personne ne le devrait.
+      L'endométriose, je vis avec, moi aussi. Ce que je peux faire, c'est vous aider à mieux vivre
+      avec, et c'est déjà beaucoup.
+    </p>
+    <ClauseYmyl />
+  </Hero>
+
+  <SectionEditoriale
+    numero="01"
+    surtitre="CE QUI SE JOUE, VRAIMENT"
+    titre="L'endométriose ne se joue pas qu'au niveau de l'utérus."
+  >
+    <p>
+      On résume souvent l'endométriose à l'utérus. La réalité est plus large : c'est une
+      inflammation qui s'installe dans le temps, et que tout l'organisme finit par entretenir.
+    </p>
+    <p>Trois leviers reviennent presque toujours :</p>
+    <ul class="leviers">
+      <li>
+        <strong>L'inflammation.</strong> Une chaleur excessive dans les tissus, ce que la tradition nomme
+        un excès de <em>Pitta</em>, que l'on cherche à apaiser plutôt qu'à attiser.
+      </li>
+      <li>
+        <strong>La digestion.</strong> Quand le feu digestif, <em>Agni</em>, fonctionne mal, le
+        corps accumule des résidus qu'il peine à éliminer (<em>Ama</em>). Cette coulisse digestive
+        est, le plus souvent, la grande oubliée de l'endométriose.
+      </li>
+      <li>
+        <strong>Le système nerveux.</strong> La douleur chronique épuise le système nerveux, qui en retour
+        amplifie la douleur. C'est un cercle, que l'on peut apprendre à desserrer.
+      </li>
+    </ul>
+    <p>
+      Comprendre ces trois leviers, c'est cesser de subir une douleur opaque, et commencer à agir
+      sur ses causes.
+    </p>
+    <Schema slot="marge" ref="SCHEMA·03" alt="La cause racine de l'endométriose" />
+  </SectionEditoriale>
+
+  <section class="pont-endo">
+    <p class="eyebrow-pont">§ 02 · LE PONT</p>
+    <h2>Vous n'aurez pas à choisir.</h2>
+    <p>
+      Vous n'aurez pas à choisir entre votre médecine et l'Ayurveda. C'est une fausse alternative.
+    </p>
+    <p>
+      Votre gynécologue, votre chirurgien, votre suivi hormonal s'il y en a un : tout cela garde sa
+      place. Mon travail vient à côté, sur le terrain, là où la médecine n'intervient pas toujours :
+      l'inflammation au quotidien, la digestion, le sommeil, la charge nerveuse.
+    </p>
+    <p>
+      Je lis vos analyses et vos comptes rendus. Je ne pose pas de diagnostic, je n'interromps aucun
+      suivi. Je travaille avec votre médecine, jamais contre elle.
+    </p>
+    <ClauseYmyl />
+  </section>
+
+  <SectionEditoriale
+    numero="03"
+    surtitre="CE QUE ÇA PEUT, ET NE PEUT PAS"
+    titre="Ce que cet accompagnement peut, et ce qu'il ne peut pas."
+  >
+    <Pratfall
+      titre=""
+      cest={[
+        "Aider à apaiser l'inflammation au quotidien.",
+        'Soutenir votre digestion, souvent malmenée.',
+        'Améliorer la qualité de votre sommeil et calmer la charge nerveuse.',
+        'Vous apprendre à lire vos signaux, cycle après cycle.',
+      ]}
+      cestPas={[
+        "Faire disparaître l'endométriose. Ce n'est pas une maladie qui se guérit, et je ne vous mentirai pas là-dessus.",
+        'Remplacer une chirurgie, ni votre suivi gynécologique ou hormonal.',
+        'Promettre un calendrier. Votre corps répond à son rythme, sur un à plusieurs cycles.',
+        "Se substituer à votre suivi médical : un symptôme nouveau ou qui s'aggrave mérite toujours l'avis de votre médecin, et je vous y orienterai sans hésiter.",
+      ]}
+    />
+    <p class="cta-intermediaire">
+      Vous vous reconnaissez ? <a href="/premier-echange">Commençons par nous parler.</a>
+    </p>
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="04"
+    surtitre="UNE PLANTE, UNE LOGIQUE"
+    titre="Aucune plante miracle, mais une logique, oui."
+  >
+    <p>Si quelqu'un vous vend LA plante qui règle l'endométriose, fuyez. Cela n'existe pas.</p>
+    <p>
+      Ce qui existe, c'est une logique. Selon votre terrain (votre digestion, votre niveau
+      d'inflammation, votre cycle), certaines plantes ont du sens, d'autres non. Le Gattilier n'a
+      rien à voir avec le Curcuma, et ce qui aide votre voisine peut vous être inutile, voire
+      déconseillé.
+    </p>
+    <p>
+      C'est pour cela que je ne donne jamais de liste toute faite. Chaque proposition est choisie
+      pour vous, à un moment précis, et accompagnée de sa raison, pour que vous compreniez ce que
+      vous prenez, et pourquoi.
+    </p>
+    <Illustration slot="marge" ref="ILLU·Gattilier" alt="Plante au trait, Gattilier" />
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="05"
+    surtitre="CE QU'ELLES EN DISENT"
+    titre="Dans leurs mots, pas les miens."
+  >
+    <p class="note-lancement">
+      Les premiers accompagnements en endométriose sont récents. Je ne publierai ici que de vrais
+      retours, jamais retouchés, et seulement quand il y en aura.
+    </p>
+    <p>
+      En attendant, ma légitimité sur ce sujet tient en deux places que j'occupe en même temps : une
+      scientifique qui sait lire vos analyses, et une femme qui vit l'endométriose. C'est de là que
+      je vous accompagne.
+    </p>
+  </SectionEditoriale>
+
+  <BandeauReassurance
+    items={[
+      'Dix ans en laboratoire de référence (CNRGS)',
+      'Lecture critique de vos bilans',
+      'Complémentaire de votre suivi médical',
+    ]}
+  />
+
+  <SectionEditoriale
+    numero="06"
+    surtitre="POUR ALLER PLUS LOIN"
+    titre="Trois chapitres pour commencer à comprendre."
+  >
+    <ul class="articles">
+      {
+        articles.map((titre) => (
+          <li>
+            <a href="/le-manuel">{titre}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </SectionEditoriale>
+
+  <BlocLettre
+    titre="Une lettre de fond. Jamais de vente."
+    promesse="Une fois par mois, un chapitre de lecture du corps. Pour commencer, un petit outil gratuit pour mieux comprendre votre terrain : quelques questions, un retour utile à la fin."
+  />
+
+  <Seuil
+    titre="Commençons par votre histoire, pas par l'endométriose en général."
+    repli="Pas encore prête ? Gardez le fil avec La lettre."
+  >
+    <p>
+      Chaque endométriose est différente. Avant de vous proposer quoi que ce soit, j'ai besoin
+      d'entendre la vôtre.
+    </p>
+    <p>
+      Commençons par nous parler : trente minutes, gratuites et sans engagement, juste le temps de
+      poser l'essentiel et de voir si je peux vous aider.
+    </p>
+    <p>
+      <a href="/accompagnement">Comment se passe l'accompagnement</a> ·
+      <a href="/qui-je-suis">Qui je suis</a>
+    </p>
+    <p class="signature-niche">Céline Lefèvre · Accompagnement Ayurvédique des Cycles</p>
+  </Seuil>
+</BaseLayout>
+
+<style>
+  .leviers {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    display: grid;
+    gap: 1rem;
+    max-width: var(--rythme-colonne);
+  }
+  .leviers li {
+    padding-left: 1rem;
+    border-left: 2px solid var(--c-creme);
+  }
+  .pont-endo {
+    background-color: var(--c-couverture);
+    color: var(--c-encre);
+    padding: var(--espace-section) clamp(1.5rem, 5vw, 4rem);
+  }
+  .eyebrow-pont {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+    margin: 0;
+  }
+  .cta-intermediaire {
+    margin-top: 1.5rem;
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+  }
+  .note-lancement {
+    color: var(--c-muted);
+    border-left: 2px solid var(--c-creme);
+    padding-left: 1rem;
+  }
+  .articles {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .signature-niche {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-creme);
+    margin-top: 2rem;
+  }
+</style>

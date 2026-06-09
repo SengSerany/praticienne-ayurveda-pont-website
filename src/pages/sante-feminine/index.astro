@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/page/Hero.astro';
+import SectionEditoriale from '../../components/page/SectionEditoriale.astro';
+import BandeauReassurance from '../../components/page/BandeauReassurance.astro';
+import Schema from '../../components/ui/Schema.astro';
+import ClauseYmyl from '../../components/ui/ClauseYmyl.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import OngletManuel from '../../components/sections/OngletManuel.astro';
+import Pont from '../../components/sections/Pont.astro';
+import Seuil from '../../components/sections/Seuil.astro';
+import { passages } from '../../data/passages';
+import { SITE } from '../../data/site';
+import { buildWebPageJsonLd } from '../../lib/seo';
+
+const description =
+  'Endométriose, SOPK, après-pilule, post-partum, périménopause : une lecture systémique de votre santé hormonale, la cause avant le symptôme. Accompagnement complémentaire de votre suivi médical.';
+
+const webPageJsonLd = buildWebPageJsonLd({
+  name: "Ce que j'accompagne, Ayurveda & santé féminine",
+  description,
+  url: new URL('/sante-feminine', SITE.url).href,
+});
+
+const descriptionsHub: Record<string, string> = {
+  endometriose:
+    "Des douleurs qui s'installent avant les règles, une fatigue qui déborde le cycle, une digestion qui se dérègle en silence. Ici, on cherche à apaiser l'inflammation et à lire ce que votre corps répète, parfois depuis des années.",
+  sopk: "Cycles longs ou absents, peau et pilosité qui s'emballent, énergie en dents de scie. On relit le terrain (métabolisme, foie, système nerveux) plutôt que de masquer les signaux.",
+  'apres-pilule':
+    "Le cycle qui ne revient pas après l'arrêt, l'acné qui explose, un corps qu'on ne reconnaît plus. On soutient le foie et on aide l'axe hormonal à se réveiller, sans reprendre d'hormones de synthèse.",
+  'post-partum':
+    "Après la naissance, un grand vide intérieur, au sens littéral. Le corps appelle de la chaleur, du gras nourrissant, du repos : c'est l'apaisement de Vata que la tradition a nommé bien avant nous.",
+  perimenopause:
+    "Le feu qui monte, le sommeil qui s'effrite, les tissus qui s'assèchent. On accompagne la transition pour la traverser autrement, sans la subir, sans la précipiter.",
+};
+---
+
+<BaseLayout
+  title="Ayurveda & santé féminine, comprendre la cause de ce qui se joue"
+  description={description}
+>
+  <script type="application/ld+json" set:html={webPageJsonLd} is:inline />
+
+  <Breadcrumb
+    items={[
+      { name: 'Accueil', url: '/' },
+      { name: "Ce que j'accompagne", url: '/sante-feminine' },
+    ]}
+  />
+
+  <Hero
+    variante="couverture"
+    eyebrow="AYURVEDA & SANTÉ FÉMININE"
+    titre="Votre santé hormonale a une histoire, apprenons à la lire."
+  >
+    <p>
+      Vos hormones ne travaillent jamais seules. Elles dialoguent en permanence avec votre
+      digestion, votre système nerveux, votre foie, votre sommeil. Quand l'une se dérègle, c'est
+      souvent ailleurs que se cache la raison.
+    </p>
+    <p>
+      C'est pour cela qu'une douleur, un cycle absent ou une fatigue qui s'éternise ne se lisent pas
+      isolément. Ils s'inscrivent dans une histoire, la vôtre, avec ses saisons, ses bascules, ses
+      causes en amont.
+    </p>
+    <p>
+      Mon travail commence là : remonter le fil.
+      <strong>La cause avant le symptôme, toujours.</strong>
+    </p>
+  </Hero>
+
+  <SectionEditoriale
+    numero="01"
+    surtitre="SELON CE QUE VOUS TRAVERSEZ"
+    titre="Quelle saison traversez-vous en ce moment ?"
+  >
+    <p>
+      Voici les cinq situations que j'accompagne le plus souvent. Entrez par la vôtre, vous verrez
+      vite qu'elles partagent une même logique.
+    </p>
+    <div class="passages-grille">
+      {
+        passages.map((p) => (
+          <OngletManuel
+            titre={p.titre}
+            resume={descriptionsHub[p.cle]}
+            href={p.href}
+            star={p.star}
+            aVenir={p.aVenir}
+            illustrationRef={p.illustrationRef}
+          />
+        ))
+      }
+    </div>
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="02"
+    surtitre="LE FIL COMMUN"
+    titre="Des situations différentes, une même manière de chercher la cause."
+  >
+    <p>
+      Vous l'avez peut-être remarqué : ces cinq passages se ressemblent peu en surface. Une
+      endométriose n'est pas un post-partum ; un SOPK n'est pas une périménopause.
+    </p>
+    <p>
+      Et pourtant, la façon de les lire est la même. On ne coche pas une liste de symptômes, on
+      remonte à ce qui les relie : l'inflammation, le feu digestif, le système nerveux, la manière
+      dont votre corps élimine et se répare.
+    </p>
+    <p>
+      C'est cette lecture systémique qui change tout. Voir le fil, c'est cesser de courir après
+      chaque symptôme un par un. <em>Bah oui, c'est logique.</em>
+    </p>
+    <p><a href="/approche">Comment je lis la cause racine</a></p>
+    <Schema slot="marge" ref="SCHEMA·04" alt="Réseau cycle, digestion, nerveux, foie" />
+  </SectionEditoriale>
+
+  <Pont
+    eyebrow="POURQUOI ME FAIRE CONFIANCE"
+    titre="Une lecture exigeante, et complémentaire de votre médecine."
+  >
+    <p>
+      Quelle que soit la situation (endométriose, SOPK, post-partum), je la lis de la même façon :
+      en cherchant la cause, jamais en cochant des cases.
+    </p>
+    <p>
+      Et je la lis avec vos vrais documents. Mon parcours, dix ans en laboratoire de référence, me
+      permet de comprendre vos analyses et vos comptes rendus, et de m'inscrire dans votre suivi,
+      pas de le contredire.
+    </p>
+    <p>
+      Je ne pose pas de diagnostic, et je ne remplace ni votre médecin, ni votre gynécologue, ni
+      votre sage-femme. Je travaille à côté d'eux.
+    </p>
+    <p><a href="/qui-je-suis">Qui je suis</a></p>
+  </Pont>
+
+  <BandeauReassurance
+    items={[
+      'Dix ans en laboratoire de référence (CNRGS)',
+      'Lecture critique de vos bilans',
+      'Complémentaire de votre suivi médical',
+    ]}
+  />
+
+  <div class="clause-zone">
+    <ClauseYmyl />
+  </div>
+
+  <Seuil
+    titre="Commençons par votre histoire."
+    repli="Pas encore prête ? Gardez le fil avec La lettre."
+  >
+    <p>
+      Aucun de ces passages ne se règle avec un protocole standard. J'ai besoin d'entendre le vôtre
+      d'abord : votre cycle, vos antécédents, ce que vous avez déjà essayé.
+    </p>
+    <p>
+      Commençons simplement, par nous parler :
+      <strong>trente minutes, gratuites et sans engagement.</strong> Juste le temps de poser l'essentiel,
+      sans être bousculée.
+    </p>
+    <p>
+      Vous savez déjà que vous voulez cheminer dans la durée ?
+      <a href="/accompagnement">Découvrir l'accompagnement</a>
+    </p>
+  </Seuil>
+</BaseLayout>
+
+<style>
+  .passages-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .clause-zone {
+    padding: 1.5rem clamp(1rem, 4vw, 3rem);
+  }
+</style>
