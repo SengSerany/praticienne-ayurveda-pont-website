@@ -28,6 +28,10 @@
   },
   "homepage": "https://github.com/SengSerany/praticienne-ayurveda-pont-website#readme",
   "dependencies": {
+    "@fontsource-variable/fraunces": "^5.2.9",
+    "@fontsource/cormorant-garamond": "^5.2.11",
+    "@fontsource/ibm-plex-sans": "^5.2.8",
+    "@fontsource/jetbrains-mono": "^5.2.8",
     "astro": "^6.4.4"
   },
   "devDependencies": {
