@@ -40,6 +40,7 @@ const {
         </p>
       )
     }
+    <div class="hero__texte"><slot /></div>
   </div>
   <div class="hero__media">
     <slot name="media" />
@@ -97,6 +98,12 @@ const {
     color: var(--c-brun-reliure);
   }
   .hero__media:empty {
+    display: none;
+  }
+  .hero__texte {
+    max-width: 34rem;
+  }
+  .hero__texte:empty {
     display: none;
   }
 </style>
