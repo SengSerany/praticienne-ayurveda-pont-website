@@ -1,11 +1,242 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/page/Hero.astro';
+import BandeauReassurance from '../components/page/BandeauReassurance.astro';
+import SectionEditoriale from '../components/page/SectionEditoriale.astro';
+import Citation from '../components/ui/Citation.astro';
+import Photo from '../components/ui/Photo.astro';
+import Schema from '../components/ui/Schema.astro';
+import Pont from '../components/sections/Pont.astro';
+import BlocLettre from '../components/sections/BlocLettre.astro';
+import OngletManuel from '../components/sections/OngletManuel.astro';
+import Seuil from '../components/sections/Seuil.astro';
+import { passages } from '../data/passages';
+
+const description =
+  "Ayurveda et santé féminine, l'endométriose comme porte d'entrée. La cause avant le symptôme, pour comprendre ce qui se joue dans votre corps.";
 ---
 
-<BaseLayout
-  title="Accueil"
-  description="Ayurveda et santé féminine, l'endométriose comme porte d'entrée."
->
-  <h1>L'Ayurveda éprouvée.</h1>
-  <p class="lead">Page d'accueil provisoire (le contenu reel arrive en Phase 1).</p>
+<BaseLayout title="Accueil" description={description}>
+  <Hero
+    eyebrow="CÉLINE LEFEVRE · AYURVEDA & SANTÉ FÉMININE"
+    titre="L'Ayurveda éprouvée."
+    sousLignes={[
+      "Spécialisée en santé féminine, avec une sensibilité particulière à l'endométriose. <strong>La cause avant le symptôme</strong>, pour enfin comprendre ce qui se joue dans votre corps.",
+    ]}
+    signature="« Une intelligence qui éclaire la cause, une compagne qui partage le chemin. »"
+    cta={{ label: 'Commençons par nous parler', href: '/premier-echange', variant: 'outline' }}
+    microcopy="gratuit, sans engagement."
+  >
+    <Photo slot="media" ref="PHOTO·07" alt="La maison ouverte sur la plaine" ratio="3 / 4" />
+  </Hero>
+
+  <BandeauReassurance
+    items={[
+      'Dix ans en laboratoire de référence (CNRGS)',
+      'Lecture systémique de la cause racine',
+      'Complémentaire de votre suivi médical',
+    ]}
+  />
+
+  <SectionEditoriale
+    numero="01"
+    surtitre="CE QUE VOUS VIVEZ"
+    titre="Ce que vous ressentez n'est pas dans votre tête."
+  >
+    <p>
+      On vous a dit que c'était « normal ». Que vos analyses ne montraient « rien ». Que c'était
+      sans doute « le stress », « une question de seuil de douleur ». Vous êtes peut-être ressortie
+      de ces rendez-vous de quinze minutes avec une ordonnance, et le sentiment tenace de ne pas
+      avoir été entendue.
+    </p>
+    <p>
+      Pourtant, vous le savez. La douleur qui revient avec le cycle, la fatigue qui ne cède pas, le
+      ventre qui se dérègle sans raison apparente : ce ne sont pas des caprices.
+      <strong>Ce sont des signaux.</strong>
+    </p>
+    <p>
+      Il y a une mécanique physiologique derrière chacun d'eux. Et tant qu'on ne la lit pas, on
+      répond au symptôme, jamais à la cause.
+    </p>
+    <p>
+      Comprendre cette mécanique sans jamais conclure trop vite : c'est une rigueur que je dois à un
+      précédent métier ; j'y reviens juste après.
+    </p>
+    <Citation
+      slot="marge"
+      texte="« Quand on ne se sent pas jugée, on dit la vérité. C'est là que se trouve la vraie cause. »"
+    />
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="02"
+    surtitre="SELON OÙ VOUS EN ÊTES"
+    titre="Votre corps ne parle pas la même langue à chaque saison de votre vie."
+  >
+    <p>
+      Cinq passages, cinq grammaires différentes. Entrez par celui qui vous ressemble : c'est là que
+      commence la lecture.
+    </p>
+    <div class="passages-grille">
+      {
+        passages.map((p) => (
+          <OngletManuel
+            titre={p.titre}
+            resume={p.resume}
+            href={p.href}
+            star={p.star}
+            aVenir={p.aVenir}
+            illustrationRef={p.illustrationRef}
+          />
+        ))
+      }
+    </div>
+    <p><a href="/sante-feminine">Voir tout ce que j'accompagne</a></p>
+  </SectionEditoriale>
+
+  <Pont
+    eyebrow="LE PONT ENTRE DEUX MONDES"
+    titre="La rigueur du laboratoire, la patience d'une sagesse millénaire."
+  >
+    <div slot="media" class="pont-visuels">
+      <Photo ref="PHOTO·02" alt="Herbier et laboratoire" />
+      <Schema ref="SCHEMA·04" alt="Schéma de lecture systémique" />
+    </div>
+    <p>
+      J'ai derrière moi dix ans de laboratoire de référence, une formation de scientifique, faite
+      d'observation patiente. Cette exigence, je ne l'ai pas laissée à la porte.
+    </p>
+    <p>
+      C'est le même regard que je pose aujourd'hui sur votre santé. Le laboratoire mesure une
+      inflammation ; l'Ayurveda en cherche le terrain. Les deux s'occupent du même corps, à deux
+      altitudes différentes.
+    </p>
+    <p>
+      On me demande souvent comment je concilie les deux mondes. Je ne les concilie pas : ils n'ont
+      jamais été en guerre. <strong>C'est dans la continuité, pas opposé.</strong>
+    </p>
+    <Citation texte="« Je vous lis vos analyses. Je n'invente pas un diagnostic. »" />
+    <p>
+      <a href="/approche">Comment je lis la cause racine</a> ·
+      <a href="/qui-je-suis">Qui je suis</a>
+    </p>
+  </Pont>
+
+  <SectionEditoriale
+    numero="04"
+    surtitre="APPRENDRE À LIRE SON CORPS"
+    titre="La consultation réussie, c'est celle au terme de laquelle vous savez lire votre corps."
+  >
+    <p>Je ne cherche pas à vous rendre dépendante de moi. Je cherche l'inverse.</p>
+    <p>
+      Mon métier n'est pas de détenir un savoir sur votre corps : c'est de vous le rendre lisible.
+      Un accompagnement a réussi le jour où vous n'avez plus à deviner : vous reconnaissez vos
+      signaux, vous savez ce qu'ils disent, vous savez quoi faire. La cause avant le symptôme, mais
+      entre vos mains.
+    </p>
+    <div class="vignettes">
+      <div>
+        <h4>I · Remonter à la cause racine</h4>
+        <p>
+          Pourquoi un symptôme en cache souvent un autre, et comment remonter le fil jusqu'à sa
+          source.
+        </p>
+      </div>
+      <div>
+        <h4>II · Lire son cycle</h4>
+        <p>
+          Ce que chaque phase raconte, et pourquoi une même douleur change de sens selon le moment
+          où elle arrive.
+        </p>
+      </div>
+      <div>
+        <h4>III · Comprendre sa digestion</h4>
+        <p>
+          Imaginez un feu : trop bas, il stagne ; trop haut, il brûle les tissus. C'est ce que la
+          tradition nomme <em>Agni</em>, la coulisse silencieuse de presque tout le reste.
+        </p>
+      </div>
+    </div>
+    <p><a href="/le-manuel">Explorer tout le manuel</a></p>
+  </SectionEditoriale>
+
+  <BlocLettre
+    titre="Une lettre de fond. Jamais de vente."
+    promesse="Une fois par mois, je partage un chapitre de lecture du corps : clair, documenté, posé. Pour commencer, un petit outil gratuit pour mieux comprendre votre terrain."
+  />
+
+  <SectionEditoriale
+    numero="05"
+    surtitre="UNE COMPAGNE DE ROUTE"
+    titre="Je ne suis pas une guide. Je suis une compagne de route."
+  >
+    <p>Je n'avance pas devant vous, en surplomb. J'avance à côté.</p>
+    <p>
+      L'endométriose, je vis avec. Je ne vous promets pas la guérison ; personne ne devrait vous la
+      promettre. Ce que je peux faire, c'est partager ce que des années de traversée, de lectures et
+      de formation m'ont appris, et ce que l'Ayurveda éprouvée éclaire sur l'inflammation, le cycle
+      et la digestion.
+    </p>
+    <p>
+      Ni au-dessus, ni en service. À côté, le temps qu'il faut. C'est ce que j'appelle une
+      <strong>force tranquille</strong> : pas la force qui impose, pas la douceur qui cède.
+    </p>
+    <p class="note-lancement">
+      Pour l'instant, je préfère ne rien afficher plutôt que d'inventer. Les vrais retours, je les
+      publierai ici tels quels, dans leurs mots, jamais retouchés, le jour où ils viendront.
+    </p>
+    <Photo slot="marge" ref="PHOTO·03" alt="La force tranquille" ratio="3 / 4" />
+  </SectionEditoriale>
+
+  <Seuil
+    titre="Je n'ai pas de protocole standard à vous appliquer."
+    repli="Pas encore prête ? Gardez le fil avec La lettre."
+  >
+    <p>
+      J'ai besoin de comprendre votre histoire avant. Alors commençons simplement : par nous parler.
+      <strong>Trente minutes, posément. Gratuit, et sans engagement.</strong>
+    </p>
+    <p>
+      Vous serez écoutée, vraiment. Et je vous dirai honnêtement ce qui relève de mon
+      accompagnement, et ce qui relève d'un autre praticien.
+    </p>
+    <p>
+      Pas de protocole tout prêt, pas de vente : juste un premier pas pour commencer à comprendre ce
+      qui se joue.
+    </p>
+    <p>
+      <a href="/accompagnement">Voir comment je travaille en profondeur : l'accompagnement</a>
+    </p>
+  </Seuil>
 </BaseLayout>
+
+<style>
+  .passages-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .pont-visuels {
+    display: grid;
+    gap: 1rem;
+  }
+  .vignettes {
+    display: grid;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  @media (min-width: 48rem) {
+    .vignettes {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .vignettes h4 {
+    margin-bottom: 0.25rem;
+  }
+  .note-lancement {
+    color: var(--c-muted);
+    border-left: 2px solid var(--c-creme);
+    padding-left: 1rem;
+  }
+</style>
