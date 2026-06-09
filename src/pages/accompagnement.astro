@@ -1,0 +1,279 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/page/Hero.astro';
+import SectionEditoriale from '../components/page/SectionEditoriale.astro';
+import BandeauReassurance from '../components/page/BandeauReassurance.astro';
+import GrilleTarifs from '../components/page/GrilleTarifs.astro';
+import Pratfall from '../components/sections/Pratfall.astro';
+import Seuil from '../components/sections/Seuil.astro';
+import Citation from '../components/ui/Citation.astro';
+import Photo from '../components/ui/Photo.astro';
+import ClauseYmyl from '../components/ui/ClauseYmyl.astro';
+
+const description =
+  'Peu de clientes, suivies en profondeur. Un bilan approfondi puis une trajectoire de 3 à 6 mois, prix affichés, complémentaire de votre suivi médical. La cause avant le symptôme.';
+
+const faq = [
+  {
+    q: 'Est-ce que ça remplace mon suivi médical ?',
+    r: "Non, à aucun moment. Mon accompagnement est complémentaire de votre médecine, il ne s'y substitue pas. Je lis vos analyses, je ne pose pas de diagnostic, et je vous oriente vers le bon praticien quand c'est nécessaire.",
+  },
+  {
+    q: "Vous allez m'imposer un régime strict ?",
+    r: "Non. Je ne crois pas aux régimes-punitions, et une partie des personnes que j'accompagne viennent justement pour en sortir. Les recommandations sont modulables, adaptées à votre vie réelle, pas l'inverse.",
+  },
+  {
+    q: "Et si mon endométriose m'empêche de tenir le rythme ?",
+    r: "Le rythme s'adapte au vôtre, pas au mien. Les créneaux sont flexibles, et les jours sans sont prévus dans la trajectoire. On avance au rythme du corps.",
+  },
+  {
+    q: 'Vous me promettez des résultats ?',
+    r: "Non, et méfiez-vous de quiconque vous le promet. Ce que je vous promets, c'est de chercher la cause, de vous l'expliquer, et de viser ensemble un mieux vivre avec. Pour beaucoup, c'est déjà beaucoup.",
+  },
+  {
+    q: 'En combien de temps verrai-je une différence ?',
+    r: "Je ne donne pas de promesse calendaire. Le cycle se rééquilibre sur un à plusieurs cycles, c'est le temps physiologique, pas un délai commercial. Je préfère être honnête là-dessus dès le départ.",
+  },
+  {
+    q: 'Et si le tarif est un frein pour moi ?',
+    r: "Je préfère en parler franchement. L'accompagnement est réglable en plusieurs fois, sans frais ; le bilan se déduit si vous continuez ; et un tarif réduit existe pour les étudiantes, les personnes en recherche d'emploi ou en situation de handicap. Si, malgré cela, ce n'est pas le moment, le manuel et la lettre restent gratuits, et seront toujours là.",
+  },
+  {
+    q: 'Comment se passent les séances, à distance ou en cabinet ?',
+    r: "En visio (ce qui ouvre toute la francophonie et ménage les agendas) ou en cabinet à Paris, selon ce qui vous convient. Entre les séances, le lien se maintient par le cahier d'observation et la messagerie écrite (réponse sous 48 heures ouvrées).",
+  },
+];
+---
+
+<BaseLayout title="L'accompagnement, comment je travaille" description={description}>
+  <Hero
+    variante="papier"
+    eyebrow="L'ACCOMPAGNEMENT, COMMENT JE TRAVAILLE"
+    titre="Peu de clientes. Suivies en profondeur."
+  >
+    <Photo slot="media" ref="PHOTO·07" alt="La maison ouverte sur la plaine" ratio="3 / 4" />
+    <p>
+      Je n'ai pas construit mon travail pour voir le plus de personnes possible. Je l'ai construit
+      pour en accompagner peu, vraiment.
+    </p>
+    <p>
+      Un accompagnement, chez moi, ce n'est pas une consultation isolée que l'on oublie en sortant.
+      C'est une relation qui s'installe dans le temps : un bilan approfondi pour poser les
+      fondations, puis une trajectoire de trois à six mois pour ajuster, observer, et vous rendre
+      autonome.
+    </p>
+    <p class="micro-autorite">
+      Une lecture nourrie par dix ans en laboratoire de référence (CNRGS), et complémentaire de
+      votre suivi médical.
+    </p>
+    <Citation
+      texte="Vous n'êtes pas venue pour être corrigée. Vous êtes venue pour être accompagnée."
+    />
+  </Hero>
+
+  <SectionEditoriale
+    numero="01"
+    surtitre="CE QUE CHANGE LE FAIT DE COMPRENDRE"
+    titre="Et si, pour la première fois, ce qui se joue devenait lisible ?"
+  >
+    <p>
+      Vous avez sans doute déjà reçu des réponses qui répondaient à côté. Une pilule prescrite pour
+      faire revenir des règles absentes, par exemple, alors que c'est l'axe hormonal, en amont,
+      qu'il fallait écouter. Le symptôme est masqué ; la cause, elle, continue son travail en
+      silence.
+    </p>
+    <p>
+      Ce que cet accompagnement vous donne d'abord, ce n'est pas un protocole. C'est de la
+      <strong>lisibilité</strong> : comprendre, enfin, ce qui se joue dans votre corps, et pourquoi.
+    </p>
+    <p>
+      À partir de là, tout devient plus simple. On ne court plus après les symptômes ; on remonte à
+      la source.
+    </p>
+    <Citation
+      texte="La crème sur une peau déshydratée, alors qu'il suffirait, parfois, de comprendre où boire de l'eau."
+    />
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="02"
+    surtitre="LE CHEMIN"
+    titre="Trois temps, pour passer de subir à lire."
+  >
+    <div class="etapes">
+      <div>
+        <h4>I · La validation</h4>
+        <p>
+          Tout commence par un bilan approfondi d'une heure trente. On y pose votre histoire à plat
+          : votre cycle, votre digestion, vos antécédents, ce que vous avez déjà essayé. Avant toute
+          proposition, je nomme ce que je comprends de ce qui se joue.
+        </p>
+      </div>
+      <div>
+        <h4>II · La lecture conjointe du terrain</h4>
+        <p>
+          Je construis avec vous une trajectoire, non pas un protocole à appliquer en aveugle, mais
+          des gestes accompagnés de leur grille de lecture. Vous ne recevez pas seulement quoi faire
+          : vous comprenez pourquoi.
+        </p>
+      </div>
+      <div>
+        <h4>III · L'apprentissage des signaux</h4>
+        <p>
+          Au fil des semaines, vous apprenez à reconnaître vos propres signaux. C'est le but réel de
+          tout l'accompagnement : qu'à la fin, vous sachiez lire votre corps sans moi.
+        </p>
+      </div>
+    </div>
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="03"
+    surtitre="EN TOUTE TRANSPARENCE"
+    titre="Ce que je vous dis d'emblée, y compris ce que je ne fais pas."
+  >
+    <Pratfall
+      cest={[
+        'Un bilan initial approfondi, une heure trente, centré sur la lecture conjointe de votre cycle, de votre digestion et de vos antécédents.',
+        "Des consultations de suivi d'une heure, espacées de trois à quatre semaines, pour ajuster ce qui doit l'être.",
+        "Un cahier d'observation que vous remplissez à votre rythme, et que je relis avant chaque séance.",
+        'Un canal de messagerie écrite pour les questions intermédiaires, avec un délai de réponse honnête : 48 heures ouvrées.',
+      ]}
+      cestPas={[
+        "Aucune promesse de guérison. Ce que nous travaillons, c'est mieux vivre avec : apaiser l'inflammation, mieux lire les signaux de votre cycle, soutenir votre digestion.",
+        'Aucun protocole-modèle. Tout est ajusté à votre situation, et modulable.',
+        'Aucun rôle de substitution à votre médecin ou votre gynécologue.',
+      ]}
+    />
+    <Citation texte="Mieux vivre avec, c'est déjà beaucoup." />
+    <ClauseYmyl />
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="04"
+    surtitre="TROIS PORTES, UNE MÊME TRAJECTOIRE"
+    titre="Trois manières d'entrer dans le même chemin."
+  >
+    <p>
+      Tout commence par le <strong>Premier échange</strong> : 30 minutes, gratuit et sans engagement (après
+      un court formulaire). Le bilan approfondi ci-dessous, lui, est la première étape payante de l'accompagnement.
+      Le format que je recommande pour la plupart, c'est l'accompagnement 3 mois.
+    </p>
+    <GrilleTarifs />
+    <p class="tarifs-mention">
+      Réglable en plusieurs fois, sans frais, soit, pour l'accompagnement 3 mois, environ 38 € par
+      semaine.
+    </p>
+    <p class="cta-intermediaire">
+      Une formule vous parle ? <a href="/premier-echange">Commençons par le Premier échange.</a>
+    </p>
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="05"
+    surtitre="CELLES QUI ONT FAIT UN BOUT DE CHEMIN"
+    titre="Ce qu'elles en disent, dans leurs mots, pas les miens."
+  >
+    <p class="note-lancement">
+      Les premiers accompagnements sont en cours. Je publierai les retours tels quels, sans les
+      retoucher, sans en choisir que les plus flatteurs.
+    </p>
+    <p>
+      En attendant, la preuve la plus honnête que je puisse vous offrir, c'est cette page elle-même
+      : des prix affichés, ce que je fais et ce que je ne fais pas, et aucune promesse que je ne
+      peux pas tenir.
+    </p>
+  </SectionEditoriale>
+
+  <BandeauReassurance
+    items={[
+      'Dix ans en laboratoire de référence (CNRGS)',
+      'Lecture critique de vos bilans',
+      'Complémentaire de votre suivi médical',
+    ]}
+  />
+
+  <SectionEditoriale
+    numero="06"
+    surtitre="LES QUESTIONS JUSTES"
+    titre="C'est une question juste, je me la suis posée."
+  >
+    <div class="faq">
+      {
+        faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.r}</p>
+          </details>
+        ))
+      }
+    </div>
+  </SectionEditoriale>
+
+  <Seuil
+    titre="Je reste à votre disposition pour toute question avant que vous décidiez."
+    repli="Pas encore prête ? Gardez le fil avec La lettre."
+  >
+    <p>
+      Rien ne presse. Vous n'avez pas à choisir une formule maintenant, ni même à savoir si vous
+      voulez vous engager.
+    </p>
+    <p>
+      Commençons par nous parler :
+      <strong>trente minutes, posément, gratuites et sans engagement.</strong> On verra ensemble si ce
+      que je propose correspond à ce dont vous avez besoin. Et si la réponse est non, je vous le dirai
+      aussi honnêtement.
+    </p>
+    <p class="signature-niche">Céline Lefèvre · Accompagnement Ayurvédique des Cycles</p>
+  </Seuil>
+</BaseLayout>
+
+<style>
+  .micro-autorite {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-brun-reliure);
+  }
+  .etapes {
+    display: grid;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .etapes h4 {
+    margin-bottom: 0.25rem;
+  }
+  .tarifs-mention {
+    font-size: var(--t-small-size);
+    color: var(--c-muted);
+    margin-top: 1rem;
+  }
+  .cta-intermediaire {
+    margin-top: 1rem;
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+  }
+  .note-lancement {
+    color: var(--c-muted);
+    border-left: 2px solid var(--c-creme);
+    padding-left: 1rem;
+  }
+  .faq details {
+    border-bottom: 1px solid var(--c-creme);
+    padding: 1rem 0;
+    max-width: var(--rythme-colonne-large);
+  }
+  .faq summary {
+    cursor: pointer;
+    font-family: var(--f-display);
+    font-size: var(--t-h4-size);
+  }
+  .faq details p {
+    margin-top: 0.75rem;
+  }
+  .signature-niche {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-creme);
+    margin-top: 2rem;
+  }
+</style>
