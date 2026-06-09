@@ -1,0 +1,94 @@
+---
+
+---
+
+<form class="form-pe" method="post" action="/api/premier-echange">
+  <p class="form-pe__champ">
+    <label for="pe-email">Votre email <span class="form-pe__requis">(requis)</span></label>
+    <input id="pe-email" name="email" type="email" required />
+  </p>
+  <p class="form-pe__champ">
+    <label for="pe-prenom">Votre prenom <span class="form-pe__optionnel">(optionnel)</span></label>
+    <input id="pe-prenom" name="prenom" type="text" maxlength="100" />
+  </p>
+  <p class="form-pe__champ">
+    <label for="pe-message">
+      Ce qui vous amene <span class="form-pe__optionnel">(optionnel, meme une ligne suffit)</span>
+    </label>
+    <textarea id="pe-message" name="message" rows="4" maxlength="5000"></textarea>
+  </p>
+  <input
+    type="text"
+    name="site"
+    class="form-pe__hp"
+    tabindex="-1"
+    autocomplete="off"
+    aria-hidden="true"
+  />
+  <button type="submit" class="button button--filled">Envoyer mon message</button>
+  <p class="form-pe__rgpd">
+    Vos informations me servent uniquement a vous repondre. Elles ne sont ni revendues, ni utilisees
+    pour autre chose. Vous pouvez demander leur suppression a tout moment.
+  </p>
+</form>
+
+<style>
+  .form-pe {
+    max-width: var(--rythme-colonne);
+  }
+  .form-pe__champ {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 0 0 1.25rem;
+    max-width: none;
+  }
+  .form-pe label {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+  }
+  .form-pe__optionnel,
+  .form-pe__requis {
+    color: var(--c-muted);
+  }
+  .form-pe input,
+  .form-pe textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--c-creme);
+    background-color: var(--c-papier);
+    font-family: var(--f-body);
+    font-size: var(--t-body-size);
+  }
+  .form-pe__hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+  }
+  .form-pe button.button--filled {
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-family: var(--f-body);
+    font-size: var(--t-cta-size);
+    font-weight: var(--t-cta-weight);
+    letter-spacing: var(--t-cta-ls);
+    line-height: var(--t-cta-lh);
+    text-transform: uppercase;
+    padding: var(--t-cta-pad);
+    background-color: var(--c-encre);
+    color: var(--c-papier);
+    transition: background-color 160ms ease;
+  }
+  .form-pe button.button--filled:hover {
+    background-color: var(--c-terre);
+  }
+  .form-pe__rgpd {
+    font-size: var(--t-caption-size);
+    color: var(--c-muted);
+    margin-top: 1rem;
+  }
+</style>

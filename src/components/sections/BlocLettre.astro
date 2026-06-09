@@ -9,10 +9,24 @@ const { titre, promesse } = Astro.props;
 <section class="bloc-lettre">
   <h3>{titre}</h3>
   <p>{promesse}</p>
-  <form class="bloc-lettre__form" data-lettre method="post" action="#">
-    <label class="bloc-lettre__label" for="email-lettre">Votre adresse email</label>
+  <form class="bloc-lettre__form" method="post" action="/api/lettre">
+    <label class="bloc-lettre__label" for="email-lettre-bloc">Votre adresse email</label>
     <div class="bloc-lettre__ligne">
-      <input id="email-lettre" name="email" type="email" required placeholder="prenom@exemple.fr" />
+      <input
+        id="email-lettre-bloc"
+        name="email"
+        type="email"
+        required
+        placeholder="prenom@exemple.fr"
+      />
+      <input
+        type="text"
+        name="site"
+        class="bloc-lettre__hp"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+      />
       <button type="submit">S'inscrire</button>
     </div>
   </form>
@@ -39,7 +53,13 @@ const { titre, promesse } = Astro.props;
     flex-wrap: wrap;
     gap: 0.75rem;
   }
-  .bloc-lettre__ligne input {
+  .bloc-lettre__hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+  }
+  .bloc-lettre__ligne input[type='email'] {
     flex: 1 1 14rem;
     padding: 0.75rem 1rem;
     border: 1px solid var(--c-creme);

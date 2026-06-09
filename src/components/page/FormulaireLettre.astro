@@ -1,0 +1,74 @@
+---
+interface Props {
+  cta?: string;
+}
+const { cta = "S'inscrire" } = Astro.props;
+---
+
+<form class="form-lettre" method="post" action="/api/lettre">
+  <label class="form-lettre__label" for="email-lettre">Votre adresse email</label>
+  <div class="form-lettre__ligne">
+    <input id="email-lettre" name="email" type="email" required placeholder="prenom@exemple.fr" />
+    <input
+      type="text"
+      name="site"
+      class="form-lettre__hp"
+      tabindex="-1"
+      autocomplete="off"
+      aria-hidden="true"
+    />
+    <button type="submit">{cta}</button>
+  </div>
+  <p class="form-lettre__rgpd">
+    Votre email me sert uniquement a vous envoyer la lettre. Desabonnement en un clic, a tout
+    moment.
+  </p>
+</form>
+
+<style>
+  .form-lettre__label {
+    display: block;
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+    margin-bottom: 0.5rem;
+  }
+  .form-lettre__ligne {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .form-lettre__ligne input[type='email'] {
+    flex: 1 1 14rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--c-creme);
+    background-color: var(--c-papier);
+    font-family: var(--f-body);
+    font-size: var(--t-body-size);
+  }
+  .form-lettre__hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+  }
+  .form-lettre__ligne button {
+    padding: var(--t-cta-pad);
+    border: none;
+    background-color: var(--c-sauge);
+    color: var(--c-encre);
+    font-family: var(--f-body);
+    font-size: var(--t-cta-size);
+    font-weight: var(--t-cta-weight);
+    letter-spacing: var(--t-cta-ls);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .form-lettre__rgpd {
+    font-size: var(--t-caption-size);
+    color: var(--c-muted);
+    margin-top: 0.75rem;
+  }
+</style>
