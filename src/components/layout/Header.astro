@@ -1,0 +1,69 @@
+---
+import { navPrincipale, ctaPrincipal, SITE } from '../../data/site';
+import Button from '../ui/Button.astro';
+---
+
+<header class="header">
+  <a class="header__marque" href="/">
+    <span class="header__nom">{SITE.nom}</span>
+    <span class="header__baseline">{SITE.baseline}</span>
+  </a>
+  <nav class="header__nav" aria-label="Navigation principale">
+    <ul>
+      {
+        navPrincipale.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <Button href={ctaPrincipal.href} label={ctaPrincipal.label} variant="outline" />
+</header>
+
+<style>
+  .header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem clamp(1rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--c-creme);
+  }
+  .header__marque {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--c-encre);
+    margin-right: auto;
+  }
+  .header__nom {
+    font-family: var(--f-display);
+    font-size: 1.25rem;
+  }
+  .header__baseline {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+  }
+  .header__nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+  }
+  .header__nav a {
+    font-family: var(--f-body);
+    font-size: var(--t-small-size);
+    color: var(--c-encre);
+    text-decoration: none;
+  }
+  .header__nav a:hover {
+    color: var(--c-terre);
+  }
+</style>

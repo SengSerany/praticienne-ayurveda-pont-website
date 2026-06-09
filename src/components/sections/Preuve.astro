@@ -1,0 +1,51 @@
+---
+import Eyebrow from '../ui/Eyebrow.astro';
+
+interface Verbatim {
+  texte: string;
+  prenom: string;
+  ville: string;
+}
+interface Props {
+  autorite?: string;
+  verbatims: Verbatim[];
+}
+const { autorite, verbatims } = Astro.props;
+---
+
+<section class="preuve">
+  {autorite && <Eyebrow text={autorite} />}
+  <ul class="preuve__liste">
+    {
+      verbatims.map((v) => (
+        <li>
+          <blockquote>{v.texte}</blockquote>
+          <p class="preuve__source">
+            {v.prenom} — {v.ville}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .preuve {
+    background-color: var(--c-papier);
+    padding: var(--espace-section) clamp(1.5rem, 5vw, 4rem);
+  }
+  .preuve__liste {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--espace-section);
+  }
+  .preuve__source {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+</style>

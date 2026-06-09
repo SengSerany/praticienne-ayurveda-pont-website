@@ -1,0 +1,34 @@
+---
+import Eyebrow from '../ui/Eyebrow.astro';
+
+interface Props {
+  eyebrow?: string;
+  titre: string;
+}
+const { eyebrow, titre } = Astro.props;
+---
+
+<section class="pont">
+  {eyebrow && <Eyebrow text={eyebrow} />}
+  <h2>{titre}</h2>
+  <div class="pont__media">
+    <slot name="media" />
+  </div>
+  <div class="pont__corps">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .pont {
+    background-color: var(--c-couverture);
+    color: var(--c-encre);
+    padding: var(--espace-section) clamp(1.5rem, 5vw, 4rem);
+  }
+  .pont h2 {
+    max-width: 30rem;
+  }
+  .pont__media:empty {
+    display: none;
+  }
+</style>

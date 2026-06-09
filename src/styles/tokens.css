@@ -1,0 +1,95 @@
+:root {
+  /* ── Couleurs de marque (Systeme Chromatique 4.8) ───────────────── */
+  --c-couverture: #e3b0a0;
+  --c-terre: #9f6c5c;
+  --c-brun-reliure: #7a463a;
+  --c-papier: #f2ebde;
+  --c-papier-chaleur: #efe7dc;
+  --c-creme: #d9cab5;
+  --c-encre: #2d2a26;
+  --c-sauge: #a7b5a0;
+  --c-dore: #e2c583;
+  --c-muted: rgba(45, 42, 38, 0.42);
+
+  /* ── Couleurs fonctionnelles (primaire + fond) ──────────────────── */
+  --c-succes: #6b8c6b;
+  --c-succes-fond: #eaf2ea;
+  --c-danger: #9e4e46;
+  --c-danger-fond: #f3ecea;
+  --c-vigilance: #b8852a;
+  --c-vigilance-fond: #f5eddb;
+  --c-info: #6e85a0;
+  --c-info-fond: #e7edf5;
+
+  /* ── Familles de police (avec fallbacks) ────────────────────────── */
+  --f-display: 'Fraunces Variable', 'Fraunces', Georgia, 'Times New Roman', serif;
+  --f-body: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --f-quote: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+  --f-mono: 'JetBrains Mono', 'Courier New', Courier, monospace;
+
+  /* ── Echelle typographique ──────────────────────────────────────── */
+  --t-h1-size: clamp(4.5rem, 10vw, 8.5rem);
+  --t-h1-weight: 300;
+  --t-h1-fvs: 'opsz' 144, 'WONK' 1;
+  --t-h1-lh: 1;
+  --t-h1-ls: -0.03em;
+
+  --t-h2-size: clamp(2rem, 4.5vw, 3.75rem);
+  --t-h2-weight: 300;
+  --t-h2-fvs: 'opsz' 72, 'WONK' 1;
+  --t-h2-lh: 1.1;
+  --t-h2-ls: -0.02em;
+
+  --t-h3-size: clamp(1.5rem, 3vw, 2.25rem);
+  --t-h3-weight: 400;
+  --t-h3-fvs: 'opsz' 36, 'WONK' 1;
+  --t-h3-lh: 1.22;
+  --t-h3-ls: -0.01em;
+
+  --t-h4-size: clamp(1.25rem, 2.2vw, 1.625rem);
+  --t-h4-weight: 400;
+  --t-h4-fvs: 'opsz' 24, 'WONK' 0;
+  --t-h4-lh: 1.3;
+  --t-h4-ls: 0;
+
+  --t-lead-size: clamp(1.125rem, 2vw, 1.3125rem);
+  --t-lead-weight: 400;
+  --t-lead-lh: 1.6;
+
+  --t-body-size: 1rem;
+  --t-body-weight: 300;
+  --t-body-lh: 1.8;
+  --t-body-ls: 0.01em;
+
+  --t-quote-size: clamp(1.25rem, 2.5vw, 1.875rem);
+  --t-quote-weight: 400;
+  --t-quote-lh: 1.52;
+  --t-quote-ls: 0.01em;
+
+  --t-small-size: 0.875rem;
+  --t-small-weight: 400;
+  --t-small-lh: 1.65;
+  --t-small-ls: 0.015em;
+
+  --t-caption-size: 0.75rem;
+  --t-caption-weight: 300;
+  --t-caption-lh: 1.6;
+  --t-caption-ls: 0.03em;
+
+  --t-label-size: 0.6875rem;
+  --t-label-weight: 400;
+  --t-label-lh: 1;
+  --t-label-ls: 0.22em;
+
+  --t-cta-size: 0.8125rem;
+  --t-cta-weight: 500;
+  --t-cta-lh: 1;
+  --t-cta-ls: 0.14em;
+  --t-cta-pad: 15px 30px;
+
+  /* ── Rythme & composition ───────────────────────────────────────── */
+  --rythme-colonne: 40rem;
+  --rythme-colonne-large: 48rem;
+  --rythme-para: 1.5em;
+  --espace-section: clamp(3rem, 8vw, 6rem);
+}

@@ -1,0 +1,21 @@
+---
+interface Props {
+  text: string;
+}
+const { text } = Astro.props;
+---
+
+<span class="eyebrow">{text}</span>
+
+<style>
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    font-weight: var(--t-label-weight);
+    line-height: var(--t-label-lh);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+  }
+</style>

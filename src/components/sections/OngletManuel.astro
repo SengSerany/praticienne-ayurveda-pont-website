@@ -1,0 +1,47 @@
+---
+interface Props {
+  titre: string;
+  resume: string;
+  href: string;
+  star?: boolean;
+}
+const { titre, resume, href, star = false } = Astro.props;
+---
+
+<a class:list={['onglet', { 'onglet--star': star }]} href={href}>
+  <span class="onglet__languette"></span>
+  <h4>{titre}</h4>
+  <p>{resume}</p>
+</a>
+
+<style>
+  .onglet {
+    display: block;
+    position: relative;
+    background-color: var(--c-papier);
+    border: 1px solid var(--c-creme);
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--c-encre);
+    transition: border-color 160ms ease;
+  }
+  .onglet:hover {
+    border-color: var(--c-brun-reliure);
+  }
+  .onglet__languette {
+    position: absolute;
+    top: -1px;
+    left: 1.5rem;
+    width: 2.5rem;
+    height: 4px;
+    background-color: var(--c-sauge);
+  }
+  .onglet--star .onglet__languette {
+    background-color: var(--c-dore);
+  }
+  .onglet p {
+    margin-bottom: 0;
+    font-size: var(--t-small-size);
+    color: var(--c-muted);
+  }
+</style>

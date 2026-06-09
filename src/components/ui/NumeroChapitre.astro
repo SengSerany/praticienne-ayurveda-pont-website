@@ -1,0 +1,19 @@
+---
+import { toRoman } from '../../lib/roman';
+
+interface Props {
+  n: number;
+}
+const { n } = Astro.props;
+---
+
+<span class="numero-chapitre" aria-hidden="true">{toRoman(n)}</span>
+
+<style>
+  .numero-chapitre {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    color: var(--c-brun-reliure);
+  }
+</style>

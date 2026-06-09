@@ -1,0 +1,43 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'filled' | 'outline';
+}
+const { href, label, variant = 'filled' } = Astro.props;
+---
+
+<a class:list={['button', `button--${variant}`]} href={href}>{label}</a>
+
+<style>
+  .button {
+    display: inline-block;
+    font-family: var(--f-body);
+    font-size: var(--t-cta-size);
+    font-weight: var(--t-cta-weight);
+    line-height: var(--t-cta-lh);
+    letter-spacing: var(--t-cta-ls);
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: var(--t-cta-pad);
+    transition:
+      background-color 160ms ease,
+      color 160ms ease;
+  }
+  .button--filled {
+    background-color: var(--c-encre);
+    color: var(--c-papier);
+  }
+  .button--filled:hover {
+    background-color: var(--c-terre);
+  }
+  .button--outline {
+    background-color: transparent;
+    color: var(--c-encre);
+    border: 1px solid var(--c-encre);
+  }
+  .button--outline:hover {
+    background-color: var(--c-encre);
+    color: var(--c-papier);
+  }
+</style>

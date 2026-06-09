@@ -1,0 +1,51 @@
+---
+import Button from '../ui/Button.astro';
+import ClauseYmyl from '../ui/ClauseYmyl.astro';
+import Motif from '../ui/Motif.astro';
+import { ctaPrincipal } from '../../data/site';
+
+interface Props {
+  titre: string;
+  repli?: string;
+}
+const { titre, repli } = Astro.props;
+---
+
+<section class="seuil">
+  <Motif />
+  <h2>{titre}</h2>
+  <Button href={ctaPrincipal.href} label={ctaPrincipal.label} variant="filled" />
+  {repli && <p class="seuil__repli">{repli}</p>}
+  <ClauseYmyl />
+</section>
+
+<style>
+  .seuil {
+    background-color: var(--c-terre);
+    color: var(--c-papier);
+    padding: var(--espace-section) clamp(1.5rem, 5vw, 4rem);
+  }
+  .seuil h2 {
+    color: var(--c-papier);
+    max-width: 28rem;
+  }
+  .seuil__repli {
+    font-size: var(--t-small-size);
+    color: var(--c-creme);
+  }
+  .seuil :global(.button--filled) {
+    background-color: var(--c-papier);
+    color: var(--c-encre);
+  }
+  .seuil :global(.button--filled:hover) {
+    background-color: var(--c-couverture);
+  }
+  .seuil :global(.clause-ymyl) {
+    color: var(--c-creme);
+    margin-top: 1.5rem;
+  }
+  .seuil :global(.motif) {
+    color: var(--c-couverture);
+    margin-top: 0;
+  }
+</style>

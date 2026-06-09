@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import ClauseYmyl from '../components/ui/ClauseYmyl.astro';
+import Motif from '../components/ui/Motif.astro';
+import NumeroChapitre from '../components/ui/NumeroChapitre.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import Seuil from '../components/sections/Seuil.astro';
+import Pont from '../components/sections/Pont.astro';
+import Preuve from '../components/sections/Preuve.astro';
+import Pratfall from '../components/sections/Pratfall.astro';
+import BlocLettre from '../components/sections/BlocLettre.astro';
+import OngletManuel from '../components/sections/OngletManuel.astro';
+
+const couleurs: Array<[string, string, string]> = [
+  ['Couverture toilée', '--c-couverture', '#E3B0A0'],
+  ['Terre dense', '--c-terre', '#9F6C5C'],
+  ['Brun reliure', '--c-brun-reliure', '#7A463A'],
+  ['Papier', '--c-papier', '#F2EBDE'],
+  ['Papier chaleur', '--c-papier-chaleur', '#EFE7DC'],
+  ['Crème', '--c-creme', '#D9CAB5'],
+  ['Encre', '--c-encre', '#2D2A26'],
+  ['Sauge', '--c-sauge', '#A7B5A0'],
+  ['Doré mat', '--c-dore', '#E2C583'],
+];
+
+const verbatims = [
+  {
+    texte: "Pour la première fois, on ne m'a pas dit que c'était dans ma tête.",
+    prenom: 'Marie',
+    ville: 'Lyon',
+  },
+];
+
+const conditionsDemo = [
+  {
+    titre: 'Endométriose',
+    resume: "La porte d'entrée.",
+    href: '/sante-feminine/endometriose',
+    star: true,
+  },
+  { titre: 'SOPK', resume: 'Lire le terrain hormonal.', href: '/sante-feminine/sopk', star: false },
+];
+---
+
+<BaseLayout title="Styleguide" description="Reference interne du design system." noindex={true}>
+  <Breadcrumb
+    items={[
+      { name: 'Accueil', url: '/' },
+      { name: 'Styleguide', url: '/styleguide' },
+    ]}
+  />
+
+  <Eyebrow text="Reference interne" />
+  <h1>Styleguide</h1>
+  <p class="lead">Preuve de tenue du design system « Manuel Relié ».</p>
+
+  <Motif />
+
+  <h2>Typographie</h2>
+  <h1>H1 Fraunces — L'Ayurveda éprouvée.</h1>
+  <h2>H2 Fraunces — Une intelligence qui éclaire la cause.</h2>
+  <h3>H3 Fraunces italic — Le pont entre deux mondes</h3>
+  <h4>H4 Fraunces roman — La cause avant le symptôme.</h4>
+  <p class="lead">Lead IBM Plex Sans — chapeau introductif sur une largeur confortable.</p>
+  <p>
+    Corps IBM Plex Sans avec un terme ayurvédique en <em>Agni</em> rendu en Cormorant italic. La longueur
+    de ligne reste contenue pour la lecture.
+  </p>
+  <blockquote>« Une citation en Cormorant Garamond italic, filet doré à gauche. »</blockquote>
+  <p><NumeroChapitre n={3} /> numéro de chapitre romain.</p>
+
+  <Motif />
+
+  <h2>Palette</h2>
+  <ul class="swatches">
+    {
+      couleurs.map(([nom, token, hex]) => (
+        <li>
+          <span class="swatch" style={`background-color: var(${token})`} />
+          <strong>{nom}</strong>
+          <code>{hex}</code>
+        </li>
+      ))
+    }
+  </ul>
+
+  <Motif />
+
+  <h2>Boutons</h2>
+  <p class="boutons">
+    <Button href="#" label="Premier échange" variant="filled" />
+    <Button href="#" label="En savoir plus" variant="outline" />
+  </p>
+  <ClauseYmyl />
+
+  <Motif />
+
+  <h2>Composants de section</h2>
+  <Pont eyebrow="Autorité" titre="La rigueur du laboratoire, la patience d'une sagesse millénaire.">
+    <p>Corps du pont entre science et Ayurveda.</p>
+  </Pont>
+  <Preuve autorite="CNRGS · lecture systémique" verbatims={verbatims} />
+  <Pratfall
+    titre="Ce que ce n'est pas"
+    cest={['Une lecture de terrain', 'Un accompagnement dans la durée']}
+    cestPas={['Une pharmacie de plantes miracles', 'Une rupture avec votre médecine']}
+  />
+  <div class="onglets">
+    {
+      conditionsDemo.map((c) => (
+        <OngletManuel titre={c.titre} resume={c.resume} href={c.href} star={c.star} />
+      ))
+    }
+  </div>
+  <BlocLettre titre="La lettre" promesse="Une lettre de fond. Jamais de vente." />
+  <Seuil titre="Avant tout protocole, votre histoire." repli="Pas encore prête ? La lettre." />
+</BaseLayout>
+
+<style>
+  .swatches {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap: 1rem;
+  }
+  .swatch {
+    display: block;
+    height: 3rem;
+    border: 1px solid var(--c-creme);
+    margin-bottom: 0.5rem;
+  }
+  .swatches code {
+    font-family: var(--f-mono);
+    font-size: var(--t-caption-size);
+    color: var(--c-muted);
+  }
+  .boutons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  .onglets {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+</style>
