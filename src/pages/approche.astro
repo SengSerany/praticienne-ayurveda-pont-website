@@ -1,0 +1,193 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/page/Hero.astro';
+import SectionEditoriale from '../components/page/SectionEditoriale.astro';
+import Photo from '../components/ui/Photo.astro';
+import Schema from '../components/ui/Schema.astro';
+import Pont from '../components/sections/Pont.astro';
+import OngletManuel from '../components/sections/OngletManuel.astro';
+import Seuil from '../components/sections/Seuil.astro';
+
+const description =
+  "Une lecture systémique du corps : on ne coche pas des symptômes, on lit un terrain. L'Ayurveda éprouvée, en complément de votre médecine. La cause avant le symptôme.";
+
+const portes = [
+  {
+    titre: 'Comprendre par vous-même',
+    resume: 'Les chapitres du manuel expliquent, sans rien à vendre, comment lire votre corps.',
+    href: '/le-manuel',
+  },
+  {
+    titre: 'Reconnaître votre situation',
+    resume: 'Endométriose, SOPK, après-pilule, post-partum, périménopause : entrez par la vôtre.',
+    href: '/sante-feminine',
+  },
+  {
+    titre: 'Cheminer ensemble',
+    resume: 'Si vous voulez un accompagnement dans la durée, voici comment je travaille.',
+    href: '/accompagnement',
+  },
+];
+---
+
+<BaseLayout title="L'approche, la cause avant le symptôme" description={description}>
+  <Hero variante="papier" eyebrow="L'APPROCHE" titre="La cause avant le symptôme. Toujours.">
+    <Schema slot="media" ref="SCHEMA·03" alt="Le pansement face à la cause racine" />
+    <p>
+      La plupart du temps, on vous propose un pansement. Une réponse rapide qui fait taire le
+      symptôme (la douleur, le saignement, l'acné, l'insomnie) sans jamais demander d'où il vient.
+    </p>
+    <p>Le symptôme se calme un temps. Puis il revient, parce que sa cause, elle, n'a pas bougé.</p>
+    <p>
+      Mon travail consiste à faire l'inverse. Avant de proposer quoi que ce soit, je cherche à
+      comprendre ce qui produit le symptôme. C'est plus long, parfois moins spectaculaire, mais
+      c'est la seule façon d'obtenir un changement qui tienne.
+      <strong>La cause avant le symptôme. Toujours.</strong>
+    </p>
+  </Hero>
+
+  <SectionEditoriale
+    numero="01"
+    surtitre="LIRE LE TERRAIN"
+    titre="On ne coche pas des symptômes, on lit un terrain."
+  >
+    <p>
+      Une grille de symptômes que l'on coche, c'est rassurant. C'est aussi trompeur : deux femmes
+      peuvent présenter exactement la même douleur pour des raisons entièrement différentes.
+    </p>
+    <p>
+      Je ne lis donc pas des cases. Je lis un terrain : la façon dont votre digestion, votre cycle,
+      votre système nerveux et votre foie travaillent ensemble, ou se gênent. C'est ce qu'on appelle
+      une lecture systémique : regarder les liens, pas seulement les pièces.
+    </p>
+    <p>
+      C'est souvent là que se cache la vraie cause, à un endroit que personne n'avait encore relié à
+      votre symptôme de départ.
+    </p>
+    <Schema slot="marge" ref="SCHEMA·04" alt="Réseau cycle, digestion, nerveux, foie" />
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="02"
+    surtitre="LES QUATRE PRINCIPES"
+    titre="Quatre principes qui tiennent toute la méthode."
+  >
+    <div class="principes">
+      <div>
+        <h4>I · Remonter à la cause.</h4>
+        <p>
+          Tant qu'on n'a pas nommé la cause, on ne fait que gérer le bruit. Chaque recommandation
+          que je vous fais part de là, jamais d'un symptôme isolé.
+        </p>
+      </div>
+      <div>
+        <h4>II · Faire confiance au simple.</h4>
+        <p>
+          Les gestes les plus efficaces sont souvent les plus humbles : un rythme, une chaleur, une
+          tisane au bon moment. Ici, le simple est un choix réfléchi, pas un défaut.
+        </p>
+      </div>
+      <div>
+        <h4>III · Donner du temps à l'écoute.</h4>
+        <p>
+          On ne lit bien un terrain qu'en prenant le temps de l'entendre. C'est pour cela qu'un
+          bilan dure une heure trente, et non quinze minutes.
+        </p>
+      </div>
+      <div>
+        <h4>IV · Viser votre autonomie.</h4>
+        <p>
+          Chaque geste est accompagné de sa raison, pour que vous puissiez le refaire sans moi. Le
+          but n'est pas que vous reveniez : c'est que vous sachiez.
+        </p>
+      </div>
+    </div>
+  </SectionEditoriale>
+
+  <Pont eyebrow="LE PONT ENTRE DEUX MONDES" titre="Deux manières de connaître le même corps.">
+    <Photo slot="media" ref="PHOTO·02" alt="Herbier et laboratoire" />
+    <p>
+      On présente souvent la science et l'Ayurveda comme deux camps. Je n'ai jamais vu les choses
+      ainsi.
+    </p>
+    <p>
+      La science répond très bien à une question : qu'est-ce qui se passe ? Une analyse vous dit,
+      par exemple, que votre ferritine est basse. Elle ne vous dit pas toujours pourquoi votre corps
+      ne parvient plus à l'absorber. Cette autre moitié de la question, celle du terrain, c'est là
+      que l'Ayurveda éclaire.
+    </p>
+    <p>
+      Les deux ne se contredisent pas : elles se complètent. C'est dans la continuité, pas opposé.
+      C'est ce pont, exactement, que je cherche à tenir dans chaque accompagnement.
+    </p>
+  </Pont>
+
+  <SectionEditoriale
+    numero="04"
+    surtitre="CE QUE CE N'EST PAS"
+    titre="Ce que cette approche n'est pas, et que je préfère dire."
+  >
+    <div class="exclusions">
+      <div>
+        <h4>Ce n'est pas une pharmacie de plantes miracles.</h4>
+        <p>
+          Je ne remplace pas un médicament par une plante censée tout régler. Une plante n'a de sens
+          que dans une logique d'ensemble, choisie pour vous, à un moment précis.
+        </p>
+      </div>
+      <div>
+        <h4>Ce n'est pas un contrôle alimentaire.</h4>
+        <p>
+          Vous n'avez besoin ni d'un régime de plus, ni d'une nouvelle liste d'interdits.
+          L'alimentation est un levier, jamais une punition.
+        </p>
+      </div>
+      <div>
+        <h4>Ce n'est pas une rupture avec votre médecine.</h4>
+        <p>
+          Je travaille en complément de votre médecin et de votre gynécologue, jamais contre eux.
+        </p>
+      </div>
+    </div>
+  </SectionEditoriale>
+
+  <SectionEditoriale numero="05" surtitre="OÙ CELA VOUS MÈNE" titre="Par où commencer, selon vous.">
+    <div class="portes">
+      {portes.map((p) => <OngletManuel titre={p.titre} resume={p.resume} href={p.href} />)}
+    </div>
+  </SectionEditoriale>
+
+  <Seuil
+    titre="Commençons par nous parler."
+    repli="Pas encore prête ? Gardez le fil avec La lettre."
+  >
+    <p>
+      Et si vous préférez simplement en parler, c'est souvent le plus simple. Trente minutes,
+      posément, gratuites et sans engagement.
+    </p>
+  </Seuil>
+</BaseLayout>
+
+<style>
+  .principes,
+  .exclusions {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  @media (min-width: 48rem) {
+    .principes {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .principes h4,
+  .exclusions h4 {
+    margin-bottom: 0.25rem;
+  }
+  .portes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+</style>
