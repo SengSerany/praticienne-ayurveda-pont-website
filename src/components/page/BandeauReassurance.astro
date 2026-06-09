@@ -1,0 +1,40 @@
+---
+interface Props {
+  items: string[];
+}
+const { items } = Astro.props;
+---
+
+<div class="bandeau">
+  {
+    items.map((item, index) => (
+      <>
+        <span class="bandeau__item">{item}</span>
+        {index < items.length - 1 && (
+          <span class="bandeau__sep" aria-hidden="true">
+            ·
+          </span>
+        )}
+      </>
+    ))
+  }
+</div>
+
+<style>
+  .bandeau {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.75rem clamp(1rem, 4vw, 3rem);
+    background-color: var(--c-papier-chaleur);
+    color: var(--c-encre);
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+  }
+  .bandeau__sep {
+    color: var(--c-brun-reliure);
+  }
+</style>
