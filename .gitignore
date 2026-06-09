@@ -17,6 +17,7 @@ node_modules/
 # Build Astro
 dist/
 .astro/
+.wrangler/
 
 # OS
 .DS_Store
