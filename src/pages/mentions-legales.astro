@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description = 'Mentions légales du site Céline Lefèvre, Ayurveda & santé féminine.';
+---
+
+{
+  /* Gabarit a completer et a faire relire. Ne constitue pas un conseil juridique. Remplacer les champs entre crochets. */
+}
+<BaseLayout title="Mentions légales" description={description}>
+  <h1>Mentions légales</h1>
+
+  <h2>Éditeur du site</h2>
+  <p>
+    [Nom et prénom ou raison sociale], [statut juridique, par exemple entrepreneur individuel].<br
+    />
+    Adresse : [adresse postale].<br />
+    SIRET : [numéro SIRET]. [Le cas échéant, numéro de TVA intracommunautaire.]<br />
+    Contact : [adresse email][, téléphone].
+  </p>
+
+  <h2>Directrice de la publication</h2>
+  <p>[Nom et prénom].</p>
+
+  <h2>Hébergeur</h2>
+  <p>
+    Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, États-Unis. Les pages du site
+    sont servies depuis l'infrastructure edge de Cloudflare.
+  </p>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>
+    L'ensemble des contenus de ce site (textes, identité visuelle, illustrations) est protégé. Toute
+    reproduction sans autorisation préalable est interdite.
+  </p>
+
+  <h2>Activité</h2>
+  <p>
+    Ce site présente une activité de praticienne en médecine traditionnelle ayurvédique. Cet
+    accompagnement est complémentaire d'un suivi médical et ne s'y substitue pas.
+  </p>
+
+  <p class="legal-renvoi">
+    <a href="/politique-de-confidentialite">Politique de confidentialité</a>
+  </p>
+</BaseLayout>
+
+<style>
+  .legal-renvoi {
+    margin-top: var(--espace-section);
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+  }
+</style>

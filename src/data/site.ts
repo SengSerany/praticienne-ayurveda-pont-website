@@ -21,6 +21,7 @@ export const navFooter: NavItem[] = [
   { label: 'La lettre', href: '/la-lettre' },
   { label: 'Professionnels de santé', href: '/professionnels-de-sante' },
   { label: 'Mentions légales', href: '/mentions-legales' },
+  { label: 'Confidentialité', href: '/politique-de-confidentialite' },
 ];
 
 export const ctaPrincipal: NavItem = { label: 'Premier échange', href: '/premier-echange' };
