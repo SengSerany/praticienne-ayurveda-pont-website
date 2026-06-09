@@ -10,7 +10,9 @@ const config = {
 };
 
 function mockFetch(status: number) {
-  return vi.fn(async () => new Response('{}', { status }));
+  return vi.fn((_url: RequestInfo | URL, _init?: RequestInit) =>
+    Promise.resolve(new Response(null, { status })),
+  );
 }
 
 describe('brevoUpsertContact', () => {
