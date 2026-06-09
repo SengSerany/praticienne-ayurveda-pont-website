@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/page/Hero.astro';
+import SectionEditoriale from '../components/page/SectionEditoriale.astro';
+import BandeauReassurance from '../components/page/BandeauReassurance.astro';
+import Pratfall from '../components/sections/Pratfall.astro';
+import FormulairePremierEchange from '../components/page/FormulairePremierEchange.astro';
+import Button from '../components/ui/Button.astro';
+import ClauseYmyl from '../components/ui/ClauseYmyl.astro';
+
+const description =
+  'Un premier échange gratuit, sans engagement : trente minutes, posément, pour comprendre votre histoire avant toute proposition. Vous remplissez un court formulaire, je vous réponds sous 48 heures.';
+---
+
+<BaseLayout title="Premier échange, parlons avant tout protocole" description={description}>
+  <Hero variante="papier" eyebrow="PREMIER ÉCHANGE" titre="Avant tout protocole, votre histoire.">
+    <p>
+      Je n'ai pas de protocole standard à vous appliquer. Avant de pouvoir vous dire quoi que ce
+      soit d'utile, j'ai besoin de comprendre la vôtre, d'histoire.
+    </p>
+    <p>
+      C'est tout l'objet de ce premier échange : trente minutes, posément, pour faire connaissance
+      et regarder ensemble ce qui se joue. <strong>Gratuit, et sans engagement de suite.</strong>
+    </p>
+  </Hero>
+
+  <SectionEditoriale
+    numero="01"
+    surtitre="CE QUI SE PASSE PENDANT L'APPEL"
+    titre="Trente minutes, pour vous, sans rien à prouver."
+  >
+    <div class="points">
+      <div>
+        <h4>Trente minutes, rien que pour vous.</h4>
+        <p>
+          On prend le temps, sans se presser. Vous racontez ce que vous vivez, à votre rythme. Je
+          vous écoute, je reformule, je vous pose des questions précises.
+        </p>
+      </div>
+      <div>
+        <h4>Sans engagement.</h4>
+        <p>
+          Repartir sans suite est une réponse parfaitement acceptable. Vous ne signez rien, vous ne
+          décidez rien sur le moment.
+        </p>
+      </div>
+      <div>
+        <h4>Écoutée, et orientée honnêtement.</h4>
+        <p>
+          À la fin, je vous dis ce que je pense pouvoir faire pour vous, et ce qui relève plutôt
+          d'un autre praticien. Même si la réponse est « ce n'est pas pour moi », vous l'aurez
+          clairement.
+        </p>
+      </div>
+    </div>
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="02"
+    surtitre="ÉCRIVEZ-MOI UN MOT"
+    titre="Dites-moi simplement ce qui vous amène."
+  >
+    <p>
+      Ce court formulaire me permet d'arriver préparée à notre échange. Pas besoin de tout
+      détailler, même une ligne suffit ; vous me direz le reste de vive voix. Je vous réponds
+      personnellement, et nous fixons un créneau de trente minutes.
+    </p>
+    <FormulairePremierEchange />
+    <BandeauReassurance
+      items={[
+        '30 min, par téléphone ou en visio',
+        'Réponse personnelle sous 48 h',
+        'Gratuit, écoutée, pas démarchée',
+      ]}
+    />
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="03"
+    surtitre="POUR QUE LES CHOSES SOIENT CLAIRES"
+    titre="Ce premier échange n'est pas un argumentaire de vente."
+  >
+    <p>
+      Ce n'est pas une mini-consultation déguisée, ni un appel au terme duquel je vous pousserai à
+      signer. Je n'ai pas de quota à remplir, je travaille avec peu de personnes, en profondeur.
+    </p>
+    <p class="pour-qui">Ce premier échange est sans doute pour vous si :</p>
+    <Pratfall
+      cest={[
+        'Vous voulez comprendre la cause de ce que vous vivez, pas seulement faire taire un symptôme.',
+        'Vous êtes prête à mettre des choses en place, à votre rythme.',
+        'Vous cherchez un accompagnement dans la durée, pas une réponse instantanée.',
+      ]}
+      cestPas={[
+        'Vous attendez une solution miracle, immédiate et sans effort.',
+        "Vous cherchez un diagnostic médical : c'est le rôle de votre médecin, pas le mien.",
+      ]}
+    />
+    <p>
+      Dans tous les cas, écrivez-moi : si ce n'est pas pour moi, je vous le dirai, et je vous
+      orienterai au mieux.
+    </p>
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="04"
+    surtitre="PAS ENCORE PRÊTE ?"
+    titre="Rien ne presse. Gardez simplement le fil."
+  >
+    <p>
+      Vous n'êtes pas obligée de m'écrire aujourd'hui. Si vous préférez d'abord apprendre, lire,
+      comprendre à votre rythme, c'est très bien aussi.
+    </p>
+    <p>
+      Recevez La lettre : une fois par mois, un chapitre de fond, sans rien à vendre. Le jour où
+      vous vous sentez prête, vous saurez où me trouver.
+    </p>
+    <p><Button href="/la-lettre" label="Recevoir La lettre" variant="outline" /></p>
+    <ClauseYmyl />
+  </SectionEditoriale>
+</BaseLayout>
+
+<style>
+  .points {
+    display: grid;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  @media (min-width: 48rem) {
+    .points {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .points h4 {
+    margin-bottom: 0.25rem;
+  }
+  .pour-qui {
+    margin-bottom: 0.5rem;
+  }
+</style>
