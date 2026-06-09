@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description =
+  'Politique de confidentialité : quelles données sont collectées, pourquoi, et quels sont vos droits.';
+---
+
+{/* Gabarit RGPD a completer et a faire relire. Ne constitue pas un conseil juridique. */}
+<BaseLayout title="Politique de confidentialité" description={description}>
+  <h1>Politique de confidentialité</h1>
+  <p class="lead">
+    Cette page explique quelles données sont collectées sur ce site, pourquoi, et quels sont vos
+    droits.
+  </p>
+
+  <h2>Responsable de traitement</h2>
+  <p>[Nom et prénom], [adresse]. Pour toute question, écrivez à [adresse email].</p>
+
+  <h2>Données collectées et finalités</h2>
+  <ul class="liste-rgpd">
+    <li>
+      <strong>Formulaire « Premier échange »</strong> : votre adresse email, et, si vous les renseignez,
+      votre prénom et votre message. Finalité : vous répondre et organiser un premier échange. Base légale
+      : votre démarche (mesures précontractuelles).
+    </li>
+    <li>
+      <strong>Inscription à La lettre</strong> : votre adresse email, recueillie avec votre consentement
+      (confirmation par double opt-in). Finalité : vous envoyer la lettre. Base légale : votre consentement.
+    </li>
+    <li>
+      <strong>Mesure d'audience</strong> : des statistiques de visite agrégées, sans cookie, via Umami.
+      Aucune donnée permettant de vous identifier n'est collectée à cette fin.
+    </li>
+  </ul>
+
+  <h2>Destinataires et sous-traitants</h2>
+  <p>
+    Vos adresses email sont traitées via Brevo (société française, hébergement dans l'Union
+    européenne), qui assure l'envoi des messages et de la lettre. La mesure d'audience est assurée
+    par Umami. L'hébergement du site est assuré par Cloudflare. Vos données ne sont ni vendues, ni
+    utilisées à d'autres fins.
+  </p>
+
+  <h2>Durée de conservation</h2>
+  <p>
+    Les données du formulaire sont conservées le temps nécessaire au traitement de votre demande.
+    Les abonnées à la lettre sont conservées jusqu'à leur désabonnement.
+  </p>
+
+  <h2>Cookies</h2>
+  <p>
+    Ce site n'utilise aucun cookie de suivi ni de publicité. La mesure d'audience est réalisée sans
+    cookie.
+  </p>
+
+  <h2>Vos droits</h2>
+  <p>
+    Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition
+    sur vos données, ainsi que du droit de retirer votre consentement à tout moment. Pour l'exercer,
+    écrivez à [adresse email]. Vous pouvez également introduire une réclamation auprès de la CNIL
+    (www.cnil.fr).
+  </p>
+</BaseLayout>
+
+<style>
+  .liste-rgpd {
+    display: grid;
+    gap: 1rem;
+    max-width: var(--rythme-colonne);
+  }
+</style>

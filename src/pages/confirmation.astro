@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionEditoriale from '../components/page/SectionEditoriale.astro';
+import Button from '../components/ui/Button.astro';
+import ClauseYmyl from '../components/ui/ClauseYmyl.astro';
+import Motif from '../components/ui/Motif.astro';
+
+const description = 'Votre message est bien arrivé.';
+---
+
+<BaseLayout title="Merci, votre message est bien arrivé" description={description} noindex={true}>
+  <p class="conf-eyebrow">PREMIER ÉCHANGE, C'EST ENVOYÉ</p>
+  <h1>Merci, votre message est bien arrivé.</h1>
+  <p class="lead">
+    Je l'ai bien reçu. Et je le lirai moi-même, pas un assistant, pas un message automatique. Vous
+    n'avez rien à faire de plus pour l'instant.
+  </p>
+
+  <Motif />
+
+  <SectionEditoriale
+    numero="01"
+    surtitre="CE QUI SE PASSE MAINTENANT"
+    titre="La suite, en trois temps."
+  >
+    <div class="temps">
+      <div>
+        <h4>1 · Je vous lis.</h4>
+        <p>Dans les jours qui viennent, je prends le temps de lire votre message attentivement.</p>
+      </div>
+      <div>
+        <h4>2 · Je vous réponds.</h4>
+        <p>
+          Sous 48 heures ouvrées, je vous réponds personnellement et je vous propose des créneaux
+          pour notre échange.
+        </p>
+      </div>
+      <div>
+        <h4>3 · On se parle.</h4>
+        <p>
+          Trente minutes, posément et sans engagement. Le temps de poser l'essentiel, sans être
+          bousculée.
+        </p>
+      </div>
+    </div>
+    <p class="conf-spam">
+      Vous ne voyez rien passer d'ici 48 heures ? Pensez à vérifier vos courriers indésirables, ou
+      réécrivez-moi, un message se perd parfois.
+    </p>
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="02"
+    surtitre="POUR GARDER LE FIL"
+    titre="Et si ce n'est pas déjà fait, gardez le fil."
+  >
+    <p>
+      Vous pouvez recevoir La lettre : une fois par mois, un chapitre de fond, clair et documenté.
+      Jamais de vente.
+    </p>
+    <p><Button href="/la-lettre" label="Recevoir La lettre" variant="outline" /></p>
+    <ClauseYmyl />
+  </SectionEditoriale>
+</BaseLayout>
+
+<style>
+  .conf-eyebrow {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+  }
+  .temps {
+    display: grid;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  @media (min-width: 48rem) {
+    .temps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .temps h4 {
+    margin-bottom: 0.25rem;
+  }
+  .conf-spam {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-muted);
+  }
+</style>

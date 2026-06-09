@@ -11,9 +11,13 @@ node_modules/
 .env.local
 .env*.local
 
+# Secrets locaux Cloudflare
+.dev.vars
+
 # Build Astro
 dist/
 .astro/
+.wrangler/
 
 # OS
 .DS_Store

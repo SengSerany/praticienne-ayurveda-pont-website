@@ -1,0 +1,7 @@
+---
+const src = import.meta.env.PUBLIC_UMAMI_SRC;
+const websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
+const actif = Boolean(src && websiteId);
+---
+
+{actif && <script defer src={src} data-website-id={websiteId} is:inline />}
