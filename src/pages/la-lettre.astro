@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/page/Hero.astro';
+import SectionEditoriale from '../components/page/SectionEditoriale.astro';
+import Citation from '../components/ui/Citation.astro';
+import FormulaireLettre from '../components/page/FormulaireLettre.astro';
+
+const description =
+  'Une fois par mois, un chapitre de santé féminine expliqué clairement, de la cause au geste. Rien à vendre, juste à comprendre.';
+---
+
+<BaseLayout title="La lettre, une lettre de fond, jamais de vente" description={description}>
+  <Hero variante="papier" eyebrow="LA LETTRE" titre="Une lettre de fond. Jamais de vente.">
+    <p>La plupart des lettres d'information cherchent à vous vendre quelque chose. Pas celle-ci.</p>
+    <p>
+      Une fois par mois, je vous envoie un chapitre de fond : un sujet de santé féminine expliqué
+      clairement, de la cause au geste. Rien à acheter, juste à comprendre, à votre rythme.
+    </p>
+    <p>
+      C'est la même chose que ce que je transmets en consultation, mais en accès libre : apprendre,
+      peu à peu, à lire votre corps.
+    </p>
+  </Hero>
+
+  <SectionEditoriale
+    numero="01"
+    surtitre="CE QUE VOUS RECEVREZ"
+    titre="Ce que vous recevrez, et à quel rythme."
+  >
+    <ul class="recevrez">
+      <li>
+        <strong>Une lettre par mois, pas plus.</strong> Je préfère une vraie lettre, rare, à dix emails
+        oubliables.
+      </li>
+      <li>
+        <strong>Un sujet par lettre, traité en profondeur</strong> : la cause avant le symptôme, toujours.
+      </li>
+      <li>
+        <strong>Des gestes simples et applicables</strong>, jamais des injonctions ni des régimes.
+      </li>
+      <li>
+        <strong>Aucune vente, aucune pression.</strong> Désabonnement en un clic, à tout moment.
+      </li>
+    </ul>
+    <Citation
+      texte="Le ton y est celui d'un carnet que l'on partage : on s'y tutoie, comme entre deux personnes qui cheminent."
+    />
+  </SectionEditoriale>
+
+  <section class="abonnement">
+    <p class="abonnement__eyebrow">§ 02 · RECEVEZ LA PREMIÈRE</p>
+    <h2>Laissez-moi votre adresse, je m'occupe du reste.</h2>
+    <p class="lettre-confirme" hidden>
+      Merci. Vérifiez votre boîte mail pour confirmer votre inscription.
+    </p>
+    <FormulaireLettre cta="S'abonner" />
+    <p class="abonnement__medical">
+      Les contenus de la lettre sont informatifs et ne remplacent pas un avis médical.
+    </p>
+  </section>
+
+  <script is:inline>
+    if (location.search.includes('inscrite=1')) {
+      const el = document.querySelector('.lettre-confirme');
+      if (el) el.hidden = false;
+    }
+  </script>
+</BaseLayout>
+
+<style>
+  .recevrez {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    max-width: var(--rythme-colonne);
+  }
+  .abonnement {
+    background-color: var(--c-papier-chaleur);
+    padding: var(--espace-section) clamp(1rem, 4vw, 3rem);
+  }
+  .abonnement__eyebrow {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+    margin: 0 0 0.5rem;
+  }
+  .lettre-confirme {
+    background-color: var(--c-succes-fond);
+    border-left: 2px solid var(--c-succes);
+    padding: 0.75rem 1rem;
+    max-width: var(--rythme-colonne);
+  }
+  .abonnement__medical {
+    font-family: var(--f-mono);
+    font-size: var(--t-caption-size);
+    color: var(--c-muted);
+    margin-top: 1rem;
+  }
+</style>
