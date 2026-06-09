@@ -1,6 +1,6 @@
 ---
 interface Props {
-  titre: string;
+  titre?: string;
   cest: string[];
   cestPas: string[];
 }
@@ -8,7 +8,7 @@ const { titre, cest, cestPas } = Astro.props;
 ---
 
 <section class="pratfall">
-  <h2>{titre}</h2>
+  {titre && <h2>{titre}</h2>}
   <div class="pratfall__colonnes">
     <ul class="pratfall__col">
       {cest.map((item) => <li>{item}</li>)}
