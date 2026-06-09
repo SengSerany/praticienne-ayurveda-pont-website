@@ -1,0 +1,59 @@
+---
+import { navFooter, SITE } from '../../data/site';
+import ClauseYmyl from '../ui/ClauseYmyl.astro';
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <p class="footer__signature">{SITE.nom} — {SITE.baseline}</p>
+    <nav aria-label="Navigation secondaire">
+      <ul>
+        {
+          navFooter.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <ClauseYmyl />
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--c-terre);
+    color: var(--c-papier);
+    padding: var(--espace-section) clamp(1rem, 4vw, 3rem);
+    margin-top: var(--espace-section);
+  }
+  .footer__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: var(--rythme-colonne-large);
+  }
+  .footer__signature {
+    font-family: var(--f-display);
+    font-size: var(--t-h4-size);
+    margin: 0;
+    max-width: none;
+  }
+  .footer ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+  }
+  .footer a {
+    color: var(--c-papier);
+    font-size: var(--t-small-size);
+    text-decoration: none;
+  }
+  .footer :global(.clause-ymyl) {
+    color: var(--c-creme);
+  }
+</style>
