@@ -1,0 +1,50 @@
+---
+interface Props {
+  ref: string;
+  alt: string;
+  src?: string;
+  legende?: string;
+}
+const { ref, alt, src, legende } = Astro.props;
+---
+
+<figure class="schema">
+  {
+    src ? (
+      <img src={src} alt={alt} />
+    ) : (
+      <div class="schema-placeholder" role="img" aria-label={alt}>
+        <span class="schema-placeholder__ref">{ref}</span>
+      </div>
+    )
+  }
+  {legende && <figcaption>{legende}</figcaption>}
+</figure>
+
+<style>
+  .schema {
+    margin: 0;
+  }
+  .schema-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 8rem;
+    padding: 1.5rem;
+    background-color: var(--c-papier-chaleur);
+    border: 1px dashed var(--c-brun-reliure);
+  }
+  .schema-placeholder__ref {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+  }
+  .schema figcaption {
+    font-family: var(--f-mono);
+    font-size: var(--t-caption-size);
+    color: var(--c-muted);
+    margin-top: 0.5rem;
+  }
+</style>

@@ -1,0 +1,41 @@
+---
+interface Props {
+  ref: string;
+  alt: string;
+  src?: string;
+  ratio?: string;
+}
+const { ref, alt, src, ratio = '4 / 3' } = Astro.props;
+---
+
+{
+  src ? (
+    <img class="photo" src={src} alt={alt} style={`aspect-ratio: ${ratio}`} />
+  ) : (
+    <div class="photo-placeholder" style={`aspect-ratio: ${ratio}`} role="img" aria-label={alt}>
+      <span class="photo-placeholder__ref">{ref}</span>
+    </div>
+  )
+}
+
+<style>
+  .photo {
+    width: 100%;
+    object-fit: cover;
+  }
+  .photo-placeholder {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    background-color: var(--c-creme);
+    border: 1px solid var(--c-brun-reliure);
+  }
+  .photo-placeholder__ref {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+interface Props {
+  ref: string;
+  alt: string;
+  src?: string;
+}
+const { ref, alt, src } = Astro.props;
+---
+
+{
+  src ? (
+    <img class="illustration" src={src} alt={alt} />
+  ) : (
+    <div class="illustration-placeholder" role="img" aria-label={alt}>
+      <svg width="40" height="56" viewBox="0 0 40 56" fill="none" aria-hidden="true">
+        <path
+          d="M20 54 L20 20 M20 28 C12 24 8 16 8 8 C16 10 20 16 20 24 M20 28 C28 24 32 16 32 8 C24 10 20 16 20 24"
+          stroke="currentColor"
+          stroke-width="1.2"
+          fill="none"
+        />
+      </svg>
+      <span class="illustration-placeholder__ref">{ref}</span>
+    </div>
+  )
+}
+
+<style>
+  .illustration {
+    max-width: 100%;
+  }
+  .illustration-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    color: var(--c-sauge);
+  }
+  .illustration-placeholder__ref {
+    font-family: var(--f-mono);
+    font-size: var(--t-caption-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+  }
+</style>
