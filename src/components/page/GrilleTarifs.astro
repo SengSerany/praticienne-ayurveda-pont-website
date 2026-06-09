@@ -1,0 +1,61 @@
+---
+import { offres, reglesTarifs } from '../../data/prix';
+---
+
+<div class="tarifs">
+  <ul class="tarifs__liste">
+    {
+      offres.map((offre) => (
+        <li class="tarifs__offre">
+          <div class="tarifs__entete">
+            <h4>{offre.nom}</h4>
+            <span class="tarifs__prix">{offre.prix}</span>
+          </div>
+          <p>{offre.description}</p>
+          {offre.note && <p class="tarifs__note">{offre.note}</p>}
+        </li>
+      ))
+    }
+  </ul>
+  <ul class="tarifs__regles">
+    {reglesTarifs.map((regle) => <li>{regle}</li>)}
+  </ul>
+</div>
+
+<style>
+  .tarifs__liste,
+  .tarifs__regles {
+    list-style: none;
+    padding: 0;
+  }
+  .tarifs__offre {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--c-creme);
+  }
+  .tarifs__entete {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    align-items: baseline;
+  }
+  .tarifs__entete h4 {
+    margin: 0;
+  }
+  .tarifs__prix {
+    font-family: var(--f-display);
+    font-size: var(--t-h4-size);
+    color: var(--c-terre);
+  }
+  .tarifs__note {
+    font-size: var(--t-small-size);
+    color: var(--c-muted);
+  }
+  .tarifs__regles {
+    margin-top: 1.5rem;
+    font-size: var(--t-small-size);
+    color: var(--c-muted);
+    display: grid;
+    gap: 0.5rem;
+  }
+</style>
