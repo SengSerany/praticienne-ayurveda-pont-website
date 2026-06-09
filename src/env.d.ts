@@ -1,7 +1,5 @@
 /// <reference types="astro/client" />
 
-type CloudflareRuntime = import('@astrojs/cloudflare').Runtime<Env>;
-
 interface Env {
   BREVO_API_KEY?: string;
   BREVO_LIST_LETTRE_ID?: string;
@@ -10,6 +8,6 @@ interface Env {
   BREVO_DOI_REDIRECT_URL?: string;
 }
 
-declare namespace App {
-  interface Locals extends CloudflareRuntime {}
+declare module 'cloudflare:workers' {
+  export const env: Env;
 }
