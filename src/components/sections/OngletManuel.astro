@@ -1,18 +1,28 @@
 ---
+import Illustration from '../ui/Illustration.astro';
+
 interface Props {
   titre: string;
   resume: string;
   href: string;
   star?: boolean;
+  aVenir?: boolean;
+  illustrationRef?: string;
 }
-const { titre, resume, href, star = false } = Astro.props;
+const { titre, resume, href, star = false, aVenir = false, illustrationRef } = Astro.props;
+const Tag = aVenir ? 'div' : 'a';
 ---
 
-<a class:list={['onglet', { 'onglet--star': star }]} href={href}>
+<Tag
+  class:list={['onglet', { 'onglet--star': star, 'onglet--a-venir': aVenir }]}
+  href={aVenir ? undefined : href}
+>
   <span class="onglet__languette"></span>
+  {illustrationRef && <Illustration ref={illustrationRef} alt={`Illustration ${titre}`} />}
   <h4>{titre}</h4>
   <p>{resume}</p>
-</a>
+  {aVenir && <span class="onglet__badge">À venir</span>}
+</Tag>
 
 <style>
   .onglet {
@@ -25,7 +35,7 @@ const { titre, resume, href, star = false } = Astro.props;
     color: var(--c-encre);
     transition: border-color 160ms ease;
   }
-  .onglet:hover {
+  a.onglet:hover {
     border-color: var(--c-brun-reliure);
   }
   .onglet__languette {
@@ -39,9 +49,21 @@ const { titre, resume, href, star = false } = Astro.props;
   .onglet--star .onglet__languette {
     background-color: var(--c-dore);
   }
+  .onglet--a-venir {
+    opacity: 0.7;
+  }
   .onglet p {
     margin-bottom: 0;
     font-size: var(--t-small-size);
     color: var(--c-muted);
+  }
+  .onglet__badge {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
   }
 </style>
