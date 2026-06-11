@@ -1,0 +1,266 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/page/Hero.astro';
+import SectionEditoriale from '../../components/page/SectionEditoriale.astro';
+import BandeauReassurance from '../../components/page/BandeauReassurance.astro';
+import Photo from '../../components/ui/Photo.astro';
+import Schema from '../../components/ui/Schema.astro';
+import Illustration from '../../components/ui/Illustration.astro';
+import ClauseYmyl from '../../components/ui/ClauseYmyl.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import PontCondition from '../../components/sections/PontCondition.astro';
+import Pratfall from '../../components/sections/Pratfall.astro';
+import BlocLettre from '../../components/sections/BlocLettre.astro';
+import Seuil from '../../components/sections/Seuil.astro';
+import { SITE } from '../../data/site';
+import { buildWebPageJsonLd } from '../../lib/seo';
+
+const description =
+  'Périménopause : bouffées de chaleur, sommeil fragmenté, assèchement. Une lecture de la cause racine (chaleur, sécheresse) en complément de votre suivi médical. Traverser cette étape, sans la subir.';
+
+const medicalJsonLd = buildWebPageJsonLd({
+  name: 'Périménopause & Ayurveda, traverser la transition autrement',
+  description,
+  url: new URL('/sante-feminine/perimenopause', SITE.url).href,
+  medical: true,
+});
+
+const articles = [
+  "Bouffées de chaleur : comprendre le feu et l'apaiser.",
+  'Périménopause et sommeil : pourquoi les nuits changent.',
+  "Tissus qui s'assèchent : nourrir et hydrater autrement.",
+];
+---
+
+<BaseLayout
+  title="Périménopause & Ayurveda, traverser la transition autrement"
+  description={description}
+>
+  <script type="application/ld+json" set:html={medicalJsonLd} is:inline />
+
+  <Breadcrumb
+    items={[
+      { name: 'Accueil', url: '/' },
+      { name: "Ce que j'accompagne", url: '/sante-feminine' },
+      { name: 'Périménopause', url: '/sante-feminine/perimenopause' },
+    ]}
+  />
+
+  <Hero
+    variante="papier"
+    eyebrow="SANTÉ FÉMININE · PÉRIMÉNOPAUSE"
+    titre="Périménopause : traverser la transition, sans la subir."
+  >
+    <Photo
+      slot="media"
+      ref="PHOTO·PERIMENOPAUSE"
+      alt="Herbier, lumière de fin de journée"
+      ratio="3 / 4"
+    />
+    <p>
+      Des bouffées de chaleur qui surgissent sans prévenir, des nuits hachées, une irritabilité que
+      vous ne vous connaissiez pas, des tissus qui s'assèchent. On vous dit que « c'est l'âge »,
+      qu'il faut « faire avec », comme si vous n'aviez rien à comprendre, ni rien à faire. La
+      périménopause fait partie de ce que j'accompagne, en tant que praticienne
+      <strong>spécialisée en santé féminine</strong>.
+    </p>
+    <p>
+      Ce que je vous propose, c'est de comprendre ce qui se joue, vraiment, dans cette transition
+      (la chaleur, la sécheresse, le sommeil) pour la traverser plus sereinement, en complément de
+      votre suivi médical.
+    </p>
+    <p>
+      Je ne vais pas prétendre « arrêter » la ménopause : c'est une étape de la vie, pas une
+      maladie, et personne ne devrait vous vendre l'inverse. Ce que je peux faire, c'est vous aider
+      à mieux vivre cette période, apaiser ce qui peut l'être, et vous y sentir moins étrangère.
+    </p>
+    <ClauseYmyl />
+  </Hero>
+
+  <SectionEditoriale
+    numero="01"
+    surtitre="CE QUI SE JOUE, VRAIMENT"
+    titre="La périménopause n'est pas une panne, c'est un changement de saison."
+  >
+    <p>
+      Votre corps ne tombe pas en panne : il change de régime hormonal, parfois brutalement. Trois
+      mouvements expliquent l'essentiel de ce que vous ressentez :
+    </p>
+    <ul class="leviers">
+      <li>
+        <strong>La chaleur.</strong> Les bouffées, l'irritabilité, l'inflammation qui s'invite : c'est
+        un excès de feu, ce que la tradition nomme un excès de <em>Pitta</em>, que l'on cherche à
+        apaiser plutôt qu'à entretenir.
+      </li>
+      <li>
+        <strong>L'assèchement.</strong> Avec l'âge, le corps s'assèche : peau, muqueuses, articulations.
+        C'est la montée de <em>Vata</em>, le principe du sec et du mouvement. On y répond par de la
+        nourriture, du gras, de la lenteur.
+      </li>
+      <li>
+        <strong>Le sommeil et le système nerveux.</strong> Les nuits se fragmentent, l'anxiété monte.
+        Soutenir le système nerveux fait souvent autant pour les bouffées que pour le sommeil lui-même.
+      </li>
+    </ul>
+    <p>
+      Comprendre quel mouvement domine chez vous, c'est cesser de subir une transition floue, et
+      savoir où agir.
+    </p>
+    <Schema slot="marge" ref="SCHEMA·PERIMENOPAUSE" alt="Chaleur et sécheresse" />
+  </SectionEditoriale>
+
+  <PontCondition numero="02" titre="Vous n'aurez pas à choisir.">
+    <p>
+      Vous n'aurez pas à choisir entre votre médecine et l'Ayurveda. C'est une fausse alternative.
+    </p>
+    <p>
+      Votre gynécologue, votre médecin, et votre traitement hormonal de la ménopause si vous l'avez
+      choisi avec eux : tout cela garde sa place. Mon travail vient à côté, sur le terrain quotidien
+      : la chaleur, l'hydratation des tissus, la digestion, le sommeil, la charge nerveuse.
+    </p>
+    <p>
+      Je lis vos analyses et vos bilans. Je ne pose pas de diagnostic, je n'interromps aucun suivi.
+      Je travaille avec votre médecine, jamais contre elle.
+    </p>
+  </PontCondition>
+
+  <SectionEditoriale
+    numero="03"
+    surtitre="CE QUE ÇA PEUT, ET NE PEUT PAS"
+    titre="Ce que cet accompagnement peut, et ce qu'il ne peut pas."
+  >
+    <Pratfall
+      cest={[
+        "Aider à apaiser les bouffées de chaleur et l'irritabilité.",
+        "Soutenir l'hydratation et la nutrition des tissus qui s'assèchent.",
+        'Améliorer la qualité de votre sommeil et calmer la charge nerveuse.',
+        'Vous apprendre à lire vos signaux, pour ajuster au fil de la transition.',
+      ]}
+      cestPas={[
+        "« Arrêter » la ménopause. C'est une étape naturelle, pas une maladie à guérir.",
+        'Remplacer votre suivi gynécologique, ni un traitement hormonal de la ménopause choisi avec votre médecin.',
+        'Se substituer à un avis médical : tout saignement inhabituel après une longue absence de règles doit toujours être vérifié médicalement, et je vous y orienterai.',
+      ]}
+    />
+    <p class="cta-intermediaire">
+      Vous vous reconnaissez ? <a href="/premier-echange">Commençons par nous parler.</a>
+    </p>
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="04"
+    surtitre="UNE PLANTE, UNE LOGIQUE"
+    titre="Aucune plante miracle, mais une logique, oui."
+  >
+    <p>Si quelqu'un vous vend LA plante qui règle la ménopause, méfiez-vous. Cela n'existe pas.</p>
+    <p>
+      Ce qui existe, c'est une logique. Apaiser la chaleur n'a rien à voir avec répondre à
+      l'assèchement, ou avec restaurer le sommeil : ce ne sont ni les mêmes plantes, ni le même
+      moment. La Sauge, qui touche aux bouffées de chaleur, ne répond pas au même besoin que le
+      Shatavari, qui soutient l'hydratation des tissus.
+    </p>
+    <p>
+      C'est pour cela que je ne donne jamais de liste toute faite. Chaque proposition est choisie
+      pour vous, à un moment précis, et accompagnée de sa raison.
+    </p>
+    <Illustration slot="marge" ref="ILLU·Sauge" alt="Plante au trait, Sauge" />
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="05"
+    surtitre="CE QU'ELLES EN DISENT"
+    titre="Dans leurs mots, pas les miens."
+  >
+    <p class="note-lancement">
+      Les accompagnements en périménopause que je publierai ici seront de vrais retours, sans
+      retouche, et seulement quand il y en aura.
+    </p>
+  </SectionEditoriale>
+
+  <BandeauReassurance
+    items={[
+      'Dix ans en laboratoire de référence (CNRGS)',
+      'Lecture critique de vos bilans',
+      'Complémentaire de votre suivi médical',
+    ]}
+  />
+
+  <SectionEditoriale
+    numero="06"
+    surtitre="POUR ALLER PLUS LOIN"
+    titre="Trois chapitres pour commencer à comprendre."
+  >
+    <ul class="articles">
+      {
+        articles.map((titre) => (
+          <li>
+            <a href="/le-manuel">{titre}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </SectionEditoriale>
+
+  <BlocLettre
+    titre="Une lettre de fond. Jamais de vente."
+    promesse="Une fois par mois, un chapitre de lecture du corps. Pour commencer, un petit outil gratuit pour mieux comprendre votre terrain : quelques questions, un retour utile à la fin."
+  />
+
+  <Seuil
+    titre="Commençons par votre transition à vous."
+    repli="Pas encore prête ? Gardez le fil avec La lettre."
+  >
+    <p>
+      Aucune périménopause ne ressemble à une autre. Avant de vous proposer quoi que ce soit, j'ai
+      besoin de comprendre la vôtre : ce que vous ressentez, ce qui vous pèse le plus, comment vous
+      dormez.
+    </p>
+    <p>
+      Commençons par nous parler : trente minutes, gratuites et sans engagement, juste le temps de
+      poser l'essentiel et de voir si je peux vous aider.
+    </p>
+    <p>
+      <a href="/accompagnement">Comment se passe l'accompagnement</a> ·
+      <a href="/qui-je-suis">Qui je suis</a>
+    </p>
+    <p class="signature-niche">Céline Lefèvre · Accompagnement Ayurvédique des Cycles</p>
+  </Seuil>
+</BaseLayout>
+
+<style>
+  .leviers {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    display: grid;
+    gap: 1rem;
+    max-width: var(--rythme-colonne);
+  }
+  .leviers li {
+    padding-left: 1rem;
+    border-left: 2px solid var(--c-creme);
+  }
+  .cta-intermediaire {
+    margin-top: 1.5rem;
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+  }
+  .note-lancement {
+    color: var(--c-muted);
+    border-left: 2px solid var(--c-creme);
+    padding-left: 1rem;
+  }
+  .articles {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .signature-niche {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-creme);
+    margin-top: 2rem;
+  }
+</style>
