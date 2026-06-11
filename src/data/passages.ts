@@ -26,7 +26,7 @@ export const passages: Passage[] = [
       "Cycles devenus silencieux, peau qui s'emballe, énergie en dents de scie. Relire le terrain plutôt que masquer les signaux.",
     href: '/sante-feminine/sopk',
     star: false,
-    aVenir: true,
+    aVenir: false,
     illustrationRef: 'ILLU·Shatavari',
   },
   {
@@ -36,7 +36,7 @@ export const passages: Passage[] = [
       "Le cycle qui ne revient pas, le corps qu'on ne reconnaît plus. Soutenir le foie et réveiller l'axe hormonal, sans reprendre d'hormones de synthèse.",
     href: '/sante-feminine/apres-pilule-amenorrhee',
     star: false,
-    aVenir: true,
+    aVenir: false,
     illustrationRef: 'ILLU·Sauge',
   },
   {
@@ -46,7 +46,7 @@ export const passages: Passage[] = [
       "Après l'accouchement, un grand vide intérieur, au sens littéral. De la chaleur, du gras nourrissant, du repos : l'apaisement de Vata.",
     href: '/sante-feminine/post-partum',
     star: false,
-    aVenir: true,
+    aVenir: false,
     illustrationRef: 'ILLU·Tilleul',
   },
   {
@@ -56,7 +56,7 @@ export const passages: Passage[] = [
       "Le feu qui monte, le sommeil qui s'effrite, les tissus qui s'assèchent. Accompagner la transition, plutôt que la subir.",
     href: '/sante-feminine/perimenopause',
     star: false,
-    aVenir: true,
+    aVenir: false,
     illustrationRef: 'ILLU·Melisse',
   },
 ];
