@@ -1,0 +1,270 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/page/Hero.astro';
+import SectionEditoriale from '../../components/page/SectionEditoriale.astro';
+import BandeauReassurance from '../../components/page/BandeauReassurance.astro';
+import Photo from '../../components/ui/Photo.astro';
+import Schema from '../../components/ui/Schema.astro';
+import Illustration from '../../components/ui/Illustration.astro';
+import ClauseYmyl from '../../components/ui/ClauseYmyl.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import PontCondition from '../../components/sections/PontCondition.astro';
+import Pratfall from '../../components/sections/Pratfall.astro';
+import BlocLettre from '../../components/sections/BlocLettre.astro';
+import Seuil from '../../components/sections/Seuil.astro';
+import { SITE } from '../../data/site';
+import { buildWebPageJsonLd } from '../../lib/seo';
+
+const description =
+  "Cycle qui ne revient pas après la pilule, acné rebond, aménorrhée : une lecture de la cause racine (foie, axe hormonal), en complément de votre suivi médical, sans reprendre d'hormones de synthèse par défaut.";
+
+const medicalJsonLd = buildWebPageJsonLd({
+  name: 'Après-pilule & aménorrhée, Ayurveda pour relancer votre cycle',
+  description,
+  url: new URL('/sante-feminine/apres-pilule-amenorrhee', SITE.url).href,
+  medical: true,
+});
+
+const articles = [
+  'Aménorrhée post-pilule : pourquoi le cycle ne revient pas.',
+  'Acné rebond après la pilule : le rôle du foie.',
+  'Soutenir son foie sans cure violente : ce qui aide vraiment.',
+];
+---
+
+<BaseLayout
+  title="Après-pilule & aménorrhée, Ayurveda pour relancer votre cycle"
+  description={description}
+>
+  <script type="application/ld+json" set:html={medicalJsonLd} is:inline />
+
+  <Breadcrumb
+    items={[
+      { name: 'Accueil', url: '/' },
+      { name: "Ce que j'accompagne", url: '/sante-feminine' },
+      { name: 'Après-pilule & aménorrhée', url: '/sante-feminine/apres-pilule-amenorrhee' },
+    ]}
+  />
+
+  <Hero
+    variante="papier"
+    eyebrow="SANTÉ FÉMININE · APRÈS-PILULE & AMÉNORRHÉE"
+    titre="Après la pilule : comprendre pourquoi votre cycle ne revient pas."
+  >
+    <Photo
+      slot="media"
+      ref="PHOTO·APRESPILULE"
+      alt="Herbier documentaire, lumière rasante"
+      ratio="3 / 4"
+    />
+    <p>
+      Vous avez arrêté la pilule, par désir d'enfant, par intolérance, ou simplement pour retrouver
+      votre corps. Et là, rien, ou presque. Des mois sans règles, une peau qui s'enflamme, parfois
+      des cheveux qui tombent. On vous dit d'attendre, ou de reprendre la pilule. Vous sentez bien
+      que ce n'est pas une réponse. L'après-pilule et l'aménorrhée font partie de ce que
+      j'accompagne, en tant que praticienne <strong>spécialisée en santé féminine</strong>.
+    </p>
+    <p>
+      Ce que je vous propose, c'est de comprendre ce qui empêche votre cycle de repartir (du côté du
+      foie et de votre équilibre hormonal) pour le soutenir là où cela compte, en complément de
+      votre suivi médical.
+    </p>
+    <p>
+      Je ne peux pas vous garantir un retour de règles à une date précise : votre corps a son
+      rythme, et je ne vous mentirai pas là-dessus. Ce que je peux faire, c'est réunir les
+      conditions pour qu'il reparte, et vous aider à mieux vivre cette transition.
+    </p>
+    <ClauseYmyl />
+  </Hero>
+
+  <SectionEditoriale
+    numero="01"
+    surtitre="CE QUI SE JOUE, VRAIMENT"
+    titre="Le cycle ne s'éteint pas par hasard."
+  >
+    <p>
+      Quand un cycle ne revient pas, c'est qu'on a, sans le vouloir, retiré au corps les conditions
+      dont il a besoin pour fonctionner. Trois leviers reviennent souvent :
+    </p>
+    <ul class="leviers">
+      <li>
+        <strong>Le foie.</strong> Le foie est la station d'épuration de vos hormones. Après des années
+        de pilule, il peut être débordé, et c'est souvent là que se logent l'acné rebond et la chute de
+        cheveux. C'est ce que la tradition relie à un excès de chaleur, un <em>Pitta</em> du foie que
+        l'on cherche à apaiser. On le soutient, on ne le « détoxifie » pas à coups de cures violentes.
+      </li>
+      <li>
+        <strong>Le réveil de l'axe hormonal.</strong> On propose souvent de reprendre la pilule pour «
+        relancer » les règles. La pilule a ses usages, mais celui-là n'en est pas un : le saignement qu'elle
+        provoque n'est pas un vrai cycle. Le vrai enjeu, c'est d'aider votre axe hormonal à se remettre
+        en route, ce mouvement descendant que la tradition nomme <em>Apana Vata</em>.
+      </li>
+      <li>
+        <strong>La vitalité et le système nerveux.</strong> Un corps épuisé, sous-nourri ou très stressé
+        met parfois son cycle en pause, pour se protéger. Restaurer la réserve de vitalité,
+        <em>Ojas</em>, fait alors partie du chemin.
+      </li>
+    </ul>
+    <p>
+      Comprendre lequel de ces leviers vous concerne, c'est cesser d'attendre dans le vide, et
+      commencer à agir.
+    </p>
+    <Schema slot="marge" ref="SCHEMA·APRESPILULE" alt="Foie et axe hormonal" />
+  </SectionEditoriale>
+
+  <PontCondition numero="02" titre="Vous n'aurez pas à choisir.">
+    <p>
+      Vous n'aurez pas à choisir entre votre médecine et l'Ayurveda. C'est une fausse alternative.
+    </p>
+    <p>
+      Votre médecin, votre gynécologue, votre suivi de fertilité si vous en avez un : tout cela
+      garde sa place. Mon travail vient à côté, sur le terrain : le foie, la digestion, le sommeil,
+      la vitalité, la charge nerveuse.
+    </p>
+    <p>
+      Je lis vos analyses et vos bilans hormonaux. Je ne pose pas de diagnostic, je n'interromps
+      aucun suivi. Je travaille avec votre médecine, jamais contre elle.
+    </p>
+  </PontCondition>
+
+  <SectionEditoriale
+    numero="03"
+    surtitre="CE QUE ÇA PEUT, ET NE PEUT PAS"
+    titre="Ce que cet accompagnement peut, et ce qu'il ne peut pas."
+  >
+    <Pratfall
+      cest={[
+        "Soutenir le travail d'élimination du foie, malmené par les années de pilule.",
+        'Aider à réunir les conditions du retour de votre cycle.',
+        "Apaiser l'acné rebond en travaillant le terrain, pas seulement la surface.",
+        'Restaurer la vitalité, le sommeil, et vous apprendre à lire vos signaux.',
+      ]}
+      cestPas={[
+        'Garantir un retour de règles à une date fixe. Votre corps répond à son rythme.',
+        'Remplacer un bilan hormonal ou un suivi de fertilité.',
+        'Se substituer à un avis médical : une aménorrhée qui se prolonge mérite toujours un bilan, et je vous y encouragerai.',
+      ]}
+    />
+    <p class="cta-intermediaire">
+      Vous vous reconnaissez ? <a href="/premier-echange">Commençons par nous parler.</a>
+    </p>
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="04"
+    surtitre="UNE PLANTE, UNE LOGIQUE"
+    titre="Aucune plante miracle, mais une logique, oui."
+  >
+    <p>
+      Si quelqu'un vous vend LA plante qui fait revenir les règles, méfiez-vous. Cela n'existe pas.
+    </p>
+    <p>
+      Ce qui existe, c'est une logique. Soutenir un foie surchargé n'a rien à voir avec réamorcer un
+      cycle, ou avec restaurer une vitalité épuisée : ce ne sont pas les mêmes plantes, ni le même
+      moment. Le Gattilier, qui touche à l'équilibre du cycle, ne répond pas au même besoin qu'une
+      plante qui soutient le foie.
+    </p>
+    <p>
+      C'est pour cela que je ne donne jamais de liste toute faite. Chaque proposition est choisie
+      pour vous, à un moment précis, et accompagnée de sa raison.
+    </p>
+    <Illustration slot="marge" ref="ILLU·Gattilier" alt="Plante au trait, Gattilier" />
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="05"
+    surtitre="CE QU'ELLES EN DISENT"
+    titre="Dans leurs mots, pas les miens."
+  >
+    <p class="note-lancement">
+      Les accompagnements après-pilule que je publierai ici seront de vrais retours, sans retouche,
+      et seulement quand il y en aura.
+    </p>
+  </SectionEditoriale>
+
+  <BandeauReassurance
+    items={[
+      'Dix ans en laboratoire de référence (CNRGS)',
+      'Lecture critique de vos bilans',
+      'Complémentaire de votre suivi médical',
+    ]}
+  />
+
+  <SectionEditoriale
+    numero="06"
+    surtitre="POUR ALLER PLUS LOIN"
+    titre="Trois chapitres pour commencer à comprendre."
+  >
+    <ul class="articles">
+      {
+        articles.map((titre) => (
+          <li>
+            <a href="/le-manuel">{titre}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </SectionEditoriale>
+
+  <BlocLettre
+    titre="Une lettre de fond. Jamais de vente."
+    promesse="Une fois par mois, un chapitre de lecture du corps. Pour commencer, un petit outil gratuit pour mieux comprendre votre terrain : quelques questions, un retour utile à la fin."
+  />
+
+  <Seuil
+    titre="Commençons par votre histoire avec la pilule."
+    repli="Pas encore prête ? Gardez le fil avec La lettre."
+  >
+    <p>
+      Depuis combien de temps avez-vous arrêté ? Qu'observez-vous depuis ? Avant de vous proposer
+      quoi que ce soit, j'ai besoin de comprendre votre situation.
+    </p>
+    <p>
+      Commençons par nous parler : trente minutes, gratuites et sans engagement, juste le temps de
+      poser l'essentiel et de voir si je peux vous aider.
+    </p>
+    <p>
+      <a href="/accompagnement">Comment se passe l'accompagnement</a> ·
+      <a href="/qui-je-suis">Qui je suis</a>
+    </p>
+    <p class="signature-niche">Céline Lefèvre · Accompagnement Ayurvédique des Cycles</p>
+  </Seuil>
+</BaseLayout>
+
+<style>
+  .leviers {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    display: grid;
+    gap: 1rem;
+    max-width: var(--rythme-colonne);
+  }
+  .leviers li {
+    padding-left: 1rem;
+    border-left: 2px solid var(--c-creme);
+  }
+  .cta-intermediaire {
+    margin-top: 1.5rem;
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+  }
+  .note-lancement {
+    color: var(--c-muted);
+    border-left: 2px solid var(--c-creme);
+    padding-left: 1rem;
+  }
+  .articles {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .signature-niche {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-creme);
+    margin-top: 2rem;
+  }
+</style>
