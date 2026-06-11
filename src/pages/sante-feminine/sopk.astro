@@ -1,0 +1,266 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/page/Hero.astro';
+import SectionEditoriale from '../../components/page/SectionEditoriale.astro';
+import BandeauReassurance from '../../components/page/BandeauReassurance.astro';
+import Photo from '../../components/ui/Photo.astro';
+import Schema from '../../components/ui/Schema.astro';
+import Illustration from '../../components/ui/Illustration.astro';
+import ClauseYmyl from '../../components/ui/ClauseYmyl.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import PontCondition from '../../components/sections/PontCondition.astro';
+import Pratfall from '../../components/sections/Pratfall.astro';
+import BlocLettre from '../../components/sections/BlocLettre.astro';
+import Seuil from '../../components/sections/Seuil.astro';
+import { SITE } from '../../data/site';
+import { buildWebPageJsonLd } from '../../lib/seo';
+
+const description =
+  "SOPK (syndrome des ovaires polykystiques) : une lecture de la cause racine, métabolisme, résistance à l'insuline, inflammation, en complément de votre suivi médical, sans repasser par la pilule par défaut.";
+
+const medicalJsonLd = buildWebPageJsonLd({
+  name: 'SOPK & Ayurveda, comprendre la cause, réguler autrement',
+  description,
+  url: new URL('/sante-feminine/sopk', SITE.url).href,
+  medical: true,
+});
+
+const articles = [
+  'SOPK : le lien entre sucre, insuline et cycle.',
+  'Retrouver un cycle quand il a disparu : par où commencer.',
+  "SOPK et peau : comprendre l'acné hormonale.",
+];
+---
+
+<BaseLayout
+  title="SOPK & Ayurveda, comprendre la cause, réguler autrement"
+  description={description}
+>
+  <script type="application/ld+json" set:html={medicalJsonLd} is:inline />
+
+  <Breadcrumb
+    items={[
+      { name: 'Accueil', url: '/' },
+      { name: "Ce que j'accompagne", url: '/sante-feminine' },
+      { name: 'SOPK', url: '/sante-feminine/sopk' },
+    ]}
+  />
+
+  <Hero
+    variante="papier"
+    eyebrow="SANTÉ FÉMININE · SOPK"
+    titre="SOPK : comprendre ce qui dérègle votre cycle, pour le réguler autrement."
+  >
+    <Photo
+      slot="media"
+      ref="PHOTO·SOPK"
+      alt="Herbier documentaire, lumière rasante"
+      ratio="3 / 4"
+    />
+    <p>
+      Des cycles qui s'espacent ou disparaissent, une peau qui s'emballe, une pilosité qui change,
+      une énergie en montagnes russes, et souvent, pour seule réponse, la pilule. Si vous cherchez
+      autre chose, vous êtes au bon endroit. Le SOPK (syndrome des ovaires polykystiques) fait
+      partie de ce que j'accompagne au quotidien, en tant que praticienne spécialisée en santé
+      féminine.
+    </p>
+    <p>
+      Ce que je vous propose, c'est de regarder votre SOPK par sa cause : ce qui, dans votre
+      métabolisme et votre terrain, dérègle l'équilibre hormonal. Pour agir là où cela compte, en
+      complément de votre suivi médical.
+    </p>
+    <p>
+      Je ne vais pas vous promettre de faire disparaître votre SOPK. Ce que je peux faire, c'est
+      vous aider à mieux vivre avec, et à réguler durablement ce qui peut l'être : votre cycle,
+      votre énergie, votre peau.
+    </p>
+    <ClauseYmyl />
+  </Hero>
+
+  <SectionEditoriale
+    numero="01"
+    surtitre="CE QUI SE JOUE, VRAIMENT"
+    titre="Le SOPK ne se joue pas qu'au niveau des ovaires."
+  >
+    <p>
+      On résume souvent le SOPK aux ovaires et aux kystes. La cause, elle, est le plus souvent
+      ailleurs : dans la façon dont votre corps gère le sucre et l'énergie.
+    </p>
+    <p>Trois leviers reviennent presque toujours :</p>
+    <ul class="leviers">
+      <li>
+        <strong>Le métabolisme et l'insuline.</strong> Quand le corps répond mal au sucre, tout l'équilibre
+        hormonal se dérègle en cascade. C'est ce que la tradition relie à un encrassement des tissus et
+        à un excès de <em>Kapha</em> et de <em>Meda</em>, un terrain qu'on cherche à alléger.
+      </li>
+      <li>
+        <strong>La digestion.</strong> Un feu digestif au ralenti, <em>Agni</em> affaibli, laisse s'accumuler
+        des résidus que le corps peine à éliminer (<em>Ama</em>). Soutenir cette digestion, c'est
+        souvent soutenir tout le reste.
+      </li>
+      <li>
+        <strong>Le système nerveux.</strong> Le stress chronique entretient le déséquilibre hormonal,
+        et le déséquilibre nourrit le stress. Un cercle que l'on peut apprendre à desserrer.
+      </li>
+    </ul>
+    <p>
+      Comprendre ces trois leviers, c'est cesser de courir après les symptômes un par un, et agir
+      sur le terrain qui les produit.
+    </p>
+    <Schema slot="marge" ref="SCHEMA·SOPK" alt="Métabolisme, insuline et cycle" />
+  </SectionEditoriale>
+
+  <PontCondition numero="02" titre="Vous n'aurez pas à choisir.">
+    <p>
+      Vous n'aurez pas à choisir entre votre médecine et l'Ayurveda. C'est une fausse alternative.
+    </p>
+    <p>
+      Votre gynécologue, votre suivi endocrinien, votre contraception s'il y en a une : tout cela
+      garde sa place. Mon travail vient à côté, sur le terrain métabolique et hormonal, au quotidien
+      : la sensibilité à l'insuline, la digestion, le sommeil, la charge nerveuse.
+    </p>
+    <p>
+      Je lis vos analyses et vos bilans. Je ne pose pas de diagnostic, je n'interromps aucun suivi.
+      Je travaille avec votre médecine, jamais contre elle.
+    </p>
+  </PontCondition>
+
+  <SectionEditoriale
+    numero="03"
+    surtitre="CE QUE ÇA PEUT, ET NE PEUT PAS"
+    titre="Ce que cet accompagnement peut, et ce qu'il ne peut pas."
+  >
+    <Pratfall
+      cest={[
+        "Soutenir un métabolisme au ralenti et la sensibilité à l'insuline, par l'hygiène de vie.",
+        'Aider votre cycle à retrouver un rythme plus régulier.',
+        "Apaiser l'inflammation et soutenir la digestion.",
+        'Calmer la charge nerveuse, et vous apprendre à lire vos signaux.',
+      ]}
+      cestPas={[
+        "Faire disparaître le SOPK. C'est un terrain, pas une maladie qui se guérit, et je ne vous mentirai pas là-dessus.",
+        'Remplacer votre suivi gynécologique ou endocrinien : le SOPK demande un suivi médical régulier, et je vous y encouragerai.',
+        'Promettre un retour de cycle à date fixe. Votre corps répond à son rythme.',
+      ]}
+    />
+    <p class="cta-intermediaire">
+      Vous vous reconnaissez ? <a href="/premier-echange">Commençons par nous parler.</a>
+    </p>
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="04"
+    surtitre="UNE PLANTE, UNE LOGIQUE"
+    titre="Aucune plante miracle, mais une logique, oui."
+  >
+    <p>Si quelqu'un vous vend LA plante qui règle le SOPK, fuyez. Cela n'existe pas.</p>
+    <p>
+      Ce qui existe, c'est une logique. Selon votre terrain (votre métabolisme, votre digestion,
+      votre niveau de stress), certaines plantes ont du sens, d'autres non. La Cannelle, qui touche
+      à la gestion du sucre, n'a rien à voir avec l'Ashwagandha, qui apaise le système nerveux. Ce
+      qui aide une personne peut être inutile pour une autre.
+    </p>
+    <p>
+      C'est pour cela que je ne donne jamais de liste toute faite. Chaque proposition est choisie
+      pour vous, à un moment précis, et accompagnée de sa raison.
+    </p>
+    <Illustration slot="marge" ref="ILLU·Cannelle" alt="Plante au trait, Cannelle" />
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="05"
+    surtitre="CE QU'ELLES EN DISENT"
+    titre="Dans leurs mots, pas les miens."
+  >
+    <p class="note-lancement">
+      Les accompagnements SOPK que je publierai ici seront de vrais retours, sans retouche, et
+      seulement quand il y en aura.
+    </p>
+  </SectionEditoriale>
+
+  <BandeauReassurance
+    items={[
+      'Dix ans en laboratoire de référence (CNRGS)',
+      'Lecture critique de vos bilans',
+      'Complémentaire de votre suivi médical',
+    ]}
+  />
+
+  <SectionEditoriale
+    numero="06"
+    surtitre="POUR ALLER PLUS LOIN"
+    titre="Trois chapitres pour commencer à comprendre."
+  >
+    <ul class="articles">
+      {
+        articles.map((titre) => (
+          <li>
+            <a href="/le-manuel">{titre}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </SectionEditoriale>
+
+  <BlocLettre
+    titre="Une lettre de fond. Jamais de vente."
+    promesse="Une fois par mois, un chapitre de lecture du corps. Pour commencer, un petit outil gratuit pour mieux comprendre votre terrain : quelques questions, un retour utile à la fin."
+  />
+
+  <Seuil
+    titre="Commençons par votre cycle à vous."
+    repli="Pas encore prête ? Gardez le fil avec La lettre."
+  >
+    <p>
+      Aucun SOPK ne ressemble à un autre. Avant de vous proposer quoi que ce soit, j'ai besoin de
+      comprendre le vôtre : votre métabolisme, votre cycle, votre histoire.
+    </p>
+    <p>
+      Commençons par nous parler : trente minutes, gratuites et sans engagement, juste le temps de
+      poser l'essentiel et de voir si je peux vous aider.
+    </p>
+    <p>
+      <a href="/accompagnement">Comment se passe l'accompagnement</a> ·
+      <a href="/qui-je-suis">Qui je suis</a>
+    </p>
+    <p class="signature-niche">Céline Lefèvre · Accompagnement Ayurvédique des Cycles</p>
+  </Seuil>
+</BaseLayout>
+
+<style>
+  .leviers {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    display: grid;
+    gap: 1rem;
+    max-width: var(--rythme-colonne);
+  }
+  .leviers li {
+    padding-left: 1rem;
+    border-left: 2px solid var(--c-creme);
+  }
+  .cta-intermediaire {
+    margin-top: 1.5rem;
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+  }
+  .note-lancement {
+    color: var(--c-muted);
+    border-left: 2px solid var(--c-creme);
+    padding-left: 1rem;
+  }
+  .articles {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .signature-niche {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-creme);
+    margin-top: 2rem;
+  }
+</style>

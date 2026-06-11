@@ -1,0 +1,259 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/page/Hero.astro';
+import SectionEditoriale from '../../components/page/SectionEditoriale.astro';
+import BandeauReassurance from '../../components/page/BandeauReassurance.astro';
+import Photo from '../../components/ui/Photo.astro';
+import Schema from '../../components/ui/Schema.astro';
+import Illustration from '../../components/ui/Illustration.astro';
+import ClauseYmyl from '../../components/ui/ClauseYmyl.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import PontCondition from '../../components/sections/PontCondition.astro';
+import Pratfall from '../../components/sections/Pratfall.astro';
+import BlocLettre from '../../components/sections/BlocLettre.astro';
+import Seuil from '../../components/sections/Seuil.astro';
+import { SITE } from '../../data/site';
+import { buildWebPageJsonLd } from '../../lib/seo';
+
+const description =
+  "Post-partum : le grand vide après l'accouchement, l'épuisement, les tissus à reconstituer. Une lecture ayurvédique, chaleur, nourriture, repos, en complément de votre suivi postnatal.";
+
+const medicalJsonLd = buildWebPageJsonLd({
+  name: 'Post-partum & Ayurveda, reconstituer votre corps après la naissance',
+  description,
+  url: new URL('/sante-feminine/post-partum', SITE.url).href,
+  medical: true,
+});
+
+const articles = [
+  "Le post-partum vu par l'Ayurveda : pourquoi la chaleur change tout.",
+  'Nourrir son corps après la naissance, sans se restreindre.',
+  'Récupérer son énergie en post-partum : par où commencer.',
+];
+---
+
+<BaseLayout
+  title="Post-partum & Ayurveda, reconstituer votre corps après la naissance"
+  description={description}
+>
+  <script type="application/ld+json" set:html={medicalJsonLd} is:inline />
+
+  <Breadcrumb
+    items={[
+      { name: 'Accueil', url: '/' },
+      { name: "Ce que j'accompagne", url: '/sante-feminine' },
+      { name: 'Post-partum', url: '/sante-feminine/post-partum' },
+    ]}
+  />
+
+  <Hero
+    variante="papier"
+    eyebrow="SANTÉ FÉMININE · POST-PARTUM"
+    titre="Post-partum : reconstituer votre corps, après le grand vide."
+  >
+    <Photo slot="media" ref="PHOTO·POSTPARTUM" alt="Herbier et lumière chaude" ratio="3 / 4" />
+    <p>
+      Vous avez accouché il y a quelques semaines, ou quelques mois. Autour de vous, on s'occupe
+      beaucoup du bébé, un peu moins de vous. On vous dit que la fatigue, « c'est normal », que « ça
+      va passer ». Mais vous vous sentez vidée, parfois étrangère à votre propre corps. Le
+      post-partum fait partie de ce que j'accompagne, en tant que praticienne
+      <strong>spécialisée en santé féminine</strong>.
+    </p>
+    <p>
+      L'Ayurveda porte, depuis des siècles, une attention précise à cette période. Ce que je vous
+      propose, c'est de remettre votre reconstitution au centre (chaleur, nourriture, repos) à un
+      moment où votre corps en a un besoin vital. En complément de votre suivi postnatal.
+    </p>
+    <p>
+      Je ne vais pas prétendre effacer la fatigue d'un nouveau-né, ni remplacer votre entourage. Ce
+      que je peux faire, c'est vous aider à reconstituer vos forces et à mieux vivre cette
+      traversée, sans vous demander d'être parfaite.
+    </p>
+    <ClauseYmyl />
+  </Hero>
+
+  <SectionEditoriale
+    numero="01"
+    surtitre="CE QUI SE JOUE, VRAIMENT"
+    titre="Après la naissance, c'est tout un terrain qui se vide."
+  >
+    <p>
+      La fatigue post-partum n'est pas une faiblesse de caractère. C'est physiologique. Trois
+      leviers l'expliquent :
+    </p>
+    <ul class="leviers">
+      <li>
+        <strong>Le grand vide.</strong> Après l'accouchement, votre corps se retrouve avec un grand vide
+        intérieur, au sens littéral, pas métaphorique. Cet espace appelle de la chaleur, du gras nourrissant,
+        du liquide. C'est ce que la tradition nomme l'apaisement de <em>Vata</em> : les soupes très digestes
+        et les massages à l'huile chaude (<em>Abhyanga</em>) sont nés de cette intuition millénaire.
+      </li>
+      <li>
+        <strong>La reconstitution des tissus.</strong> Porter, accoucher, allaiter puise dans vos réserves
+        profondes. Reconstruire ces tissus, et votre vitalité (<em>Ojas</em>), demande une
+        nourriture dense et digeste, jamais des restrictions.
+      </li>
+      <li>
+        <strong>Le système nerveux et le sommeil.</strong> Le manque de sommeil et la charge mentale épuisent
+        le système nerveux. On cherche à le soutenir, dans la limite de ce qu'un post-partum permet réellement.
+      </li>
+    </ul>
+    <p>
+      Comprendre cela, c'est cesser de vous en vouloir d'être épuisée, et donner enfin à votre corps
+      ce qu'il réclame.
+    </p>
+    <Schema slot="marge" ref="SCHEMA·POSTPARTUM" alt="Le grand vide et la reconstitution" />
+  </SectionEditoriale>
+
+  <PontCondition numero="02" titre="Vous n'aurez pas à choisir.">
+    <p>
+      Vous n'aurez pas à choisir entre votre suivi postnatal et l'Ayurveda. C'est une fausse
+      alternative.
+    </p>
+    <p>
+      Votre sage-femme, votre médecin, votre rééducation périnéale : tout cela garde sa place, et
+      reste prioritaire. Mon travail vient à côté, sur le terrain : la chaleur, la nourriture qui
+      reconstitue, le repos, la digestion, la vitalité.
+    </p>
+    <p>
+      Je ne pose pas de diagnostic, je n'interromps aucun suivi. Je travaille avec votre médecine,
+      jamais contre elle.
+    </p>
+  </PontCondition>
+
+  <SectionEditoriale
+    numero="03"
+    surtitre="CE QUE ÇA PEUT, ET NE PEUT PAS"
+    titre="Ce que cet accompagnement peut, et ce qu'il ne peut pas."
+  >
+    <Pratfall
+      cest={[
+        'Soutenir votre reconstitution par une alimentation chaude et nourrissante.',
+        'Aider à restaurer la vitalité et le sommeil, dans la mesure du possible.',
+        "Accompagner la digestion et la période d'allaitement, côté nutrition.",
+        "Vous apprendre à repérer vos propres signaux de fatigue, avant l'épuisement.",
+      ]}
+      cestPas={[
+        'Remplacer votre suivi postnatal, votre sage-femme ou votre rééducation périnéale.',
+        "Se substituer à un avis médical : une tristesse ou une anxiété qui s'installent ne sont pas « juste de la fatigue », elles relèvent d'un accompagnement médical, et je vous y orienterai sans hésiter.",
+        "Faire de vous une mère parfaite. Personne ne l'est, et ce n'est pas l'objectif.",
+      ]}
+    />
+    <p class="cta-intermediaire">
+      Vous vous reconnaissez ? <a href="/premier-echange">Commençons par nous parler.</a>
+    </p>
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="04"
+    surtitre="UNE PLANTE, UNE LOGIQUE"
+    titre="Aucune plante miracle, et, en post-partum, une prudence accrue."
+  >
+    <p>
+      En post-partum, et plus encore si vous allaitez, le choix des plantes demande une vraie
+      prudence : certaines sont déconseillées pendant l'allaitement. C'est exactement pour cela
+      qu'une liste toute faite trouvée en ligne n'a pas de sens.
+    </p>
+    <p>
+      Ce qui a du sens, c'est une logique. Selon votre état (votre digestion, votre fatigue, le fait
+      que vous allaitiez ou non), certaines plantes et, surtout, certains aliments soutiennent votre
+      reconstitution, d'autres non. Souvent, l'essentiel se joue d'abord dans l'assiette, avant
+      toute plante.
+    </p>
+    <p>
+      Chaque proposition est choisie pour vous, à un moment précis, et accompagnée de sa raison.
+    </p>
+    <Illustration slot="marge" ref="ILLU·Shatavari" alt="Plante au trait, Shatavari" />
+  </SectionEditoriale>
+
+  <SectionEditoriale
+    numero="05"
+    surtitre="CE QU'ELLES EN DISENT"
+    titre="Dans leurs mots, pas les miens."
+  >
+    <p class="note-lancement">
+      Les accompagnements post-partum que je publierai ici seront de vrais retours, sans retouche,
+      et seulement quand il y en aura.
+    </p>
+  </SectionEditoriale>
+
+  <BandeauReassurance
+    items={[
+      'Dix ans en laboratoire de référence (CNRGS)',
+      'Lecture critique de vos bilans',
+      'Complémentaire de votre suivi médical',
+    ]}
+  />
+
+  <SectionEditoriale
+    numero="06"
+    surtitre="POUR ALLER PLUS LOIN"
+    titre="Trois chapitres pour commencer à comprendre."
+  >
+    <ul class="articles">
+      {
+        articles.map((titre) => (
+          <li>
+            <a href="/le-manuel">{titre}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </SectionEditoriale>
+
+  <BlocLettre
+    titre="Une lettre de fond. Jamais de vente."
+    promesse="Une fois par mois, un chapitre de lecture du corps. Pour commencer, un petit outil gratuit pour mieux comprendre votre terrain : quelques questions, un retour utile à la fin, utile aussi pour préparer le retour de votre cycle."
+  />
+
+  <Seuil
+    titre="Commençons par où vous en êtes vraiment."
+    repli="Pas encore prête ? Gardez le fil avec La lettre."
+  >
+    <p>
+      Pas par où vous « devriez » en être. Avant de vous proposer quoi que ce soit, j'ai besoin de
+      comprendre votre post-partum à vous : votre fatigue, votre alimentation, votre sommeil tel
+      qu'il est.
+    </p>
+    <p>
+      Commençons par nous parler : trente minutes, gratuites et sans engagement, juste le temps de
+      poser l'essentiel et de voir si je peux vous aider.
+    </p>
+    <p>
+      <a href="/accompagnement">Comment se passe l'accompagnement</a> ·
+      <a href="/qui-je-suis">Qui je suis</a>
+    </p>
+  </Seuil>
+</BaseLayout>
+
+<style>
+  .leviers {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    display: grid;
+    gap: 1rem;
+    max-width: var(--rythme-colonne);
+  }
+  .leviers li {
+    padding-left: 1rem;
+    border-left: 2px solid var(--c-creme);
+  }
+  .cta-intermediaire {
+    margin-top: 1.5rem;
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+  }
+  .note-lancement {
+    color: var(--c-muted);
+    border-left: 2px solid var(--c-creme);
+    padding-left: 1rem;
+  }
+  .articles {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+</style>

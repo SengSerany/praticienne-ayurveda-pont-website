@@ -1,0 +1,33 @@
+---
+import ClauseYmyl from '../ui/ClauseYmyl.astro';
+
+interface Props {
+  numero?: string;
+  titre: string;
+}
+const { numero, titre } = Astro.props;
+const eyebrow = numero ? `§ ${numero} · LE PONT` : 'LE PONT';
+---
+
+<section class="pont-condition">
+  <p class="pont-condition__eyebrow">{eyebrow}</p>
+  <h2>{titre}</h2>
+  <div class="pont-condition__corps"><slot /></div>
+  <ClauseYmyl />
+</section>
+
+<style>
+  .pont-condition {
+    background-color: var(--c-couverture);
+    color: var(--c-encre);
+    padding: var(--espace-section) clamp(1.5rem, 5vw, 4rem);
+  }
+  .pont-condition__eyebrow {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+    margin: 0;
+  }
+</style>

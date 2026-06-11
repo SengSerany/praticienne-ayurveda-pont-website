@@ -11,6 +11,7 @@ import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import Pratfall from '../../components/sections/Pratfall.astro';
 import BlocLettre from '../../components/sections/BlocLettre.astro';
 import Seuil from '../../components/sections/Seuil.astro';
+import PontCondition from '../../components/sections/PontCondition.astro';
 import { SITE } from '../../data/site';
 import { buildWebPageJsonLd } from '../../lib/seo';
 
@@ -101,9 +102,7 @@ const articles = [
     <Schema slot="marge" ref="SCHEMA·03" alt="La cause racine de l'endométriose" />
   </SectionEditoriale>
 
-  <section class="pont-endo">
-    <p class="eyebrow-pont">§ 02 · LE PONT</p>
-    <h2>Vous n'aurez pas à choisir.</h2>
+  <PontCondition numero="02" titre="Vous n'aurez pas à choisir.">
     <p>
       Vous n'aurez pas à choisir entre votre médecine et l'Ayurveda. C'est une fausse alternative.
     </p>
@@ -116,8 +115,7 @@ const articles = [
       Je lis vos analyses et vos comptes rendus. Je ne pose pas de diagnostic, je n'interromps aucun
       suivi. Je travaille avec votre médecine, jamais contre elle.
     </p>
-    <ClauseYmyl />
-  </section>
+  </PontCondition>
 
   <SectionEditoriale
     numero="03"
@@ -241,19 +239,6 @@ const articles = [
   .leviers li {
     padding-left: 1rem;
     border-left: 2px solid var(--c-creme);
-  }
-  .pont-endo {
-    background-color: var(--c-couverture);
-    color: var(--c-encre);
-    padding: var(--espace-section) clamp(1.5rem, 5vw, 4rem);
-  }
-  .eyebrow-pont {
-    font-family: var(--f-mono);
-    font-size: var(--t-label-size);
-    letter-spacing: var(--t-label-ls);
-    text-transform: uppercase;
-    color: var(--c-brun-reliure);
-    margin: 0;
   }
   .cta-intermediaire {
     margin-top: 1.5rem;
