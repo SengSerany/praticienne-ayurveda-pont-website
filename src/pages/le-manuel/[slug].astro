@@ -1,0 +1,162 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import NumeroChapitre from '../../components/ui/NumeroChapitre.astro';
+import Illustration from '../../components/ui/Illustration.astro';
+import EncadreYmylArticle from '../../components/sections/EncadreYmylArticle.astro';
+import BlocLettre from '../../components/sections/BlocLettre.astro';
+import Button from '../../components/ui/Button.astro';
+import { manuelMeta, filParSlug } from '../../data/manuel';
+import { articlesPubliables, minutesDeLecture } from '../../lib/manuel';
+import { passages } from '../../data/passages';
+import { SITE } from '../../data/site';
+import { buildArticleJsonLd } from '../../lib/seo';
+
+export async function getStaticPaths() {
+  const tous = await getCollection('articles');
+  const visibles = articlesPubliables(tous, import.meta.env.DEV);
+  return visibles.map((article) => ({ params: { slug: article.id }, props: { article } }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const fil = filParSlug(article.data.theme);
+const minutes = minutesDeLecture(article.body ?? '');
+const condition = article.data.conditionLiee
+  ? passages.find((p) => p.cle === article.data.conditionLiee)
+  : undefined;
+
+const cheminArticle = `/le-manuel/${article.id}`;
+const url = new URL(cheminArticle, SITE.url).href;
+const articleJsonLd = buildArticleJsonLd({
+  title: article.data.titre,
+  description: article.data.resume,
+  url,
+  datePublished: article.data.datePublication,
+});
+const filAriane = [
+  { name: 'Accueil', url: '/' },
+  { name: 'Le manuel', url: '/le-manuel' },
+  { name: article.data.titre, url: cheminArticle },
+];
+---
+
+<BaseLayout
+  title={article.data.titre}
+  description={article.data.resume}
+  noindex={article.data.brouillon}
+>
+  <script type="application/ld+json" set:html={articleJsonLd} is:inline />
+
+  <Breadcrumb items={filAriane} />
+
+  {article.data.brouillon && <p class="brouillon">Brouillon · a valider</p>}
+
+  <article class="chapitre">
+    <p class="chapitre__entete">
+      <NumeroChapitre n={article.data.chapitre} /> · {fil.labelCourt} · {minutes} min de lecture
+    </p>
+    <h1>{article.data.titre}</h1>
+    <p class="chapitre__chapo">{article.data.resume}</p>
+
+    {
+      article.data.illustrationRef && (
+        <Illustration
+          ref={article.data.illustrationRef}
+          alt={`Illustration, ${article.data.titre}`}
+        />
+      )
+    }
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {article.data.ymyl && <EncadreYmylArticle situation={article.data.ymyl} />}
+
+    <nav class="maillage" aria-label="Pour continuer">
+      <a href="/le-manuel">Retour au manuel</a>
+      {condition && <a href={condition.href}>Lire la page dediee, {condition.titre}</a>}
+    </nav>
+
+    <BlocLettre titre={manuelMeta.lettre.titre} promesse={manuelMeta.lettre.promesse} />
+    <p class="microcopy">{manuelMeta.lettre.microcopy}</p>
+
+    <p class="doux">
+      Envie d'en parler ensemble ?
+      <Button href="/premier-echange" label="Premier echange" variant="outline" />
+    </p>
+
+    <p class="signature">{SITE.nom} · {SITE.baseline}</p>
+  </article>
+</BaseLayout>
+
+<style>
+  .brouillon {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-terre);
+    border: 1px dashed var(--c-terre);
+    padding: 0.5rem 1rem;
+    display: inline-block;
+  }
+  .chapitre {
+    max-width: var(--rythme-colonne);
+  }
+  .chapitre__entete {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+    margin: 0 0 0.5rem;
+  }
+  .chapitre__chapo {
+    font-family: var(--f-body);
+    font-size: var(--t-lead-size);
+    line-height: var(--t-lead-lh);
+    color: var(--c-encre);
+  }
+  .prose :global(p) {
+    max-width: var(--rythme-colonne);
+  }
+  .prose :global(em) {
+    font-style: italic;
+  }
+  .prose :global(blockquote) {
+    font-family: var(--f-quote);
+    font-style: italic;
+    font-size: var(--t-quote-size);
+    line-height: var(--t-quote-lh);
+    color: var(--c-brun-reliure);
+    border-left: 2px solid var(--c-creme);
+    padding-left: 1.25rem;
+    margin: var(--espace-section) 0;
+  }
+  .maillage {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin: var(--espace-section) 0 1.5rem;
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+  }
+  .microcopy {
+    font-family: var(--f-mono);
+    font-size: var(--t-caption-size);
+    color: var(--c-muted);
+    margin-top: 0.75rem;
+  }
+  .doux {
+    margin-top: 1.5rem;
+  }
+  .signature {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-brun-reliure);
+    margin-top: 2rem;
+  }
+</style>

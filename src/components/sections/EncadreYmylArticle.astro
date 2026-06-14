@@ -1,0 +1,28 @@
+---
+interface Props {
+  situation: string;
+}
+const { situation } = Astro.props;
+---
+
+<aside class="ymyl-article">
+  <p>
+    Cet article est informatif et ne remplace pas un avis medical. Si {situation} te concerne,
+    parles-en a ton medecin.
+  </p>
+</aside>
+
+<style>
+  .ymyl-article {
+    background-color: var(--c-papier-chaleur);
+    border-left: 2px solid var(--c-brun-reliure);
+    padding: 1.25rem 1.5rem;
+    margin: var(--rythme-para) 0;
+  }
+  .ymyl-article p {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-encre);
+    margin: 0;
+  }
+</style>

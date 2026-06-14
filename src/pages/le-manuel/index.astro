@@ -1,0 +1,140 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import OngletManuel from '../../components/sections/OngletManuel.astro';
+import CarteArticle from '../../components/sections/CarteArticle.astro';
+import BlocLettre from '../../components/sections/BlocLettre.astro';
+import Button from '../../components/ui/Button.astro';
+import { manuelMeta, fils, filParSlug } from '../../data/manuel';
+import { articlesPubliables, minutesDeLecture } from '../../lib/manuel';
+import { SITE } from '../../data/site';
+import { buildWebPageJsonLd } from '../../lib/seo';
+
+const tous = await getCollection('articles');
+const articles = articlesPubliables(tous, import.meta.env.DEV);
+
+const url = new URL('/le-manuel', SITE.url).href;
+const webPageJsonLd = buildWebPageJsonLd({
+  name: manuelMeta.h1,
+  description: manuelMeta.metaDescription,
+  url,
+});
+const filAriane = [
+  { name: 'Accueil', url: '/' },
+  { name: 'Le manuel', url: '/le-manuel' },
+];
+---
+
+<BaseLayout title={manuelMeta.title} description={manuelMeta.metaDescription}>
+  <script type="application/ld+json" set:html={webPageJsonLd} is:inline />
+
+  <Breadcrumb items={filAriane} />
+
+  <section class="promesse">
+    <p class="surtitre">LE MANUEL</p>
+    <h1>{manuelMeta.h1}</h1>
+    {manuelMeta.promesse.map((p) => <p class="promesse__corps">{p}</p>)}
+  </section>
+
+  <section class="portes">
+    <p class="surtitre">§ 01 · PAR OU COMMENCER</p>
+    <h2>Quatre portes. Choisis celle qui te parle aujourd'hui.</h2>
+    <div class="portes__grille">
+      {
+        fils.map((fil) => (
+          <OngletManuel
+            titre={fil.titre}
+            resume={fil.accroche}
+            href="#chapitres"
+            illustrationRef={fil.illustrationRef}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="chapitres" class="chapitres">
+    <p class="surtitre">§ 02 · CHAPITRES EN AVANT</p>
+    <h2>A lire en ce moment.</h2>
+    {
+      articles.length === 0 ? (
+        <p class="chapitres__vide">Les premiers chapitres arrivent.</p>
+      ) : (
+        <div class="chapitres__grille">
+          {articles.map((a) => (
+            <CarteArticle
+              titre={a.data.titre}
+              href={`/le-manuel/${a.id}`}
+              chapitre={a.data.chapitre}
+              themeLabel={filParSlug(a.data.theme).labelCourt}
+              minutes={minutesDeLecture(a.body ?? '')}
+              brouillon={a.data.brouillon}
+            />
+          ))}
+        </div>
+      )
+    }
+  </section>
+
+  <section class="garde-fil">
+    <p class="surtitre">§ 03 · GARDE LE FIL</p>
+    <h2>Tu ne peux pas tout lire d'un coup. Garde le fil.</h2>
+    <BlocLettre titre={manuelMeta.lettre.titre} promesse={manuelMeta.lettre.promesse} />
+    <p class="microcopy">{manuelMeta.lettre.microcopy}</p>
+  </section>
+
+  <section class="aller-plus-loin">
+    <p class="surtitre">§ 04 · ALLER PLUS LOIN</p>
+    <h2>Envie d'aller plus loin que la lecture ?</h2>
+    <p>
+      Si, a un moment, la lecture ne te suffit plus, si tu veux qu'on regarde ta situation a toi,
+      ensemble, on peut simplement se parler. Trente minutes, gratuites et sans engagement.
+    </p>
+    <Button href="/premier-echange" label="Premier echange" variant="outline" />
+    <p class="ymyl">{manuelMeta.ymylPilier}</p>
+    <p class="signature">{SITE.nom} · {SITE.baseline}</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .surtitre {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+    margin: 0 0 0.5rem;
+  }
+  section {
+    margin-bottom: var(--espace-section);
+  }
+  .promesse__corps {
+    max-width: var(--rythme-colonne);
+  }
+  .portes__grille,
+  .chapitres__grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .chapitres__vide {
+    color: var(--c-muted);
+    font-style: italic;
+    margin-top: 1.5rem;
+  }
+  .microcopy,
+  .ymyl {
+    font-family: var(--f-mono);
+    font-size: var(--t-caption-size);
+    color: var(--c-muted);
+    margin-top: 0.75rem;
+  }
+  .signature {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-brun-reliure);
+    margin-top: 2rem;
+  }
+</style>

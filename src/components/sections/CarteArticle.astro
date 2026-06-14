@@ -1,0 +1,56 @@
+---
+import NumeroChapitre from '../ui/NumeroChapitre.astro';
+
+interface Props {
+  titre: string;
+  href: string;
+  chapitre: number;
+  themeLabel: string;
+  minutes: number;
+  brouillon?: boolean;
+}
+const { titre, href, chapitre, themeLabel, minutes, brouillon = false } = Astro.props;
+---
+
+<a class="carte-article" href={href}>
+  <p class="carte-article__meta">
+    <NumeroChapitre n={chapitre} /> · {themeLabel} · {minutes} min de lecture
+  </p>
+  <h3>{titre}</h3>
+  {brouillon && <span class="carte-article__brouillon">Brouillon · a valider</span>}
+</a>
+
+<style>
+  .carte-article {
+    display: block;
+    background-color: var(--c-papier);
+    border: 1px solid var(--c-creme);
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--c-encre);
+    transition: border-color 160ms ease;
+  }
+  .carte-article:hover {
+    border-color: var(--c-brun-reliure);
+  }
+  .carte-article__meta {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+    margin: 0 0 0.5rem;
+  }
+  .carte-article h3 {
+    margin: 0;
+  }
+  .carte-article__brouillon {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-terre);
+  }
+</style>
