@@ -54,3 +54,28 @@ export function buildWebPageJsonLd(input: WebPageJsonLdInput): string {
     url: input.url,
   });
 }
+
+export interface ArticleJsonLdInput {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: Date;
+  dateModified?: Date;
+}
+
+export function buildArticleJsonLd(input: ArticleJsonLdInput): string {
+  const origin = new URL(input.url).origin;
+  const auteur = { '@type': 'Person', name: 'Celine Lefevre', url: origin };
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: input.title,
+    description: input.description,
+    datePublished: input.datePublished.toISOString(),
+    dateModified: (input.dateModified ?? input.datePublished).toISOString(),
+    author: auteur,
+    publisher: auteur,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': input.url },
+    inLanguage: 'fr-FR',
+  });
+}

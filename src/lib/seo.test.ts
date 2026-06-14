@@ -1,10 +1,33 @@
 import { describe, it, expect } from 'vitest';
 import {
+  buildArticleJsonLd,
   buildBreadcrumbJsonLd,
   buildPageTitle,
   buildPersonJsonLd,
   buildWebPageJsonLd,
 } from './seo';
+
+describe('buildArticleJsonLd', () => {
+  it('produit un schema Article avec dates ISO et auteur Celine', () => {
+    const json = JSON.parse(
+      buildArticleJsonLd({
+        title: 'Titre',
+        description: 'Resume',
+        url: 'https://celine-lefevre-ayurveda.fr/le-manuel/exemple',
+        datePublished: new Date('2026-06-14T00:00:00.000Z'),
+      }),
+    );
+    expect(json['@type']).toBe('Article');
+    expect(json.headline).toBe('Titre');
+    expect(json.author.name).toBe('Celine Lefevre');
+    expect(json.datePublished).toBe('2026-06-14T00:00:00.000Z');
+    expect(json.dateModified).toBe('2026-06-14T00:00:00.000Z');
+    expect(json.mainEntityOfPage['@id']).toBe(
+      'https://celine-lefevre-ayurveda.fr/le-manuel/exemple',
+    );
+    expect(json.inLanguage).toBe('fr-FR');
+  });
+});
 
 describe('buildBreadcrumbJsonLd', () => {
   it('genere un BreadcrumbList ordonne', () => {
