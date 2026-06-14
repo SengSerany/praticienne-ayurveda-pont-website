@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
+import { THEMES } from './data/manuel';
 
 const articles = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/articles' }),
@@ -9,7 +10,10 @@ const articles = defineCollection({
     chapitre: z.number().int().positive(),
     resume: z.string(),
     datePublication: z.coerce.date(),
+    theme: z.enum([...THEMES] as [string, ...string[]]),
     conditionLiee: z.string().optional(),
+    ymyl: z.string().optional(),
+    illustrationRef: z.string().optional(),
     brouillon: z.boolean().default(false),
   }),
 });
