@@ -11,7 +11,7 @@ import { manuelMeta, filParSlug } from '../../data/manuel';
 import { articlesPubliables, minutesDeLecture } from '../../lib/manuel';
 import { passages } from '../../data/passages';
 import { SITE } from '../../data/site';
-import { buildArticleJsonLd, buildBreadcrumbJsonLd } from '../../lib/seo';
+import { buildArticleJsonLd } from '../../lib/seo';
 
 export async function getStaticPaths() {
   const tous = await getCollection('articles');
@@ -40,7 +40,6 @@ const filAriane = [
   { name: 'Le manuel', url: '/le-manuel' },
   { name: article.data.titre, url: cheminArticle },
 ];
-const breadcrumbJsonLd = buildBreadcrumbJsonLd(filAriane);
 ---
 
 <BaseLayout
@@ -49,7 +48,6 @@ const breadcrumbJsonLd = buildBreadcrumbJsonLd(filAriane);
   noindex={article.data.brouillon}
 >
   <script type="application/ld+json" set:html={articleJsonLd} is:inline />
-  <script type="application/ld+json" set:html={breadcrumbJsonLd} is:inline />
 
   <Breadcrumb items={filAriane} />
 

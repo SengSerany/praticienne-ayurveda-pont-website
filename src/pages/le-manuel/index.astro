@@ -9,7 +9,7 @@ import Button from '../../components/ui/Button.astro';
 import { manuelMeta, fils, filParSlug } from '../../data/manuel';
 import { articlesPubliables, minutesDeLecture } from '../../lib/manuel';
 import { SITE } from '../../data/site';
-import { buildWebPageJsonLd, buildBreadcrumbJsonLd } from '../../lib/seo';
+import { buildWebPageJsonLd } from '../../lib/seo';
 
 const tous = await getCollection('articles');
 const articles = articlesPubliables(tous, import.meta.env.DEV);
@@ -24,12 +24,10 @@ const filAriane = [
   { name: 'Accueil', url: '/' },
   { name: 'Le manuel', url: '/le-manuel' },
 ];
-const breadcrumbJsonLd = buildBreadcrumbJsonLd(filAriane);
 ---
 
 <BaseLayout title={manuelMeta.title} description={manuelMeta.metaDescription}>
   <script type="application/ld+json" set:html={webPageJsonLd} is:inline />
-  <script type="application/ld+json" set:html={breadcrumbJsonLd} is:inline />
 
   <Breadcrumb items={filAriane} />
 
