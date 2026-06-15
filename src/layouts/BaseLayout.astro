@@ -20,8 +20,9 @@ interface Props {
   title?: string;
   description: string;
   noindex?: boolean;
+  masquerCtaPrincipal?: boolean;
 }
-const { title, description, noindex } = Astro.props;
+const { title, description, noindex, masquerCtaPrincipal = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -31,7 +32,7 @@ const { title, description, noindex } = Astro.props;
     <Analytics />
   </head>
   <body>
-    <Header />
+    <Header masquerCtaPrincipal={masquerCtaPrincipal} />
     <main class="page">
       <slot />
     </main>

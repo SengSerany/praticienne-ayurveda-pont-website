@@ -1,6 +1,11 @@
 ---
 import { navPrincipale, ctaPrincipal, SITE } from '../../data/site';
 import Button from '../ui/Button.astro';
+
+interface Props {
+  masquerCtaPrincipal?: boolean;
+}
+const { masquerCtaPrincipal = false } = Astro.props;
 ---
 
 <header class="header">
@@ -19,7 +24,7 @@ import Button from '../ui/Button.astro';
       }
     </ul>
   </nav>
-  <Button href={ctaPrincipal.href} label={ctaPrincipal.label} variant="outline" />
+  {!masquerCtaPrincipal && <Button href={ctaPrincipal.href} label={ctaPrincipal.label} variant="outline" />}
 </header>
 
 <style>
