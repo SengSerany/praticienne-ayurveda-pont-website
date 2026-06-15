@@ -1,0 +1,200 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import Photo from '../components/ui/Photo.astro';
+import Button from '../components/ui/Button.astro';
+import Motif from '../components/ui/Motif.astro';
+import { SITE } from '../data/site';
+import { buildWebPageJsonLd } from '../lib/seo';
+
+const description =
+  "Praticienne en Ayurveda spécialisée en santé féminine, ancien parcours en laboratoire de référence (CNRGS). Un accompagnement complémentaire pour les femmes que vous suivez : lecture du terrain, hygiène de vie, orientation.";
+
+const url = new URL('/professionnels-de-sante', SITE.url).href;
+const webPageJsonLd = buildWebPageJsonLd({
+  name: 'Un accompagnement complémentaire, pour les femmes que vous suivez',
+  description,
+  url,
+});
+
+const apports = [
+  {
+    titre: 'Une lecture du terrain.',
+    corps:
+      "Digestion, axe gonadotrope, clairance hépatique des œstrogènes, équilibre du système nerveux autonome, traduits en mesures concrètes d'hygiène de vie et de phytothérapie raisonnée.",
+  },
+  {
+    titre: 'La capacité de lire un bilan.',
+    corps:
+      "Mon parcours en laboratoire me permet de comprendre vos comptes rendus et de m'inscrire dans votre cadre, sans jamais le contredire.",
+  },
+  {
+    titre: "Un retour à l'adressage.",
+    corps:
+      "Quand vous m'adressez une patiente, je vous transmets, avec son accord, un point bref sur ce que j'observe et ce que je propose. La boucle reste fermée.",
+  },
+  {
+    titre: 'Un cadre net.',
+    corps:
+      'Pas de diagnostic, pas d\'interruption de traitement, aucune promesse de guérison. Je vous réadresse, vous ou un confrère, dès qu\'un signe clinique le justifie.',
+  },
+  {
+    titre: 'Du temps.',
+    corps:
+      "Une heure trente d'écoute et d'éducation à la lecture du corps, que vos consultations ne permettent pas toujours de dégager.",
+  },
+];
+---
+
+<BaseLayout
+  title="Professionnels de santé, collaboration"
+  description={description}
+  masquerCtaPrincipal={true}
+>
+  <script type="application/ld+json" set:html={webPageJsonLd} is:inline />
+
+  <Breadcrumb
+    items={[
+      { name: 'Accueil', url: '/' },
+      { name: 'Professionnels de santé', url: '/professionnels-de-sante' },
+    ]}
+  />
+
+  <section class="intro">
+    <p class="surtitre">PROFESSIONNELS DE SANTÉ</p>
+    <h1>Un accompagnement complémentaire, pour les femmes que vous suivez.</h1>
+    <p>
+      Vous suivez des femmes confrontées à une endométriose, un SOPK, une aménorrhée post-pilule, un
+      post-partum difficile ou une périménopause symptomatique. Pour certaines, malgré une prise en
+      charge adaptée, il subsiste une marge (sur l'inflammation pelvienne chronique, la sphère
+      digestive, le sommeil, la charge nerveuse) où un accompagnement structuré d'hygiène de vie
+      peut soutenir vos objectifs thérapeutiques.
+    </p>
+    <p>C'est précisément là que je travaille : en complément de votre suivi, jamais à sa place.</p>
+  </section>
+
+  <section class="apports">
+    <p class="surtitre">§ 01 · CE QUE JE PEUX APPORTER</p>
+    <h2>Ce que je peux apporter aux femmes que vous m'adressez.</h2>
+    <ul class="apports__liste">
+      {
+        apports.map((a) => (
+          <li>
+            <strong>{a.titre}</strong> {a.corps}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="parcours">
+    <p class="surtitre">§ 02 · MON PARCOURS</p>
+    <h2>D'un laboratoire de référence à l'accompagnement ayurvédique.</h2>
+    <div class="parcours__corps">
+      <div>
+        <p>
+          Avant l'Ayurveda, j'ai passé dix ans en laboratoire de référence, le CNRGS, sur l'analyse
+          des groupes sanguins rares. J'en ai gardé une exigence méthodologique : observer,
+          documenter, ne pas conclure trop vite.
+        </p>
+        <p>
+          Ma pratique s'inscrit dans une logique de complémentarité avec la médecine
+          conventionnelle : pas d'opposition, pas de substitution. Je distingue clairement ce que je
+          maîtrise (la santé féminine, l'hygiène de vie, la lecture du terrain) de ce qui relève de
+          votre compétence : le diagnostic et le traitement.
+        </p>
+        <p>
+          C'est cette honnêteté sur les périmètres qui rend une collaboration possible, et fiable.
+        </p>
+      </div>
+      <Photo ref="PHOTO·02" alt="Herbier documentaire et instruments de laboratoire" ratio="3 / 4" />
+    </div>
+  </section>
+
+  <section class="contact">
+    <p class="surtitre">§ 03 · CONTACT PROFESSIONNEL</p>
+    <h2>Échangeons, de professionnel à professionnel.</h2>
+    <p>
+      Si vous souhaitez connaître précisément mon périmètre, en discuter, ou m'adresser une patiente,
+      écrivez-moi directement. Je collabore avec un petit nombre de praticiens, sur des situations
+      ciblées, et je réponds personnellement.
+    </p>
+    <Button href={`mailto:${SITE.emailPro}`} label="Contact professionnel" variant="filled" />
+    <p class="contact__email">{SITE.emailPro}</p>
+    <p class="contact__perimetre">
+      Mon accompagnement est complémentaire d'un suivi médical et ne s'y substitue pas. Je n'établis
+      pas de diagnostic et n'interromps aucun traitement en cours.
+    </p>
+    <p class="signature">{SITE.nom} · {SITE.baseline}</p>
+    <p class="signature signature--note">
+      Ancien parcours : CNRGS, analyse des groupes sanguins rares.
+    </p>
+    <Motif variante="01" />
+  </section>
+</BaseLayout>
+
+<style>
+  .surtitre {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+    margin: 0 0 0.5rem;
+  }
+  section {
+    margin-bottom: var(--espace-section);
+  }
+  .intro p,
+  .contact p {
+    max-width: var(--rythme-colonne);
+  }
+  .apports__liste {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    display: grid;
+    gap: 1rem;
+    max-width: var(--rythme-colonne-large);
+  }
+  .apports__liste li {
+    padding-left: 1rem;
+    border-left: 2px solid var(--c-creme);
+  }
+  .parcours__corps {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media (max-width: 48rem) {
+    .parcours__corps {
+      grid-template-columns: 1fr;
+    }
+  }
+  .contact__email {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-brun-reliure);
+    margin-top: 0.75rem;
+  }
+  .contact__perimetre {
+    font-family: var(--f-mono);
+    font-size: var(--t-caption-size);
+    color: var(--c-muted);
+    border-left: 2px solid var(--c-creme);
+    padding-left: 1rem;
+    margin-top: 1.5rem;
+  }
+  .signature {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-brun-reliure);
+    margin-top: 2rem;
+  }
+  .signature--note {
+    font-size: var(--t-caption-size);
+    color: var(--c-muted);
+    margin-top: 0.25rem;
+  }
+</style>

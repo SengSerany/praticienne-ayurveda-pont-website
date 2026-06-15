@@ -7,6 +7,8 @@ export const SITE = {
   nom: 'Céline Lefèvre',
   baseline: 'Ayurveda & Santé féminine',
   url: 'https://celine-lefevre-ayurveda.fr',
+  // Adresse du canal professionnel, distincte du Premier echange. A confirmer par Celine.
+  emailPro: 'contact-pro@celine-lefevre-ayurveda.fr',
 };
 
 export const navPrincipale: NavItem[] = [
