@@ -76,7 +76,7 @@ const apports = [
   <section class="apports">
     <p class="surtitre">§ 01 - CE QUE JE PEUX APPORTER</p>
     <h2>Ce que je peux apporter aux femmes que vous m'adressez.</h2>
-    <ul class="apports__liste">
+    <ul class="liste-manuel apports__liste">
       {
         apports.map((a) => (
           <li>
@@ -150,16 +150,8 @@ const apports = [
     max-width: var(--rythme-colonne);
   }
   .apports__liste {
-    list-style: none;
-    padding: 0;
     margin: 1.5rem 0 0;
-    display: grid;
-    gap: 1rem;
     max-width: var(--rythme-colonne-large);
-  }
-  .apports__liste li {
-    padding-left: 1rem;
-    border-left: 2px solid var(--c-creme);
   }
   .parcours__corps {
     display: grid;
@@ -182,8 +174,8 @@ const apports = [
     font-family: var(--f-mono);
     font-size: var(--t-caption-size);
     color: var(--c-muted);
-    border-left: 2px solid var(--c-creme);
-    padding-left: 1rem;
+    border-top: 1px solid var(--c-filet);
+    padding-top: 1rem;
     margin-top: 1.5rem;
   }
   .signature {
