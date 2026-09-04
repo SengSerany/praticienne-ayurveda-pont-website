@@ -18,6 +18,8 @@ body {
   line-height: var(--t-body-lh);
   letter-spacing: var(--t-body-ls);
   text-align: left;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1,
@@ -27,6 +29,7 @@ h4 {
   font-family: var(--f-display);
   text-align: left;
   margin: 0 0 0.4em;
+  text-wrap: balance;
 }
 
 h1 {
@@ -64,6 +67,7 @@ h4 {
 p {
   max-width: var(--rythme-colonne);
   margin: 0 0 var(--rythme-para);
+  text-wrap: pretty;
 }
 
 .lead {
@@ -78,6 +82,8 @@ em {
   font-style: italic;
 }
 
+/* Citation traitee comme un exergue de page : un filet la detache du flux, et
+   le guillemet ouvrant deborde dans la marge pour s'aligner optiquement. */
 blockquote {
   font-family: var(--f-quote);
   font-style: italic;
@@ -86,18 +92,80 @@ blockquote {
   line-height: var(--t-quote-lh);
   letter-spacing: var(--t-quote-ls);
   max-width: 35rem;
-  margin: 0 0 var(--rythme-para);
-  padding-left: 1rem;
-  border-left: 2px solid var(--c-dore);
+  margin: 2.5rem 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--c-filet);
+  text-indent: -0.44em;
+  color: var(--c-brun-reliure);
+}
+
+/* Liste de manuel. Chaque entree est appelee par un numero de folio en marge,
+   la ou le site posait un filet lateral. Le conteneur garde sa marge et sa
+   largeur propres a la page. */
+.liste-manuel {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+  counter-reset: entree-manuel;
+}
+
+.liste-manuel > li {
+  counter-increment: entree-manuel;
+  position: relative;
+  padding-left: 2.75rem;
+}
+
+.liste-manuel > li::before {
+  content: counter(entree-manuel, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.34em;
+  font-family: var(--f-mono);
+  font-size: var(--t-label-size);
+  font-weight: var(--t-label-weight);
+  letter-spacing: var(--t-label-ls);
+  color: var(--c-terre);
 }
 
 a {
   color: var(--c-brun-reliure);
-  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--c-filet-fort);
+  text-underline-offset: 0.22em;
+  transition:
+    color var(--mouvement-vif),
+    text-decoration-color var(--mouvement-vif);
+}
+
+a:hover {
+  color: var(--c-terre);
+  text-decoration-color: currentColor;
+}
+
+:where(a, button, input, textarea, summary):focus-visible {
+  outline: 2px solid var(--c-brun-reliure);
+  outline-offset: 3px;
+}
+
+::selection {
+  background-color: var(--c-couverture);
+  color: var(--c-encre);
 }
 
 img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
