@@ -51,11 +51,11 @@ const filAriane = [
 
   <Breadcrumb items={filAriane} />
 
-  {article.data.brouillon && <p class="brouillon">Brouillon · a valider</p>}
+  {article.data.brouillon && <p class="brouillon">Brouillon - a valider</p>}
 
   <article class="chapitre">
     <p class="chapitre__entete">
-      <NumeroChapitre n={article.data.chapitre} /> · {fil.labelCourt} · {minutes} min de lecture
+      <NumeroChapitre n={article.data.chapitre} /> - {fil.labelCourt} - {minutes} min de lecture
     </p>
     <h1>{article.data.titre}</h1>
     <p class="chapitre__chapo">{article.data.resume}</p>
@@ -88,7 +88,7 @@ const filAriane = [
       <Button href="/premier-echange" label="Premier echange" variant="outline" />
     </p>
 
-    <p class="signature">{SITE.nom} · {SITE.baseline}</p>
+    <p class="signature">{SITE.nom} - {SITE.baseline}</p>
   </article>
 </BaseLayout>
 

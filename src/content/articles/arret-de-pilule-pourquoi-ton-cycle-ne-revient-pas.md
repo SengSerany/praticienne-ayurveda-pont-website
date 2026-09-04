@@ -6,7 +6,7 @@ datePublication: 2026-06-14
 theme: cycle
 conditionLiee: apres-pilule
 ymyl: "une absence de regles qui se prolonge"
-illustrationRef: "ILLU·Sauge"
+illustrationRef: "ILLU-Sauge"
 brouillon: true
 ---
 

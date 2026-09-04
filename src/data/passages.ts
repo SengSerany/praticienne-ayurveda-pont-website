@@ -17,7 +17,7 @@ export const passages: Passage[] = [
     href: '/sante-feminine/endometriose',
     star: true,
     aVenir: false,
-    illustrationRef: 'ILLU·Gattilier',
+    illustrationRef: 'ILLU-Gattilier',
   },
   {
     cle: 'sopk',
@@ -27,7 +27,7 @@ export const passages: Passage[] = [
     href: '/sante-feminine/sopk',
     star: false,
     aVenir: false,
-    illustrationRef: 'ILLU·Shatavari',
+    illustrationRef: 'ILLU-Shatavari',
   },
   {
     cle: 'apres-pilule',
@@ -37,7 +37,7 @@ export const passages: Passage[] = [
     href: '/sante-feminine/apres-pilule-amenorrhee',
     star: false,
     aVenir: false,
-    illustrationRef: 'ILLU·Sauge',
+    illustrationRef: 'ILLU-Sauge',
   },
   {
     cle: 'post-partum',
@@ -47,7 +47,7 @@ export const passages: Passage[] = [
     href: '/sante-feminine/post-partum',
     star: false,
     aVenir: false,
-    illustrationRef: 'ILLU·Tilleul',
+    illustrationRef: 'ILLU-Tilleul',
   },
   {
     cle: 'perimenopause',
@@ -57,6 +57,6 @@ export const passages: Passage[] = [
     href: '/sante-feminine/perimenopause',
     star: false,
     aVenir: false,
-    illustrationRef: 'ILLU·Melisse',
+    illustrationRef: 'ILLU-Melisse',
   },
 ];

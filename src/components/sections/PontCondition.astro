@@ -6,7 +6,7 @@ interface Props {
   titre: string;
 }
 const { numero, titre } = Astro.props;
-const eyebrow = numero ? `§ ${numero} · LE PONT` : 'LE PONT';
+const eyebrow = numero ? `§ ${numero} - LE PONT` : 'LE PONT';
 ---
 
 <section class="pont-condition">

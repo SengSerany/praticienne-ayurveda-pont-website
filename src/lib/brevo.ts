@@ -38,7 +38,7 @@ export async function brevoUpsertContact(
       updateEnabled: true,
     }),
   });
-  // 201 cree, 204 mis a jour, 400 = souvent « contact existe deja », tolere.
+  // 201 cree, 204 mis a jour, 400 = souvent "contact existe deja", tolere.
   const ok = res.status === 201 || res.status === 204 || res.status === 400;
   return { ok, status: res.status };
 }

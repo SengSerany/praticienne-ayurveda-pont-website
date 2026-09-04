@@ -7,7 +7,7 @@ interface Props {
   titre: string;
 }
 const { numero, surtitre, titre } = Astro.props;
-const eyebrow = numero ? `§ ${numero} · ${surtitre}` : surtitre;
+const eyebrow = numero ? `§ ${numero} - ${surtitre}` : surtitre;
 ---
 
 <section class="section-editoriale">
