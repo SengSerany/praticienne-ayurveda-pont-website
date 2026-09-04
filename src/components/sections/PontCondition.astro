@@ -19,15 +19,16 @@ const eyebrow = numero ? `§ ${numero} - LE PONT` : 'LE PONT';
 <style>
   .pont-condition {
     background-color: var(--c-couverture);
+    --c-label: var(--c-encre);
     color: var(--c-encre);
-    padding: var(--espace-section) clamp(1.5rem, 5vw, 4rem);
+    padding: var(--espace-section-ample) clamp(1.5rem, 5vw, 4rem);
   }
   .pont-condition__eyebrow {
     font-family: var(--f-mono);
     font-size: var(--t-label-size);
     letter-spacing: var(--t-label-ls);
     text-transform: uppercase;
-    color: var(--c-brun-reliure);
+    color: var(--c-label);
     margin: 0;
   }
 </style>

@@ -1,33 +1,49 @@
 :root {
-  /* ── Couleurs de marque (Systeme Chromatique 4.8) ───────────────── */
-  --c-couverture: #e3b0a0;
-  --c-terre: #9f6c5c;
-  --c-brun-reliure: #7a463a;
-  --c-papier: #f2ebde;
-  --c-papier-chaleur: #efe7dc;
-  --c-creme: #d9cab5;
-  --c-encre: #2d2a26;
-  --c-sauge: #a7b5a0;
-  --c-dore: #e2c583;
-  --c-muted: rgba(45, 42, 38, 0.42);
+  /* Couleurs de marque (Systeme Chromatique 4.8), en OKLCH pour garder une
+     echelle tonale coherente entre les papiers. Les hex d'origine sont notes
+     en regard, le rendu est inchange. */
+  --c-couverture: oklch(79.9% 0.064 38.1); /* #e3b0a0 */
+  /* Assombri depuis #9f6c5c. La valeur d'origine plafonnait a 3.71:1, aussi bien
+     en texte sur papier qu'en fond sous du texte papier. */
+  --c-terre: oklch(53% 0.07 38.2); /* #8f5d4e */
+  --c-brun-reliure: oklch(45.3% 0.075 33.9); /* #7a463a */
+  --c-papier: oklch(94.2% 0.019 83.1); /* #f2ebde */
+  --c-papier-chaleur: oklch(93.1% 0.017 76.1); /* #efe7dc */
+  --c-papier-profond: oklch(89% 0.024 79); /* palier intermediaire, nouveau */
+  --c-creme: oklch(84.6% 0.033 76.4); /* #d9cab5 */
+  --c-encre: oklch(28.7% 0.008 75.2); /* #2d2a26 */
+  --c-sauge: oklch(75.6% 0.033 135.1); /* #a7b5a0 */
+  --c-dore: oklch(83.3% 0.09 86.7); /* #e2c583 */
 
-  /* ── Couleurs fonctionnelles (primaire + fond) ──────────────────── */
-  --c-succes: #6b8c6b;
-  --c-succes-fond: #eaf2ea;
-  --c-danger: #9e4e46;
-  --c-danger-fond: #f3ecea;
-  --c-vigilance: #b8852a;
-  --c-vigilance-fond: #f5eddb;
-  --c-info: #6e85a0;
-  --c-info-fond: #e7edf5;
+  /* Encre secondaire. L'ancienne valeur, rgba(45,42,38,0.42), plafonnait a
+     2.36:1 sur le papier, sous le seuil WCAG AA. */
+  --c-muted: oklch(50.5% 0.012 75);
 
-  /* ── Familles de police (avec fallbacks) ────────────────────────── */
+  /* Couleur des surtitres et micro-libelles. Passe a l'encre sur les fonds
+     couverture, ou le brun de reliure ne tient que 3.97:1. */
+  --c-label: var(--c-brun-reliure);
+
+  /* Filets. Un manuel relie se tient par ses reglures, pas par ses ombres. */
+  --c-filet: oklch(84% 0.022 76);
+  --c-filet-fort: oklch(70% 0.03 60);
+
+  /* Couleurs fonctionnelles (primaire + fond) */
+  --c-succes: oklch(60.6% 0.062 144.8); /* #6b8c6b */
+  --c-succes-fond: oklch(95.3% 0.014 145.5); /* #eaf2ea */
+  --c-danger: oklch(52.1% 0.108 27.3); /* #9e4e46 */
+  --c-danger-fond: oklch(94.8% 0.008 36.6); /* #f3ecea */
+  --c-vigilance: oklch(65.2% 0.12 77.5); /* #b8852a */
+  --c-vigilance-fond: oklch(94.8% 0.025 86.9); /* #f5eddb */
+  --c-info: oklch(60.9% 0.049 252.7); /* #6e85a0 */
+  --c-info-fond: oklch(94.4% 0.013 255.5); /* #e7edf5 */
+
+  /* Familles de police (avec fallbacks) */
   --f-display: 'Fraunces Variable', 'Fraunces', Georgia, 'Times New Roman', serif;
   --f-body: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
   --f-quote: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
   --f-mono: 'JetBrains Mono', 'Courier New', Courier, monospace;
 
-  /* ── Echelle typographique ──────────────────────────────────────── */
+  /* Echelle typographique */
   --t-h1-size: clamp(4.5rem, 10vw, 8.5rem);
   --t-h1-weight: 300;
   --t-h1-fvs: 'opsz' 144, 'WONK' 1;
@@ -52,32 +68,34 @@
   --t-h4-lh: 1.3;
   --t-h4-ls: 0;
 
-  --t-lead-size: clamp(1.125rem, 2vw, 1.3125rem);
+  --t-lead-size: clamp(1.1875rem, 2vw, 1.375rem);
   --t-lead-weight: 400;
-  --t-lead-lh: 1.6;
+  --t-lead-lh: 1.58;
 
-  --t-body-size: 1rem;
-  --t-body-weight: 300;
-  --t-body-lh: 1.8;
-  --t-body-ls: 0.01em;
+  /* Corps en 400 et non en 300. La graisse legere se delavait sur le papier
+     creme, et le lectorat lit souvent fatigue ou douloureux. */
+  --t-body-size: 1.0625rem;
+  --t-body-weight: 400;
+  --t-body-lh: 1.72;
+  --t-body-ls: 0.005em;
 
   --t-quote-size: clamp(1.25rem, 2.5vw, 1.875rem);
   --t-quote-weight: 400;
   --t-quote-lh: 1.52;
   --t-quote-ls: 0.01em;
 
-  --t-small-size: 0.875rem;
+  --t-small-size: 0.9375rem;
   --t-small-weight: 400;
   --t-small-lh: 1.65;
   --t-small-ls: 0.015em;
 
-  --t-caption-size: 0.75rem;
-  --t-caption-weight: 300;
+  --t-caption-size: 0.8125rem;
+  --t-caption-weight: 400;
   --t-caption-lh: 1.6;
   --t-caption-ls: 0.03em;
 
   --t-label-size: 0.6875rem;
-  --t-label-weight: 400;
+  --t-label-weight: 500;
   --t-label-lh: 1;
   --t-label-ls: 0.22em;
 
@@ -85,11 +103,19 @@
   --t-cta-weight: 500;
   --t-cta-lh: 1;
   --t-cta-ls: 0.14em;
-  --t-cta-pad: 15px 30px;
+  --t-cta-pad: 17px 34px;
 
-  /* ── Rythme & composition ───────────────────────────────────────── */
+  /* Rythme & composition. Trois respirations et non une seule : un manuel
+     alterne les pages denses et les pages ouvertes. */
   --rythme-colonne: 40rem;
   --rythme-colonne-large: 48rem;
   --rythme-para: 1.5em;
+  --espace-section-serre: clamp(2.25rem, 5vw, 3.5rem);
   --espace-section: clamp(3rem, 8vw, 6rem);
+  --espace-section-ample: clamp(4.5rem, 12vw, 9rem);
+
+  /* Mouvement. Sorties exponentielles, jamais de rebond. */
+  --mouvement-vif: 180ms cubic-bezier(0.33, 1, 0.68, 1);
+  --mouvement-doux: 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  --mouvement-ample: 560ms cubic-bezier(0.16, 1, 0.3, 1);
 }

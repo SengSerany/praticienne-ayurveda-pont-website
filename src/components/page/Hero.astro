@@ -51,7 +51,7 @@ const {
   .hero {
     display: grid;
     gap: 2rem;
-    padding: var(--espace-section) clamp(1rem, 4vw, 3rem);
+    padding: var(--espace-section-ample) clamp(1rem, 4vw, 3rem);
   }
   @media (min-width: 52rem) {
     .hero {
@@ -61,6 +61,7 @@ const {
   }
   .hero--couverture {
     background-color: var(--c-couverture);
+    --c-label: var(--c-encre);
     color: var(--c-encre);
   }
   .hero--papier {
@@ -71,7 +72,7 @@ const {
     font-size: var(--t-label-size);
     letter-spacing: var(--t-label-ls);
     text-transform: uppercase;
-    color: var(--c-brun-reliure);
+    color: var(--c-label);
     margin: 0 0 1rem;
   }
   .hero__sous-ligne {
@@ -95,7 +96,7 @@ const {
   .hero__microcopy {
     font-family: var(--f-quote);
     font-style: italic;
-    color: var(--c-brun-reliure);
+    color: var(--c-label);
   }
   .hero__media:empty {
     display: none;
