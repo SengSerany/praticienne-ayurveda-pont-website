@@ -14,10 +14,10 @@ const { titre, href, chapitre, themeLabel, minutes, brouillon = false } = Astro.
 
 <a class="carte-article" href={href}>
   <p class="carte-article__meta">
-    <NumeroChapitre n={chapitre} /> · {themeLabel} · {minutes} min de lecture
+    <NumeroChapitre n={chapitre} /> - {themeLabel} - {minutes} min de lecture
   </p>
   <h3>{titre}</h3>
-  {brouillon && <span class="carte-article__brouillon">Brouillon · a valider</span>}
+  {brouillon && <span class="carte-article__brouillon">Brouillon - a valider</span>}
 </a>
 
 <style>

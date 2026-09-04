@@ -38,7 +38,7 @@ const filAriane = [
   </section>
 
   <section class="portes">
-    <p class="surtitre">§ 01 · PAR OU COMMENCER</p>
+    <p class="surtitre">§ 01 - PAR OU COMMENCER</p>
     <h2>Quatre portes. Choisis celle qui te parle aujourd'hui.</h2>
     <div class="portes__grille">
       {
@@ -55,7 +55,7 @@ const filAriane = [
   </section>
 
   <section id="chapitres" class="chapitres">
-    <p class="surtitre">§ 02 · CHAPITRES EN AVANT</p>
+    <p class="surtitre">§ 02 - CHAPITRES EN AVANT</p>
     <h2>A lire en ce moment.</h2>
     {
       articles.length === 0 ? (
@@ -78,14 +78,14 @@ const filAriane = [
   </section>
 
   <section class="garde-fil">
-    <p class="surtitre">§ 03 · GARDE LE FIL</p>
+    <p class="surtitre">§ 03 - GARDE LE FIL</p>
     <h2>Tu ne peux pas tout lire d'un coup. Garde le fil.</h2>
     <BlocLettre titre={manuelMeta.lettre.titre} promesse={manuelMeta.lettre.promesse} />
     <p class="microcopy">{manuelMeta.lettre.microcopy}</p>
   </section>
 
   <section class="aller-plus-loin">
-    <p class="surtitre">§ 04 · ALLER PLUS LOIN</p>
+    <p class="surtitre">§ 04 - ALLER PLUS LOIN</p>
     <h2>Envie d'aller plus loin que la lecture ?</h2>
     <p>
       Si, a un moment, la lecture ne te suffit plus, si tu veux qu'on regarde ta situation a toi,
@@ -93,7 +93,7 @@ const filAriane = [
     </p>
     <Button href="/premier-echange" label="Premier echange" variant="outline" />
     <p class="ymyl">{manuelMeta.ymylPilier}</p>
-    <p class="signature">{SITE.nom} · {SITE.baseline}</p>
+    <p class="signature">{SITE.nom} - {SITE.baseline}</p>
   </section>
 </BaseLayout>
 

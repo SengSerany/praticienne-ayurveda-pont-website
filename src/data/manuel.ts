@@ -16,7 +16,7 @@ export const fils: Fil[] = [
     accroche:
       'Ce que chaque phase raconte, et pourquoi une meme douleur change de sens selon le moment ou elle arrive.',
     labelCourt: 'Lire ton cycle',
-    illustrationRef: 'ILLU·Gattilier',
+    illustrationRef: 'ILLU-Gattilier',
   },
   {
     slug: 'digestion',
@@ -24,7 +24,7 @@ export const fils: Fil[] = [
     accroche:
       'Le feu digestif, Agni, comme coulisse silencieuse de presque tout le reste : peau, hormones, energie.',
     labelCourt: 'La digestion',
-    illustrationRef: 'ILLU·Shatavari',
+    illustrationRef: 'ILLU-Shatavari',
   },
   {
     slug: 'inflammation',
@@ -32,14 +32,14 @@ export const fils: Fil[] = [
     accroche:
       "Comprendre d'ou vient le « feu » qui s'installe, et ce qui aide a l'apaiser au quotidien.",
     labelCourt: "Apaiser l'inflammation",
-    illustrationRef: 'ILLU·Melisse',
+    illustrationRef: 'ILLU-Melisse',
   },
   {
     slug: 'systeme-nerveux',
     titre: 'Systeme nerveux, stress et sommeil',
     accroche: 'Le lien, souvent sous-estime, entre ta tete, tes nuits et ton cycle.',
     labelCourt: 'Systeme nerveux',
-    illustrationRef: 'ILLU·Tilleul',
+    illustrationRef: 'ILLU-Tilleul',
   },
 ];
 

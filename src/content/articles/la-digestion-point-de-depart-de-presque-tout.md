@@ -6,7 +6,7 @@ datePublication: 2026-06-14
 theme: digestion
 conditionLiee: endometriose
 ymyl: "des troubles digestifs qui persistent"
-illustrationRef: "ILLU·Shatavari"
+illustrationRef: "ILLU-Shatavari"
 brouillon: true
 ---
 

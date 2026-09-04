@@ -6,7 +6,7 @@ datePublication: 2026-06-14
 theme: cycle
 conditionLiee: endometriose
 ymyl: "des douleurs qui s'aggravent ou changent de nature"
-illustrationRef: "ILLU·Gattilier"
+illustrationRef: "ILLU-Gattilier"
 brouillon: true
 ---
 
