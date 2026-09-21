@@ -27,7 +27,14 @@ const description =
     cta={{ label: 'Commençons par nous parler', href: '/premier-echange', variant: 'outline' }}
     microcopy="gratuit, sans engagement."
   >
-    <Photo slot="media" ref="PHOTO-07" alt="La maison ouverte sur la plaine" ratio="3 / 4" />
+    <Photo
+      slot="media"
+      ref="PHOTO-07"
+      src="/photo-07.webp"
+      alt="La maison ouverte sur la plaine"
+      ratio="3 / 4"
+      prioritaire
+    />
   </Hero>
 
   <BandeauReassurance
@@ -99,8 +106,13 @@ const description =
     titre="La rigueur du laboratoire, la patience d'une sagesse millénaire."
   >
     <div slot="media" class="pont-visuels">
-      <Photo ref="PHOTO-02" alt="Herbier et laboratoire" />
-      <Schema ref="SCHEMA-04" alt="Schéma de lecture systémique" />
+      <Photo ref="PHOTO-02" src="/photo-02.webp" alt="Herbier et laboratoire" />
+      <Schema
+        ref="SCHEMA-04"
+        src="/schema-04.svg"
+        alt="Le cycle, la digestion, le système nerveux et le foie reliés entre eux"
+        legende="Trait plein, lien direct entre deux systèmes voisins. Trait tireté, lien indirect."
+      />
     </div>
     <p>
       J'ai derrière moi dix ans de laboratoire de référence, une formation de scientifique, faite
@@ -185,7 +197,13 @@ const description =
       Pour l'instant, je préfère ne rien afficher plutôt que d'inventer. Les vrais retours, je les
       publierai ici tels quels, dans leurs mots, jamais retouchés, le jour où ils viendront.
     </p>
-    <Photo slot="marge" ref="PHOTO-03" alt="La force tranquille" ratio="3 / 4" />
+    <Photo
+      slot="marge"
+      ref="PHOTO-03"
+      src="/photo-03.webp"
+      alt="Mains liant une botte de sauge et de lavande sur un plan de travail"
+      ratio="3 / 4"
+    />
   </SectionEditoriale>
 
   <Seuil

@@ -28,7 +28,14 @@ const personJsonLd = buildPersonJsonLd({
       "Céline Lefèvre, spécialisée en santé féminine, avec une sensibilité particulière à l'endométriose.",
     ]}
   >
-    <Photo slot="media" ref="PHOTO-03" alt="Mains, herbier et plan de travail" ratio="3 / 4" />
+    <Photo
+      slot="media"
+      ref="PHOTO-03"
+      src="/photo-03.webp"
+      alt="Mains liant une botte de sauge et de lavande sur un plan de travail"
+      ratio="3 / 4"
+      prioritaire
+    />
     <p>
       On me décrit souvent comme posée. C'est vrai, mais ce n'est pas de la réserve. C'est une
       manière de tenir : ne pas précipiter, ne pas conclure trop vite, rester là le temps qu'il
@@ -58,7 +65,7 @@ const personJsonLd = buildPersonJsonLd({
       Le jour où ces deux mondes se sont assemblés, j'ai eu cette sensation très simple :
       <em>bah oui, c'est logique.</em> C'est exactement ce que je cherche à provoquer chez vous.
     </p>
-    <Photo slot="marge" ref="PHOTO-02" alt="Herbier et laboratoire" />
+    <Photo slot="marge" ref="PHOTO-02" src="/photo-02.webp" alt="Herbier et laboratoire" />
   </SectionEditoriale>
 
   <SectionEditoriale numero="02" surtitre="LA TRAVERSÉE" titre="L'endométriose, je vis avec.">
