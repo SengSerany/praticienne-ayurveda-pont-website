@@ -8,8 +8,11 @@ const { text } = Astro.props;
 <span class="eyebrow">{text}</span>
 
 <style>
+  /* Le surtitre porte lui-meme son espacement, sinon chaque consommateur le
+     recompense a sa facon et les surtitres divergent. */
   .eyebrow {
-    display: inline-block;
+    display: block;
+    margin: 0 0 0.875rem;
     font-family: var(--f-mono);
     font-size: var(--t-label-size);
     font-weight: var(--t-label-weight);
