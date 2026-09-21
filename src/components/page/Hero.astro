@@ -68,6 +68,9 @@ const {
   .hero--papier {
     background-color: var(--c-papier);
   }
+  .hero h1 {
+    margin-bottom: 0.667em;
+  }
   .hero__eyebrow {
     font-family: var(--f-mono);
     font-size: var(--t-label-size);
@@ -87,12 +90,15 @@ const {
     font-size: var(--t-quote-size);
     max-width: 34rem;
   }
+  /* La marge doit depasser celle du paragraphe qui precede, sinon les deux se
+     recouvrent et le reglage reste sans effet : la signature apporte deja 45 px
+     a elle seule. */
   .hero__cta {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
-    margin-top: 1.5rem;
+    margin-top: clamp(2.75rem, 4.7vw, 4.25rem);
   }
   .hero__microcopy {
     font-family: var(--f-quote);
