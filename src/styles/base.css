@@ -6,6 +6,8 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* Le header est colle en haut : sans ca, une ancre amene la cible dessous. */
+  scroll-padding-top: 7rem;
 }
 
 body {

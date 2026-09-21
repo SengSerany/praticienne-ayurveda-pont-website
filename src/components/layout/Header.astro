@@ -8,33 +8,133 @@ interface Props {
 const { masquerCtaPrincipal = false } = Astro.props;
 ---
 
-<header class="header">
+<header class="header" data-menu-ouvert="false">
   <a class="header__marque" href="/">
     <span class="header__nom">{SITE.nom}</span>
     <span class="header__baseline">{SITE.baseline}</span>
   </a>
-  <nav class="header__nav" aria-label="Navigation principale">
-    <ul>
-      {
-        navPrincipale.map((item) => (
-          <li>
-            <a href={item.href}>{item.label}</a>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
-  {!masquerCtaPrincipal && <Button href={ctaPrincipal.href} label={ctaPrincipal.label} variant="outline" />}
+
+  <button
+    class="header__bascule"
+    type="button"
+    aria-expanded="false"
+    aria-controls="menu-principal"
+    aria-label="Ouvrir le menu"
+  >
+    <svg viewBox="0 0 22 14" aria-hidden="true">
+      <line x1="0.5" y1="1" x2="21.5" y2="1"></line>
+      <line x1="0.5" y1="7" x2="21.5" y2="7"></line>
+      <line x1="0.5" y1="13" x2="21.5" y2="13"></line>
+    </svg>
+  </button>
+
+  <div class="header__menu" id="menu-principal">
+    <nav class="header__nav" aria-label="Navigation principale">
+      <ul>
+        {
+          navPrincipale.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    {
+      !masquerCtaPrincipal && (
+        <Button href={ctaPrincipal.href} label={ctaPrincipal.label} variant="outline" />
+      )
+    }
+  </div>
 </header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('.header');
+  const bascule = header?.querySelector<HTMLButtonElement>('.header__bascule');
+
+  if (header && bascule) {
+    const definirEtat = (ouvert: boolean) => {
+      header.dataset.menuOuvert = String(ouvert);
+      bascule.setAttribute('aria-expanded', String(ouvert));
+      bascule.setAttribute('aria-label', ouvert ? 'Fermer le menu' : 'Ouvrir le menu');
+      document.body.style.overflow = ouvert ? 'hidden' : '';
+    };
+
+    bascule.addEventListener('click', () => {
+      definirEtat(bascule.getAttribute('aria-expanded') !== 'true');
+    });
+
+    header.querySelectorAll('.header__menu a').forEach((lien) => {
+      lien.addEventListener('click', () => definirEtat(false));
+    });
+
+    document.addEventListener('keydown', (evenement) => {
+      if (evenement.key === 'Escape' && header.dataset.menuOuvert === 'true') {
+        definirEtat(false);
+        bascule.focus();
+      }
+    });
+  }
+</script>
 
 <style>
   .header {
+    --voile-teinte: oklch(97% 0.012 83);
+    --voile: 58%;
+    --flou: blur(28px) saturate(105%);
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+
+    position: sticky;
+    top: 0;
+    z-index: 10;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 1.5rem;
     padding: 1.5rem clamp(1rem, 4vw, 3rem);
-    border-bottom: 1px solid var(--c-creme);
+    border-bottom: 1px solid var(--c-filet);
+    background-color: color-mix(in srgb, var(--voile-teinte) var(--voile), transparent);
+    -webkit-backdrop-filter: var(--flou);
+    backdrop-filter: var(--flou);
+  }
+  /* Grain de papier par dessus le flou, sinon le rendu est lisse-numerique et
+     contredit la matiere du reste du site. En soft-light et non en multiply,
+     qui assombrissait le bandeau et faisait chuter le contraste a 3.76:1. */
+  .header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.12;
+    mix-blend-mode: soft-light;
+    background-image: var(--grain);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .header {
+      --voile: 100%;
+    }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .header {
+      --voile: 100%;
+      --flou: none;
+    }
+  }
+
+  /* Menu ouvert : le header cesse d'etre un verre, puisque le panneau opaque
+     couvre deja tout ce qui est derriere. Il cesse surtout d'etre une racine de
+     fond, ce qui rend au panneau son positionnement fixe par rapport a la
+     fenetre : un ancetre filtre devient sinon le bloc conteneur du fixed. */
+  .header[data-menu-ouvert='true'] {
+    background-color: var(--c-papier);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .header__marque,
+  .header__bascule {
+    position: relative;
+    z-index: 1;
   }
   .header__marque {
     display: flex;
@@ -47,28 +147,181 @@ const { masquerCtaPrincipal = false } = Astro.props;
     font-family: var(--f-display);
     font-size: 1.25rem;
   }
+  /* Encre et non brun de reliure : derriere le voile, le brun tombait a 3.5:1
+     sur les fonds terre. */
   .header__baseline {
     font-family: var(--f-mono);
     font-size: var(--t-label-size);
     letter-spacing: var(--t-label-ls);
     text-transform: uppercase;
-    color: var(--c-brun-reliure);
+    color: var(--c-encre);
+  }
+
+  .header__bascule {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    margin: -0.75rem;
+    border: 0;
+    background: none;
+    color: var(--c-encre);
+    cursor: pointer;
+  }
+  .header__bascule svg {
+    width: 22px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.2;
+  }
+  .header__bascule line {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition:
+      transform var(--mouvement-doux),
+      opacity var(--mouvement-vif);
+  }
+  .header[data-menu-ouvert='true'] .header__bascule line:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .header[data-menu-ouvert='true'] .header__bascule line:nth-child(2) {
+    opacity: 0;
+  }
+  .header[data-menu-ouvert='true'] .header__bascule line:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* Panneau plein ecran et opaque. La barre reste lisible au-dessus grace au
+     z-index de la marque et du bouton, et le retrait haut degage leur hauteur. */
+  .header__menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2.5rem;
+    padding: 7.5rem clamp(1rem, 4vw, 3rem) 3rem;
+    overflow-y: auto;
+    background-color: var(--c-papier);
+  }
+  .header[data-menu-ouvert='true'] .header__menu {
+    display: flex;
+  }
+  /* Table des matieres du manuel : des rangees de hauteur egale separees par
+     des filets occupent la page par leur structure, la ou une pile de liens
+     laisserait le bas vide. */
+  .header__nav {
+    flex: 1;
   }
   .header__nav ul {
     list-style: none;
     display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem;
+    flex-direction: column;
+    height: 100%;
     margin: 0;
     padding: 0;
   }
+  .header__nav li {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--c-filet);
+  }
+  .header__nav li:first-child {
+    border-top: 1px solid var(--c-filet);
+  }
   .header__nav a {
-    font-family: var(--f-body);
-    font-size: var(--t-small-size);
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0;
+    font-family: var(--f-display);
+    font-size: var(--t-h3-size);
+    font-variation-settings: var(--t-h3-fvs);
+    line-height: var(--t-h3-lh);
     color: var(--c-encre);
     text-decoration: none;
   }
+  .header__menu :global(.button) {
+    width: 100%;
+    text-align: center;
+  }
+  /* Soulignement plutot qu'un changement de couleur : aucune teinte d'accent ne
+     tient le contraste a la fois sur le papier et sur les fonds terre. */
   .header__nav a:hover {
-    color: var(--c-terre);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+  }
+
+  /* Le hamburger est reserve au mobile. Au-dela, la navigation est deployee en
+     typographie resserree : le header reclame 1158 px pour tenir sur une seule
+     rangee en pleine taille. */
+  @media (min-width: 48rem) {
+    .header {
+      gap: 1.125rem;
+      padding: 1.5rem clamp(1rem, 2.5vw, 2rem);
+    }
+    .header__bascule {
+      display: none;
+    }
+    .header__menu,
+    .header[data-menu-ouvert='true'] .header__menu {
+      display: flex;
+      position: static;
+      flex-direction: row;
+      align-items: center;
+      gap: 1.125rem;
+      padding: 0;
+      overflow: visible;
+      background: none;
+    }
+    .header__nav {
+      flex: initial;
+    }
+    .header__nav ul {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      height: auto;
+      gap: 0.875rem;
+    }
+    .header__nav li,
+    .header__nav li:first-child {
+      flex: initial;
+      border: 0;
+    }
+    .header__nav a {
+      width: auto;
+      padding: 0;
+      font-family: var(--f-body);
+      font-size: var(--t-caption-size);
+      font-variation-settings: normal;
+      line-height: inherit;
+    }
+    .header__menu :global(.button) {
+      width: auto;
+      padding: 12px 20px;
+      font-size: 0.75rem;
+    }
+  }
+  @media (min-width: 80rem) {
+    .header {
+      gap: 1.5rem;
+      padding: 1.5rem clamp(1rem, 4vw, 3rem);
+    }
+    .header__menu,
+    .header[data-menu-ouvert='true'] .header__menu {
+      gap: 1.5rem;
+    }
+    .header__nav ul {
+      gap: 1.25rem;
+    }
+    .header__nav a {
+      font-size: var(--t-small-size);
+    }
+    .header__menu :global(.button) {
+      padding: var(--t-cta-pad);
+      font-size: var(--t-cta-size);
+    }
   }
 </style>
