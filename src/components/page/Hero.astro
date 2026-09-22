@@ -1,5 +1,6 @@
 ---
 import Button from '../ui/Button.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
 
 interface CTA {
   label: string;
@@ -28,7 +29,7 @@ const {
 
 <section class:list={['hero', `hero--${variante}`]}>
   <div class="hero__corps">
-    {eyebrow && <p class="hero__eyebrow">{eyebrow}</p>}
+    {eyebrow && <Eyebrow text={eyebrow} />}
     <h1>{titre}</h1>
     {sousLignes.map((ligne) => <p class="hero__sous-ligne" set:html={ligne} />)}
     {signature && <p class="hero__signature">{signature}</p>}
@@ -70,14 +71,6 @@ const {
   }
   .hero h1 {
     margin-bottom: 0.667em;
-  }
-  .hero__eyebrow {
-    font-family: var(--f-mono);
-    font-size: var(--t-label-size);
-    letter-spacing: var(--t-label-ls);
-    text-transform: uppercase;
-    color: var(--c-label);
-    margin: 0 0 1rem;
   }
   .hero__sous-ligne {
     max-width: 34rem;
