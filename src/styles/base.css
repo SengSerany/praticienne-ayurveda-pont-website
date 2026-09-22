@@ -137,6 +137,20 @@ blockquote {
   color: var(--c-terre);
 }
 
+/* Grille de cartes, un titre et un paragraphe par cellule. L'espacement entre
+   les cellules appartient au gap, jamais a la marge du dernier paragraphe : une
+   marge d'element de grille ne se fond pas avec son conteneur, elle poussait
+   donc le bas des sections. Le gap vertical reprend exactement l'espace
+   qu'apportait cette marge, le rendu des rangees reste identique. */
+.grille-cartes {
+  display: grid;
+  gap: calc(1.5rem + var(--rythme-para)) 1.5rem;
+}
+
+.grille-cartes > * > :last-child {
+  margin-block-end: 0;
+}
+
 a {
   color: var(--c-brun-reliure);
   text-decoration-thickness: 1px;
