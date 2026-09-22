@@ -1,35 +1,122 @@
 ---
 import Eyebrow from '../ui/Eyebrow.astro';
+import { surtitreDeSection } from '../../lib/manuel';
 
 interface Props {
+  numero?: string;
   eyebrow?: string;
   titre: string;
 }
-const { eyebrow, titre } = Astro.props;
+const { numero, eyebrow, titre } = Astro.props;
+const surtitre = eyebrow ? surtitreDeSection(eyebrow, numero) : undefined;
+const avecOuverture = Astro.slots.has('ouverture');
+const avecRegard = Astro.slots.has('regard');
 ---
 
-<section class="pont">
-  {eyebrow && <Eyebrow text={eyebrow} />}
-  <h2>{titre}</h2>
-  <div class="pont__media">
-    <slot name="media" />
-  </div>
+<section class:list={['pont', { 'pont--double-page': avecOuverture || avecRegard }]}>
+  <header class="pont__tete">
+    {surtitre && <Eyebrow text={surtitre} />}
+    <h2>{titre}</h2>
+  </header>
+  {
+    avecOuverture && (
+      <div class="pont__ouverture">
+        <slot name="ouverture" />
+      </div>
+    )
+  }
+  {
+    avecRegard && (
+      <div class="pont__regard">
+        <slot name="regard" />
+      </div>
+    )
+  }
   <div class="pont__corps">
     <slot />
   </div>
 </section>
 
 <style>
+  /* Sur la couverture, le brun des liens tient 3.97:1 et le gris 3.07:1, sous
+     le seuil de 4.5:1 : liens et mentions passent a l'encre, comme le surtitre.
+     La reglure claire du papier y disparait, elle prend le brun de reliure. */
   .pont {
-    background-color: var(--c-couverture);
     --c-label: var(--c-encre);
+    --c-muted: color-mix(in oklch, var(--c-encre) 80%, var(--c-couverture));
+    --c-filet: var(--c-brun-reliure);
+    background-color: var(--c-couverture);
     color: var(--c-encre);
-    padding: var(--espace-section) clamp(1.5rem, 5vw, 4rem);
+    padding: var(--espace-section) var(--marge-page);
   }
   .pont h2 {
     max-width: 30rem;
   }
-  .pont__media:empty {
-    display: none;
+  .pont__corps {
+    max-width: var(--rythme-colonne);
+  }
+  /* Le contenu arrive des pages, hors du scope du composant, d'ou le global. */
+  .pont__corps > :global(:last-child) {
+    margin-block-end: 0;
+  }
+  .pont__ouverture,
+  .pont__regard {
+    display: grid;
+    gap: 2.5rem;
+    max-width: var(--rythme-colonne);
+  }
+  .pont__ouverture {
+    margin-block-end: 2.5rem;
+  }
+  .pont__regard {
+    margin-block-end: 3rem;
+  }
+  /* Photo et schema prennent la meme largeur, celle de la page qui les porte. */
+  .pont__regard :global(.schema svg) {
+    width: 100%;
+  }
+  .pont :global(a) {
+    color: var(--c-encre);
+    text-decoration-color: var(--c-brun-reliure);
+  }
+  .pont :global(a:hover) {
+    color: var(--c-brun-reliure);
+  }
+
+  /* Double page : la planche d'ouverture en grand sur toute la largeur, puis le
+     texte sur la page de gauche, a la mesure de la colonne du site, et la
+     planche en regard sur la page de droite. Le texte prend sa mesure en
+     priorite, la page de droite le reste, plafonnee a 34rem. En dessous de
+     64rem, tout revient sur une seule colonne. */
+  @media (min-width: 64rem) {
+    .pont--double-page {
+      --gouttiere: clamp(3rem, 6vw, 6rem);
+      display: grid;
+      grid-template-columns:
+        minmax(min(var(--rythme-colonne), 100% - 20rem - var(--gouttiere)), var(--rythme-colonne))
+        minmax(20rem, 34rem);
+      grid-template-areas:
+        'tete tete'
+        'ouverture ouverture'
+        'corps regard';
+      column-gap: var(--gouttiere);
+      align-items: start;
+    }
+    .pont--double-page .pont__tete {
+      grid-area: tete;
+    }
+    .pont--double-page .pont__ouverture {
+      grid-area: ouverture;
+      max-width: none;
+      margin-block-end: clamp(3rem, 5vw, 4.5rem);
+    }
+    .pont--double-page .pont__corps {
+      grid-area: corps;
+    }
+    .pont--double-page .pont__regard {
+      grid-area: regard;
+      max-width: none;
+      margin-block-end: 0;
+    }
   }
 </style>

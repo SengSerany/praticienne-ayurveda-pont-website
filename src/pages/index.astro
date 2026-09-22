@@ -102,18 +102,18 @@ const description =
   </SectionEditoriale>
 
   <Pont
+    numero="03"
     eyebrow="LE PONT ENTRE DEUX MONDES"
     titre="La rigueur du laboratoire, la patience d'une sagesse millénaire."
   >
-    <div slot="media" class="pont-visuels">
-      <Photo ref="PHOTO-02" src="/photo-02.webp" alt="Herbier et laboratoire" />
-      <Schema
-        ref="SCHEMA-04"
-        src="/schema-04.svg"
-        alt="Le cycle, la digestion, le système nerveux et le foie reliés entre eux"
-        legende="Trait plein, lien direct entre deux systèmes voisins. Trait tireté, lien indirect."
-      />
-    </div>
+    <Photo slot="ouverture" ref="PHOTO-02" src="/photo-02.webp" alt="Herbier et laboratoire" />
+    <Schema
+      slot="regard"
+      ref="SCHEMA-04"
+      src="/schema-04.svg"
+      alt="Le cycle, la digestion, le système nerveux et le foie reliés entre eux"
+      legende="Trait plein, lien direct entre deux systèmes voisins. Trait tireté, lien indirect."
+    />
     <p>
       J'ai derrière moi dix ans de laboratoire de référence, une formation de scientifique, faite
       d'observation patiente. Cette exigence, je ne l'ai pas laissée à la porte.
@@ -234,10 +234,6 @@ const description =
     grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
     gap: 1rem;
     margin: 1.5rem 0;
-  }
-  .pont-visuels {
-    display: grid;
-    gap: 1rem;
   }
   .vignettes {
     margin: 1.5rem 0;

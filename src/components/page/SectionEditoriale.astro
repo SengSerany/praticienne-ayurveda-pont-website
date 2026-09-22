@@ -1,5 +1,6 @@
 ---
 import Eyebrow from '../ui/Eyebrow.astro';
+import { surtitreDeSection } from '../../lib/manuel';
 
 interface Props {
   numero?: string;
@@ -7,7 +8,7 @@ interface Props {
   titre: string;
 }
 const { numero, surtitre, titre } = Astro.props;
-const eyebrow = numero ? `§ ${numero} - ${surtitre}` : surtitre;
+const eyebrow = surtitreDeSection(surtitre, numero);
 ---
 
 <section class="section-editoriale">
@@ -28,7 +29,7 @@ const eyebrow = numero ? `§ ${numero} - ${surtitre}` : surtitre;
      qui se suivent doublaient leur espacement. Une marge unique remplace les
      deux paddings qui s'empilaient, d'ou le double du palier normal. */
   .section-editoriale {
-    padding-inline: clamp(1rem, 4vw, 3rem);
+    padding-inline: var(--marge-page);
     margin-block: calc(var(--espace-section) * 2);
   }
   .section-editoriale__marge:empty {

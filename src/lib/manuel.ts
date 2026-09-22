@@ -1,3 +1,7 @@
+export function surtitreDeSection(texte: string, numero?: string): string {
+  return numero ? `§ ${numero} - ${texte}` : texte;
+}
+
 export function minutesDeLecture(texte: string, motsParMinute = 200): number {
   const mots = texte.trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.ceil(mots / motsParMinute));

@@ -1,5 +1,15 @@
 import { describe, it, expect } from 'vitest';
-import { minutesDeLecture, articlesPubliables } from './manuel';
+import { minutesDeLecture, articlesPubliables, surtitreDeSection } from './manuel';
+
+describe('surtitreDeSection', () => {
+  it('prefixe le numero de chapitre avec le signe de section et un tiret espace', () => {
+    expect(surtitreDeSection('LE PONT', '03')).toBe('§ 03 - LE PONT');
+  });
+
+  it('rend le texte seul sans numero', () => {
+    expect(surtitreDeSection('LE PONT')).toBe('LE PONT');
+  });
+});
 
 describe('minutesDeLecture', () => {
   it('retourne 1 minute minimum pour un texte vide', () => {
