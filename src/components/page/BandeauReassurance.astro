@@ -20,12 +20,33 @@ const { items } = Astro.props;
   }
 </div>
 
+<script>
+  // Chaque ruban decide pour lui-meme, ses textes variant d'une page a l'autre :
+  // un point de rupture fixe serait faux pour certains. Le ruban prend toute la
+  // largeur, donc seul le redimensionnement de la fenetre peut le faire replier.
+  const bandeaux = document.querySelectorAll<HTMLElement>('.bandeau');
+
+  const ajuster = (bandeau: HTMLElement) => {
+    bandeau.classList.remove('bandeau--empile');
+    const elements = [...bandeau.querySelectorAll<HTMLElement>('.bandeau__item')];
+    const lignes = new Set(elements.map((element) => element.offsetTop));
+    bandeau.classList.toggle('bandeau--empile', lignes.size > 1);
+  };
+
+  const ajusterTous = () => bandeaux.forEach(ajuster);
+
+  document.fonts.ready.then(ajusterTous);
+  window.addEventListener('resize', ajusterTous);
+</script>
+
 <style>
   .bandeau {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     padding: 0.75rem clamp(1rem, 4vw, 3rem);
     background-color: var(--c-papier-chaleur);
     color: var(--c-encre);
@@ -36,5 +57,14 @@ const { items } = Astro.props;
   }
   .bandeau__sep {
     color: var(--c-brun-reliure);
+  }
+  /* Replie sur plusieurs lignes, un tiret isole en bout de ligne ou seul au
+     milieu du vide n'a plus de sens : les elements s'empilent sans separateur. */
+  .bandeau--empile {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .bandeau--empile .bandeau__sep {
+    display: none;
   }
 </style>
