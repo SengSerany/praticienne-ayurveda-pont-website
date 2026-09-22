@@ -2,11 +2,7 @@
 // Les schemas sont integres en ligne et non en <img> : un SVG servi comme image
 // ne peut pas charger la police du site, ses etiquettes retomberaient sur la
 // mono systeme. Chaque fichier porte son propre title et desc.
-const schemasEnLigne = import.meta.glob<string>('/public/*.svg', {
-  query: '?raw',
-  import: 'default',
-  eager: true,
-});
+import { svgEnLigne } from '../../lib/svg';
 
 interface Props {
   ref: string;
@@ -16,7 +12,7 @@ interface Props {
 }
 const { ref, alt, src, legende } = Astro.props;
 
-const svg = src ? schemasEnLigne[`/public${src}`] : undefined;
+const svg = src ? svgEnLigne(src) : undefined;
 ---
 
 <figure class="schema">
