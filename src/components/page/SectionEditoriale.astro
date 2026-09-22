@@ -22,8 +22,14 @@ const eyebrow = numero ? `§ ${numero} - ${surtitre}` : surtitre;
 </section>
 
 <style>
+  /* Marge et non padding : les marges de deux sections voisines se recouvrent
+     au lieu de s'additionner, et absorbent celle du dernier paragraphe. En
+     padding, une section etait plus aeree en bas qu'en haut, et deux sections
+     qui se suivent doublaient leur espacement. Une marge unique remplace les
+     deux paddings qui s'empilaient, d'ou le double du palier normal. */
   .section-editoriale {
-    padding: var(--espace-section-ample) clamp(1rem, 4vw, 3rem);
+    padding-inline: clamp(1rem, 4vw, 3rem);
+    margin-block: calc(var(--espace-section) * 2);
   }
   .section-editoriale__marge:empty {
     display: none;
