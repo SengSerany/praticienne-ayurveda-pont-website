@@ -1,17 +1,29 @@
 ---
+// Integree en ligne et non en <img> : un SVG servi comme image ne voit pas la
+// couleur de la page, son trait ne pourrait pas suivre currentColor. Chaque
+// fichier porte son propre title, qui tient lieu de texte alternatif.
+import { svgEnLigne } from '../../lib/svg';
+
 interface Props {
   ref: string;
   alt: string;
-  src?: string;
+  decoratif?: boolean;
 }
-const { ref, alt, src } = Astro.props;
+const { ref, alt, decoratif = false } = Astro.props;
+// La reference sert de nom de fichier, en minuscules (direction visuelle, section 8).
+const svg = svgEnLigne(`/${ref.toLowerCase()}.svg`);
 ---
 
 {
-  src ? (
-    <img class="illustration" src={src} alt={alt} />
+  svg ? (
+    <div class="illustration" aria-hidden={decoratif ? 'true' : undefined} set:html={svg} />
   ) : (
-    <div class="illustration-placeholder" role="img" aria-label={alt}>
+    <div
+      class="illustration-placeholder"
+      role={decoratif ? undefined : 'img'}
+      aria-label={decoratif ? undefined : alt}
+      aria-hidden={decoratif ? 'true' : undefined}
+    >
       <svg width="40" height="56" viewBox="0 0 40 56" fill="none" aria-hidden="true">
         <path
           d="M20 54 L20 20 M20 28 C12 24 8 16 8 8 C16 10 20 16 20 24 M20 28 C28 24 32 16 32 8 C24 10 20 16 20 24"
@@ -27,7 +39,14 @@ const { ref, alt, src } = Astro.props;
 
 <style>
   .illustration {
-    max-width: 100%;
+    width: var(--illustration-largeur, 7.5rem);
+    margin-block-end: 1.25rem;
+    color: var(--c-sauge);
+  }
+  .illustration :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
   }
   .illustration-placeholder {
     display: flex;

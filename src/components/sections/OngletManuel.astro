@@ -18,7 +18,11 @@ const Tag = aVenir ? 'div' : 'a';
   href={aVenir ? undefined : href}
 >
   <span class="onglet__languette"></span>
-  {illustrationRef && <Illustration ref={illustrationRef} alt={`Illustration ${titre}`} />}
+  {
+    illustrationRef && (
+      <Illustration ref={illustrationRef} alt={`Illustration ${titre}`} decoratif />
+    )
+  }
   <h4>{titre}</h4>
   <p>{resume}</p>
   {aVenir && <span class="onglet__badge">À venir</span>}
