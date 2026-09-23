@@ -6,14 +6,24 @@ interface Props {
   numero?: string;
   surtitre: string;
   titre: string;
+  // Place le media de marge en regard du texte, a droite par defaut.
+  media?: 'droite' | 'gauche';
 }
-const { numero, surtitre, titre } = Astro.props;
+const { numero, surtitre, titre, media } = Astro.props;
 const eyebrow = surtitreDeSection(surtitre, numero);
 ---
 
-<section class="section-editoriale">
-  <Eyebrow text={eyebrow} />
-  <h2>{titre}</h2>
+<section
+  class:list={[
+    'section-editoriale',
+    media && 'section-editoriale--regard',
+    media === 'gauche' && 'section-editoriale--regard-gauche',
+  ]}
+>
+  <header class="section-editoriale__tete">
+    <Eyebrow text={eyebrow} />
+    <h2>{titre}</h2>
+  </header>
   <div class="section-editoriale__corps">
     <slot />
   </div>
@@ -40,5 +50,46 @@ const eyebrow = surtitreDeSection(surtitre, numero);
   }
   .section-editoriale__marge:empty {
     display: none;
+  }
+
+  /* Media en regard : le titre tient toute la largeur, puis le texte et le
+     media se font face sous lui, comme la double page du Pont. Le texte garde
+     sa mesure en priorite, le media prend le reste. En dessous de 64rem, tout
+     revient sur une seule colonne et le media repasse sous le texte. */
+  @media (min-width: 64rem) {
+    .section-editoriale--regard {
+      --gouttiere: clamp(3rem, 6vw, 6rem);
+      display: grid;
+      grid-template-columns:
+        minmax(min(var(--rythme-colonne), 100% - 20rem - var(--gouttiere)), var(--rythme-colonne))
+        minmax(20rem, 34rem);
+      grid-template-areas:
+        'tete tete'
+        'corps marge';
+      column-gap: var(--gouttiere);
+      align-items: start;
+    }
+    .section-editoriale--regard-gauche {
+      grid-template-columns:
+        minmax(20rem, 34rem)
+        minmax(min(var(--rythme-colonne), 100% - 20rem - var(--gouttiere)), var(--rythme-colonne));
+      grid-template-areas:
+        'tete tete'
+        'marge corps';
+    }
+    .section-editoriale--regard .section-editoriale__tete {
+      grid-area: tete;
+    }
+    .section-editoriale--regard .section-editoriale__corps {
+      grid-area: corps;
+    }
+    .section-editoriale--regard .section-editoriale__marge {
+      grid-area: marge;
+      margin-block-start: 0;
+    }
+    /* Le schema prend la largeur de sa colonne, comme sur la page de droite du Pont. */
+    .section-editoriale--regard .section-editoriale__marge :global(.schema svg) {
+      width: 100%;
+    }
   }
 </style>
