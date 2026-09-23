@@ -145,6 +145,7 @@ blockquote {
 .grille-cartes {
   display: grid;
   gap: calc(1.5rem + var(--rythme-para)) 1.5rem;
+  margin-block: clamp(2rem, 4vw, 3rem);
 }
 
 .grille-cartes > * > :last-child {
