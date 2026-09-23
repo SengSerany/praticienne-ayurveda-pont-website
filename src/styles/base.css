@@ -204,6 +204,16 @@ blockquote {
   grid-column: 2;
 }
 
+/* Note de bas de chapitre : un filet la detache du texte qui precede, au meme
+   rythme que l'exergue, le gros bloc au-dessus du filet, le petit texte en
+   dessous. Meme respiration partout ou ce motif revient. */
+.note-chapitre {
+  margin-block-start: 3.75rem;
+  padding-block-start: 2.625rem;
+  border-block-start: 1px solid var(--c-filet);
+  color: var(--c-muted);
+}
+
 /* Un seul vocabulaire de bouton pour les liens d'appel a l'action et pour les
    envois de formulaire, qui sont des <button> et n'heritaient pas du composant. */
 .button {
