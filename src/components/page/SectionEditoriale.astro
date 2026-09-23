@@ -32,6 +32,12 @@ const eyebrow = surtitreDeSection(surtitre, numero);
     padding-inline: var(--marge-page);
     margin-block: calc(var(--espace-section) * 2);
   }
+  /* Le media de marge se detache du texte : le double du rythme de paragraphe,
+     la ou il n'heritait que de la marge basse du dernier paragraphe. L'exergue,
+     qui porte deja sa propre respiration, garde la sienne. */
+  .section-editoriale__marge {
+    margin-block-start: calc(var(--rythme-para) * 2);
+  }
   .section-editoriale__marge:empty {
     display: none;
   }
