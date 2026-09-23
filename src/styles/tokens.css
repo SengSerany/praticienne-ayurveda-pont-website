@@ -112,6 +112,9 @@
   /* Retrait lateral commun a toutes les sections pleine largeur : le bord du
      texte reste a la meme place d'une section a l'autre, comme dans un livre. */
   --marge-page: clamp(1rem, 4vw, 3rem);
+  /* Arrondie au pixel : les filets fins qui en dependent tombent alors sur un
+     pixel plein, au lieu d'etre etales sur deux a certaines largeurs. */
+  --marge-page: round(clamp(1rem, 4vw, 3rem), 1px);
   --rythme-para: 1.5em;
   --espace-section-serre: clamp(2.25rem, 5vw, 3.5rem);
   --espace-section: clamp(3rem, 8vw, 6rem);
