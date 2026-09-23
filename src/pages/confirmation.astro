@@ -23,20 +23,20 @@ const description = 'Votre message est bien arrivé.';
     surtitre="CE QUI SE PASSE MAINTENANT"
     titre="La suite, en trois temps."
   >
-    <div class="grille-cartes temps">
+    <div class="grille-cartes grille-cartes--numerotee temps">
       <div>
-        <h4>1. Je vous lis.</h4>
+        <h4>Je vous lis.</h4>
         <p>Dans les jours qui viennent, je prends le temps de lire votre message attentivement.</p>
       </div>
       <div>
-        <h4>2. Je vous réponds.</h4>
+        <h4>Je vous réponds.</h4>
         <p>
           Sous 48 heures ouvrées, je vous réponds personnellement et je vous propose des créneaux
           pour notre échange.
         </p>
       </div>
       <div>
-        <h4>3. On se parle.</h4>
+        <h4>On se parle.</h4>
         <p>
           Trente minutes, posément et sans engagement. Le temps de poser l'essentiel, sans être
           bousculée.
@@ -71,13 +71,13 @@ const description = 'Votre message est bien arrivé.';
     text-transform: uppercase;
     color: var(--c-brun-reliure);
   }
+  .temps {
+    --folio-style: decimal;
+  }
   @media (min-width: 48rem) {
     .temps {
       grid-template-columns: repeat(3, 1fr);
     }
-  }
-  .temps h4 {
-    margin-bottom: 0.25rem;
   }
   .conf-spam {
     font-family: var(--f-mono);
