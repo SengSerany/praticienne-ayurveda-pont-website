@@ -116,30 +116,30 @@ const personJsonLd = buildPersonJsonLd({
     surtitre="MES CONVICTIONS"
     titre="Quatre convictions qui guident tout ce que je fais."
   >
-    <div class="grille-cartes convictions">
+    <div class="grille-cartes grille-cartes--numerotee convictions">
       <div>
-        <h4>I. La cause prime.</h4>
+        <h4>La cause prime.</h4>
         <p>
           On peut soulager un symptôme sans jamais le comprendre. Je préfère l'inverse : remonter à
           la cause, même quand c'est plus long. La cause avant le symptôme, toujours.
         </p>
       </div>
       <div>
-        <h4>II. Le simple n'est pas le faux.</h4>
+        <h4>Le simple n'est pas le faux.</h4>
         <p>
           Un conseil peut paraître modeste et changer beaucoup de choses. Ce n'est pas parce qu'un
           geste est simple qu'il est sans effet, souvent, c'est même le contraire.
         </p>
       </div>
       <div>
-        <h4>III. L'écoute est l'instrument.</h4>
+        <h4>L'écoute est l'instrument.</h4>
         <p>
           On ne dit la vérité de son corps que lorsqu'on ne se sent pas jugée. Mon premier outil
           n'est pas une plante : c'est le temps, et l'attention.
         </p>
       </div>
       <div>
-        <h4>IV. L'autonomie est le but.</h4>
+        <h4>L'autonomie est le but.</h4>
         <p>
           Mon métier n'est pas de vous rendre dépendante de moi. C'est de vous apprendre à lire
           votre corps, pour qu'un jour, vous n'ayez plus besoin de moi.
@@ -187,9 +187,6 @@ const personJsonLd = buildPersonJsonLd({
     .convictions {
       grid-template-columns: 1fr 1fr;
     }
-  }
-  .convictions h4 {
-    margin-bottom: 0.25rem;
   }
   .note-lancement {
     color: var(--c-muted);

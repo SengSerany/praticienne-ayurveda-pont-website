@@ -152,6 +152,58 @@ blockquote {
   margin-block-end: 0;
 }
 
+/* Chaque entree est tenue par sa reglure, comme une entree de manuel, avec la
+   languette des onglets posee dessus. */
+.grille-cartes > * {
+  position: relative;
+  padding-block-start: 1.25rem;
+  border-block-start: 1px solid var(--c-filet-fort);
+}
+
+.grille-cartes > *::after {
+  content: '';
+  position: absolute;
+  inset-block-start: -2px;
+  inset-inline-start: 0;
+  width: 2.5rem;
+  height: 3px;
+  background-color: var(--c-couverture);
+}
+
+.grille-cartes h4 {
+  margin-block-end: 0.35rem;
+}
+
+/* Serie numerotee : le chiffre du chapitre est decale dans la marge, jamais
+   dans le titre. Le style du compteur se choisit par --folio-style, chiffres
+   romains par defaut. */
+.grille-cartes--numerotee {
+  counter-reset: entree-numerotee;
+  --folio-style: upper-roman;
+}
+
+.grille-cartes--numerotee > * {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  align-items: baseline;
+  counter-increment: entree-numerotee;
+}
+
+.grille-cartes--numerotee > *::before {
+  content: counter(entree-numerotee, var(--folio-style));
+  grid-column: 1;
+  grid-row: 1;
+  font-family: var(--f-display);
+  font-size: clamp(1.5rem, 1rem + 1.4vw, 2rem);
+  font-variation-settings: var(--t-h4-fvs);
+  line-height: 1;
+  color: var(--c-terre);
+}
+
+.grille-cartes--numerotee > * > * {
+  grid-column: 2;
+}
+
 a {
   color: var(--c-brun-reliure);
   text-decoration-thickness: 1px;
