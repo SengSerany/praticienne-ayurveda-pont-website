@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 36 560 412" width="560" height="412" role="img" aria-labelledby="schema-03-titre schema-03-desc">
+  <title id="schema-03-titre">Le pansement face à la cause</title>
+  <desc id="schema-03-desc">Dessin en deux temps. Le pansement, en bas, agit sur le symptôme, et une flèche ramène du symptôme au pansement : la boucle recommence, la cause reste intacte. Au-dessus, un autre chemin repart du symptôme et remonte jusqu'à la cause, à gauche, qui est ce qui produit le symptôme.</desc>
+
+  <g fill="none" stroke="var(--c-encre, #2d2a26)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="45" y="157" width="120" height="66" rx="10"/>
+    <circle cx="410" cy="190" r="45"/>
+    <rect x="312" y="332" width="172" height="64" rx="10"/>
+  </g>
+
+  <g fill="none" stroke="var(--c-encre, #2d2a26)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M177 190L353 190M353 190L343.1 185.2M353 190L343.1 194.8"/>
+  </g>
+
+  <g fill="none" stroke="var(--c-encre, #2d2a26)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M373.9 148.5Q245 82 111 145M111 145L122 145.2M111 145L117.9 136.4"/>
+  </g>
+
+  <g fill="none" stroke="var(--c-terre, #8f5d4e)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M352 322Q330 288 390.3 241.3M390.3 241.3L379.5 243.6M390.3 241.3L385.4 251.2"/>
+    <path d="M439.1 236.6Q492 284 462 322" stroke-dasharray="2 3"/>
+    <path d="M462 322L471.9 317.2M462 322L464.3 311.3"/>
+  </g>
+
+  <g fill="var(--c-encre, #2d2a26)" font-family="var(--f-mono, JetBrains Mono, monospace)" font-size="20" letter-spacing="4.4" text-anchor="middle">
+    <text x="245" y="58">REMONTER</text>
+    <text x="105" y="256">CAUSE</text>
+    <text x="410" y="121">SYMPTÔME</text>
+    <text x="398" y="430">PANSEMENT</text>
+  </g>
+</svg>
