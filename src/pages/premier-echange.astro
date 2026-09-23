@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icone from '../components/ui/Icone.astro';
 import Hero from '../components/page/Hero.astro';
 import SectionEditoriale from '../components/page/SectionEditoriale.astro';
 import BandeauReassurance from '../components/page/BandeauReassurance.astro';
@@ -29,8 +30,9 @@ const description =
     surtitre="CE QUI SE PASSE PENDANT L'APPEL"
     titre="Trente minutes, pour vous, sans rien à prouver."
   >
-    <div class="grille-cartes points">
+    <div class="grille-cartes grille-cartes--encadres points">
       <div>
+        <Icone nom="horloge" />
         <h4>Trente minutes, rien que pour vous.</h4>
         <p>
           On prend le temps, sans se presser. Vous racontez ce que vous vivez, à votre rythme. Je
@@ -38,6 +40,7 @@ const description =
         </p>
       </div>
       <div>
+        <Icone nom="signet" />
         <h4>Sans engagement.</h4>
         <p>
           Repartir sans suite est une réponse parfaitement acceptable. Vous ne signez rien, vous ne
@@ -45,6 +48,7 @@ const description =
         </p>
       </div>
       <div>
+        <Icone nom="boussole" />
         <h4>Écoutée, et orientée honnêtement.</h4>
         <p>
           À la fin, je vous dis ce que je pense pouvoir faire pour vous, et ce qui relève plutôt
@@ -124,6 +128,12 @@ const description =
   @media (min-width: 48rem) {
     .points {
       grid-template-columns: repeat(3, 1fr);
+      /* Colonnes en pixels entiers : avec la gouttiere, le pas devient entier et
+         les deux filets tombent au meme endroit du pixel. */
+      grid-template-columns: repeat(
+        3,
+        round(down, calc((100% - 2 * var(--gouttiere-encadre)) / 3), 1px)
+      );
     }
   }
   .pour-qui {

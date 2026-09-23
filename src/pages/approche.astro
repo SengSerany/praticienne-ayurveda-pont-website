@@ -4,6 +4,7 @@ import Hero from '../components/page/Hero.astro';
 import SectionEditoriale from '../components/page/SectionEditoriale.astro';
 import Photo from '../components/ui/Photo.astro';
 import Schema from '../components/ui/Schema.astro';
+import Icone from '../components/ui/Icone.astro';
 import Pont from '../components/sections/Pont.astro';
 import OngletManuel from '../components/sections/OngletManuel.astro';
 import Seuil from '../components/sections/Seuil.astro';
@@ -144,8 +145,9 @@ const portes = [
     surtitre="CE QUE CE N'EST PAS"
     titre="Ce que cette approche n'est pas, et que je préfère dire."
   >
-    <div class="grille-cartes exclusions">
+    <div class="grille-cartes grille-cartes--encadres exclusions">
       <div>
+        <Icone nom="fiole" />
         <h4>Ce n'est pas une pharmacie de plantes miracles.</h4>
         <p>
           Je ne remplace pas un médicament par une plante censée tout régler. Une plante n'a de sens
@@ -153,6 +155,7 @@ const portes = [
         </p>
       </div>
       <div>
+        <Icone nom="bol" />
         <h4>Ce n'est pas un contrôle alimentaire.</h4>
         <p>
           Vous n'avez besoin ni d'un régime de plus, ni d'une nouvelle liste d'interdits.
@@ -160,6 +163,7 @@ const portes = [
         </p>
       </div>
       <div>
+        <Icone nom="pont" />
         <h4>Ce n'est pas une rupture avec votre médecine.</h4>
         <p>
           Je travaille en complément de votre médecin et de votre gynécologue, jamais contre eux.
@@ -189,6 +193,15 @@ const portes = [
   @media (min-width: 48rem) {
     .principes {
       grid-template-columns: 1fr 1fr;
+    }
+    .exclusions {
+      grid-template-columns: repeat(3, 1fr);
+      /* Colonnes en pixels entiers : avec la gouttiere, le pas devient entier et
+         les deux filets tombent au meme endroit du pixel. */
+      grid-template-columns: repeat(
+        3,
+        round(down, calc((100% - 2 * var(--gouttiere-encadre)) / 3), 1px)
+      );
     }
   }
   .portes {
