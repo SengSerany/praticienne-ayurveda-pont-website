@@ -125,5 +125,16 @@ const webPageJsonLd = buildWebPageJsonLd({
     font-size: var(--t-small-size);
     color: var(--c-brun-reliure);
     margin-top: 2rem;
+    margin-bottom: 0;
+  }
+  /* Par exception, la section de la lettre se centre autour de sa boite, deja
+     centree sur la page. */
+  .garde-fil > :global(.eyebrow),
+  .garde-fil > h2,
+  .garde-fil > .microcopy {
+    text-align: center;
+  }
+  .garde-fil > .microcopy {
+    margin-inline: auto;
   }
 </style>

@@ -44,4 +44,11 @@ const { title, description, noindex, masquerCtaPrincipal = false } = Astro.props
   .page {
     padding: var(--espace-section) clamp(1rem, 4vw, 3rem);
   }
+  /* Le rembourrage du main et la marge du pied de page font seuls l'ecart avant
+     le pied de page. La marge du dernier bloc ne traverse pas ce rembourrage :
+     elle s'y ajoutait, et les pages finissant sur papier avaient 120 a 192 px de
+     trop par rapport a celles qui finissent sur le Seuil. */
+  .page > :global(:last-child) {
+    margin-block-end: 0;
+  }
 </style>
