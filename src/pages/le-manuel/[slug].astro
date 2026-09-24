@@ -43,7 +43,7 @@ const articleJsonLd = buildArticleJsonLd({
 >
   <script type="application/ld+json" set:html={articleJsonLd} is:inline />
 
-  {article.data.brouillon && <p class="brouillon">Brouillon - a valider</p>}
+  {article.data.brouillon && <p class="brouillon">Brouillon - à valider</p>}
 
   <article class="chapitre">
     <p class="chapitre__entete">
@@ -69,7 +69,7 @@ const articleJsonLd = buildArticleJsonLd({
 
     <nav class="maillage" aria-label="Pour continuer">
       <a href="/le-manuel">Retour au manuel</a>
-      {condition && <a href={condition.href}>Lire la page dediee, {condition.titre}</a>}
+      {condition && <a href={condition.href}>Lire la page dédiée, {condition.titre}</a>}
     </nav>
 
     <BlocLettre titre={manuelMeta.lettre.titre} promesse={manuelMeta.lettre.promesse} />
@@ -77,7 +77,7 @@ const articleJsonLd = buildArticleJsonLd({
 
     <p class="doux">
       Envie d'en parler ensemble ?
-      <Button href="/premier-echange" label="Premier echange" variant="outline" />
+      <Button href="/premier-echange" label="Premier échange" variant="outline" />
     </p>
 
     <p class="signature">{SITE.nom} - {SITE.baseline}</p>
@@ -93,10 +93,39 @@ const articleJsonLd = buildArticleJsonLd({
     color: var(--c-terre);
     border: 1px dashed var(--c-terre);
     padding: 0.5rem 1rem;
-    display: inline-block;
+    display: table;
+    margin-inline: auto;
   }
+
+  /* Le chapitre se lit au centre de la page. Sur laptop, sa colonne prend 60 %
+     de la largeur de l'ecran, jamais moins que la colonne de lecture des
+     tablettes, plafonnee a 60rem sur grand ecran ou les lignes deviendraient
+     trop longues. Le corps reste aligne a gauche pour la lecture ; l'en-tete,
+     l'illustration, la citation et la fin du chapitre se centrent. */
   .chapitre {
     max-width: var(--rythme-colonne);
+    margin-inline: auto;
+  }
+  @media (min-width: 64rem) {
+    .chapitre {
+      width: clamp(var(--rythme-colonne), 60vw, 60rem);
+      max-width: none;
+    }
+  }
+  .chapitre :global(p) {
+    max-width: none;
+  }
+  .chapitre__entete,
+  .chapitre h1,
+  .chapitre__chapo,
+  .microcopy,
+  .doux,
+  .signature {
+    text-align: center;
+  }
+  .chapitre > :global(.illustration),
+  .chapitre > :global(.illustration-placeholder) {
+    margin-inline: auto;
   }
   .chapitre__entete {
     font-family: var(--f-mono);
@@ -112,18 +141,16 @@ const articleJsonLd = buildArticleJsonLd({
     line-height: var(--t-lead-lh);
     color: var(--c-encre);
   }
-  .prose :global(p) {
-    max-width: var(--rythme-colonne);
-  }
   .prose :global(em) {
     font-style: italic;
   }
   .prose :global(blockquote) {
-    margin: var(--espace-section-ample) 0;
+    margin: var(--espace-section-ample) auto;
   }
   .maillage {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 1.25rem;
     margin: var(--espace-section) 0 1.5rem;
     font-family: var(--f-mono);
