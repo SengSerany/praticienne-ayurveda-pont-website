@@ -1,48 +1,154 @@
 ---
+// Un point se lit d'un coup d'oeil par son titre ; le detail reste visible
+// dessous pour qui veut la nuance. Une phrase seule reste possible.
+type Point = string | { titre: string; detail?: string };
+
 interface Props {
-  titre?: string;
-  cest: string[];
-  cestPas: string[];
+  cest: Point[];
+  cestPas: Point[];
+  // Intitules des deux colonnes, a accorder au titre de la section qui les porte.
+  labelCest?: string;
+  labelCestPas?: string;
 }
-const { titre, cest, cestPas } = Astro.props;
+const {
+  cest,
+  cestPas,
+  labelCest = "Ce que c'est",
+  labelCestPas = "Ce que ce n'est pas",
+} = Astro.props;
+
+const colonnes = [
+  { variante: 'pratfall__colonne--est', label: labelCest, points: cest },
+  { variante: 'pratfall__colonne--pas', label: labelCestPas, points: cestPas },
+];
 ---
 
-<section class="pratfall">
-  {titre && <h2>{titre}</h2>}
-  <div class="pratfall__colonnes">
-    <ul class="pratfall__col">
-      {cest.map((item) => <li>{item}</li>)}
-    </ul>
-    <ul class="pratfall__col pratfall__col--pas">
-      {cestPas.map((item) => <li>{item}</li>)}
-    </ul>
-  </div>
-</section>
+<div class="pratfall">
+  {
+    colonnes.map((colonne) => (
+      <div class:list={['pratfall__colonne', colonne.variante]}>
+        <h3 class="pratfall__label">{colonne.label}</h3>
+        <ul>
+          {colonne.points.map((point) =>
+            typeof point === 'string' ? (
+              <li>{point}</li>
+            ) : (
+              <li class="pratfall__point--titre">
+                <span class="pratfall__titre">{point.titre}</span>
+                {point.detail && <span class="pratfall__detail">{point.detail}</span>}
+              </li>
+            ),
+          )}
+        </ul>
+      </div>
+    ))
+  }
+</div>
 
 <style>
+  /* Deux colonnes de manuel, sans cadre : un intitule pose sur sa reglure,
+     puis des entrees separees par des filets, comme les lignes d'un sommaire.
+     Ce que l'accompagnement ne fait pas reste a l'encre : c'est un engagement,
+     pas une note de bas de page. */
   .pratfall {
-    padding: var(--espace-section-serre) clamp(1.5rem, 5vw, 4rem);
-  }
-  .pratfall__colonnes {
+    --pratfall-titre-taille: 1.1875rem;
+    --pratfall-titre-interligne: 1.3;
     display: grid;
-    gap: 2rem;
-    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    margin-block: clamp(2rem, 4vw, 3rem);
   }
   @media (min-width: 48rem) {
-    .pratfall__colonnes {
-      grid-template-columns: 1fr 1fr;
+    .pratfall {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
-  .pratfall__col {
+
+  .pratfall__label {
+    position: relative;
+    margin: 0;
+    padding-block-end: 1rem;
+    border-block-end: 1px solid var(--c-filet-fort);
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    font-weight: var(--t-label-weight);
+    font-style: normal;
+    font-variation-settings: normal;
+    line-height: var(--t-label-lh);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    text-wrap: pretty;
+    color: var(--c-label);
+  }
+  /* La languette des onglets, posee sur la reglure, comme sur les entrees du manuel. */
+  .pratfall__label::after {
+    content: '';
+    position: absolute;
+    inset-block-end: -2px;
+    inset-inline-start: 0;
+    width: 2.5rem;
+    height: 3px;
+    background-color: var(--c-couverture);
+  }
+
+  .pratfall ul {
     list-style: none;
     margin: 0;
-    padding: 1.5rem;
-    border: 1px solid var(--c-brun-reliure);
+    padding: 0;
   }
-  .pratfall__col li {
-    margin-bottom: 0.75rem;
+  .pratfall li {
+    position: relative;
+    padding-block: 1rem;
+    padding-inline-start: 1.75rem;
+    border-block-end: 1px solid var(--c-filet);
   }
-  .pratfall__col--pas {
+  .pratfall li:last-child {
+    padding-block-end: 0;
+    border-block-end: 0;
+  }
+
+  /* Deux reperes de forme differente, pour que le sens ne tienne pas a la
+     seule couleur : la feuille en losange de l'ornement du site pour ce qui
+     est, un trait pour ce qui n'est pas. Centres sur la premiere ligne. */
+  .pratfall li::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0.125rem;
+    inset-block-start: calc(1rem + var(--t-body-lh) * 0.5em);
+  }
+  .pratfall__colonne--est li::before {
+    width: 0.4375rem;
+    height: 0.4375rem;
+    background-color: var(--c-sauge);
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .pratfall__colonne--pas li::before {
+    width: 0.75rem;
+    height: 1px;
+    background-color: var(--c-terre);
+    transform: translateY(-50%);
+  }
+
+  /* Titre a la main du manuel, detail en retrait de ton. Le repere se cale
+     alors sur la premiere ligne du titre. */
+  .pratfall__titre {
+    display: block;
+    font-family: var(--f-display);
+    font-size: var(--pratfall-titre-taille);
+    font-variation-settings: var(--t-h4-fvs);
+    line-height: var(--pratfall-titre-interligne);
+    text-wrap: balance;
+  }
+  .pratfall__detail {
+    display: block;
+    margin-block-start: 0.375rem;
+    font-size: var(--t-small-size);
+    line-height: var(--t-small-lh);
+    text-wrap: pretty;
     color: var(--c-muted);
+  }
+  .pratfall li.pratfall__point--titre::before {
+    inset-block-start: calc(
+      1rem + var(--pratfall-titre-taille) * var(--pratfall-titre-interligne) / 2
+    );
   }
 </style>

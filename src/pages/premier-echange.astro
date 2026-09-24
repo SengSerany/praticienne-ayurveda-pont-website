@@ -88,8 +88,9 @@ const description =
       Ce n'est pas une mini-consultation déguisée, ni un appel au terme duquel je vous pousserai à
       signer. Je n'ai pas de quota à remplir, je travaille avec peu de personnes, en profondeur.
     </p>
-    <p class="pour-qui">Ce premier échange est sans doute pour vous si :</p>
     <Pratfall
+      labelCest="Sans doute pour vous si"
+      labelCestPas="Sans doute pas pour vous si"
       cest={[
         'Vous voulez comprendre la cause de ce que vous vivez, pas seulement faire taire un symptôme.',
         'Vous êtes prête à mettre des choses en place, à votre rythme.',
@@ -135,8 +136,5 @@ const description =
         round(down, calc((100% - 2 * var(--gouttiere-encadre)) / 3), 1px)
       );
     }
-  }
-  .pour-qui {
-    margin-bottom: 0.5rem;
   }
 </style>
