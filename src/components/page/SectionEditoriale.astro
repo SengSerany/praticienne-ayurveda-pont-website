@@ -102,15 +102,17 @@ const eyebrow = surtitreDeSection(surtitre, numero);
 
   /* Media en regard : le titre tient toute la largeur, puis le texte et le
      media se font face sous lui, comme la double page du Pont. Le texte garde
-     sa mesure en priorite, le media prend le reste. En dessous de 64rem, tout
-     revient sur une seule colonne et le media repasse sous le texte. */
+     sa mesure en priorite, le media prend le reste, jusqu'a sa propre taille
+     et au plus 34rem : un schema compact ne laisse pas de vide entre lui et le
+     texte quand il est a gauche. En dessous de 64rem, tout revient sur une
+     seule colonne et le media repasse sous le texte. */
   @media (min-width: 64rem) {
     .section-editoriale--regard {
       --gouttiere: clamp(3rem, 6vw, 6rem);
       display: grid;
       grid-template-columns:
         minmax(min(var(--rythme-colonne), 100% - 20rem - var(--gouttiere)), var(--rythme-colonne))
-        minmax(20rem, 34rem);
+        minmax(20rem, max-content);
       grid-template-areas:
         'tete tete'
         'corps marge';
@@ -119,25 +121,25 @@ const eyebrow = surtitreDeSection(surtitre, numero);
     }
     .section-editoriale--regard-gauche {
       grid-template-columns:
-        minmax(20rem, 34rem)
+        minmax(20rem, max-content)
         minmax(min(var(--rythme-colonne), 100% - 20rem - var(--gouttiere)), var(--rythme-colonne));
       grid-template-areas:
         'tete tete'
         'marge corps';
     }
+    /* Le titre couvre les deux colonnes : sans confinement, la longueur de sa
+       ligne elargissait la colonne du media au-dela du schema. */
     .section-editoriale--regard .section-editoriale__tete {
       grid-area: tete;
+      contain: inline-size;
     }
     .section-editoriale--regard .section-editoriale__corps {
       grid-area: corps;
     }
     .section-editoriale--regard .section-editoriale__marge {
       grid-area: marge;
+      max-inline-size: 34rem;
       margin-block-start: 0;
-    }
-    /* Le schema prend la largeur de sa colonne, comme sur la page de droite du Pont. */
-    .section-editoriale--regard .section-editoriale__marge :global(.schema svg) {
-      width: 100%;
     }
   }
 </style>
