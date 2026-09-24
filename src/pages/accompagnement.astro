@@ -8,7 +8,6 @@ import Pratfall from '../components/sections/Pratfall.astro';
 import Seuil from '../components/sections/Seuil.astro';
 import Citation from '../components/ui/Citation.astro';
 import Photo from '../components/ui/Photo.astro';
-import ClauseYmyl from '../components/ui/ClauseYmyl.astro';
 
 const description =
   'Peu de clientes, suivies en profondeur. Un bilan approfondi puis une trajectoire de 3 à 6 mois, prix affichés, complémentaire de votre suivi médical. La cause avant le symptôme.';
@@ -72,9 +71,6 @@ const faq = [
       Une lecture nourrie par dix ans en laboratoire de référence (CNRGS), et complémentaire de
       votre suivi médical.
     </p>
-    <Citation
-      texte="Vous n'êtes pas venue pour être corrigée. Vous êtes venue pour être accompagnée."
-    />
   </Hero>
 
   <SectionEditoriale
@@ -139,20 +135,45 @@ const faq = [
     titre="Ce que je vous dis d'emblée, y compris ce que je ne fais pas."
   >
     <Pratfall
+      labelCest="Ce que je vous propose"
+      labelCestPas="Ce que je ne fais pas"
       cest={[
-        'Un bilan initial approfondi, une heure trente, centré sur la lecture conjointe de votre cycle, de votre digestion et de vos antécédents.',
-        "Des consultations de suivi d'une heure, espacées de trois à quatre semaines, pour ajuster ce qui doit l'être.",
-        "Un cahier d'observation que vous remplissez à votre rythme, et que je relis avant chaque séance.",
-        'Un canal de messagerie écrite pour les questions intermédiaires, avec un délai de réponse honnête : 48 heures ouvrées.',
+        {
+          titre: 'Un bilan initial approfondi',
+          detail:
+            'Une heure trente, consacrée à la lecture conjointe de votre cycle, de votre digestion et de vos antécédents.',
+        },
+        {
+          titre: 'Un suivi toutes les trois à quatre semaines',
+          detail: "Des consultations d'une heure, pour ajuster ce qui doit l'être.",
+        },
+        {
+          titre: "Un cahier d'observation",
+          detail: 'Vous le remplissez à votre rythme, je le relis avant chaque séance.',
+        },
+        {
+          titre: 'Une messagerie écrite entre les séances',
+          detail:
+            'Pour les questions intermédiaires, avec un délai de réponse honnête : 48 heures ouvrées.',
+        },
       ]}
       cestPas={[
-        "Aucune promesse de guérison. Ce que nous travaillons, c'est mieux vivre avec : apaiser l'inflammation, mieux lire les signaux de votre cycle, soutenir votre digestion.",
-        'Aucun protocole-modèle. Tout est ajusté à votre situation, et modulable.',
-        'Aucun rôle de substitution à votre médecin ou votre gynécologue.',
+        {
+          titre: 'Aucune promesse de guérison',
+          detail:
+            "Ce que nous travaillons, c'est mieux vivre avec : apaiser l'inflammation, mieux lire les signaux de votre cycle, soutenir votre digestion.",
+        },
+        {
+          titre: 'Aucun protocole-modèle',
+          detail: 'Tout est ajusté à votre situation, et modulable.',
+        },
+        {
+          titre: 'Aucun rôle de substitution',
+          detail:
+            "Ni à votre médecin, ni à votre gynécologue : je travaille à côté d'eux, jamais à leur place.",
+        },
       ]}
     />
-    <Citation texte="Mieux vivre avec, c'est déjà beaucoup." />
-    <ClauseYmyl />
   </SectionEditoriale>
 
   <SectionEditoriale
