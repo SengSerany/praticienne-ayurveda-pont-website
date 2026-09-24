@@ -43,9 +43,13 @@ const {
     }
     <div class="hero__texte"><slot /></div>
   </div>
-  <div class="hero__media">
-    <slot name="media" />
-  </div>
+  {
+    Astro.slots.has('media') && (
+      <div class="hero__media">
+        <slot name="media" />
+      </div>
+    )
+  }
 </section>
 
 <style>
@@ -66,8 +70,12 @@ const {
     --c-label: var(--c-encre);
     color: var(--c-encre);
   }
+  /* Sur papier, aucun bord ne ferme le hero : son rembourrage bas s'ajoutait a
+     la marge de la section suivante et doublait l'ecart. La marge de section
+     porte seule la respiration, comme entre deux sections. */
   .hero--papier {
     background-color: var(--c-papier);
+    padding-block-end: 0;
   }
   .hero h1 {
     margin-bottom: 0.667em;
@@ -98,13 +106,13 @@ const {
     font-style: italic;
     color: var(--c-label);
   }
-  .hero__media:empty {
-    display: none;
-  }
   .hero__texte {
     max-width: 34rem;
   }
   .hero__texte:empty {
     display: none;
+  }
+  .hero__texte > :global(:last-child) {
+    margin-block-end: 0;
   }
 </style>
