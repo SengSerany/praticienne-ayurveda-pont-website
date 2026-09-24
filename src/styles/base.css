@@ -295,6 +295,31 @@ blockquote {
   border-block-start: 0;
 }
 
+/* Note appuyee sur son illustration : l'image garde sa taille, le texte sa
+   mesure, un simple espace les separe. Jamais un partage a parts egales. En
+   mobile, l'illustration passe au-dessus du texte. */
+.note-illustree {
+  --illustration-largeur: clamp(8rem, 11vw, 10.5rem);
+  --illustration-marge: 0;
+  display: grid;
+  grid-template-columns: var(--illustration-largeur) minmax(0, var(--rythme-colonne));
+  column-gap: clamp(1.75rem, 3.5vw, 3rem);
+  align-items: center;
+}
+
+.note-illustree > .note-chapitre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+@media (max-width: 40rem) {
+  .note-illustree {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.5rem;
+  }
+}
+
 /* Un seul vocabulaire de bouton pour les liens d'appel a l'action et pour les
    envois de formulaire, qui sont des <button> et n'heritaient pas du composant. */
 .button {
