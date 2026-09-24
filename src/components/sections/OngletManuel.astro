@@ -14,7 +14,10 @@ const Tag = aVenir ? 'div' : 'a';
 ---
 
 <Tag
-  class:list={['onglet', { 'onglet--star': star, 'onglet--a-venir': aVenir }]}
+  class:list={[
+    'onglet',
+    { 'onglet--star': star, 'onglet--a-venir': aVenir, 'carte-lien': !aVenir },
+  ]}
   href={aVenir ? undefined : href}
 >
   <span class="onglet__languette"></span>
@@ -37,10 +40,6 @@ const Tag = aVenir ? 'div' : 'a';
     padding: 1.5rem;
     text-decoration: none;
     color: var(--c-encre);
-    transition: border-color 160ms ease;
-  }
-  a.onglet:hover {
-    border-color: var(--c-brun-reliure);
   }
   .onglet__languette {
     position: absolute;
@@ -52,6 +51,14 @@ const Tag = aVenir ? 'div' : 'a';
   }
   .onglet--star .onglet__languette {
     background-color: var(--c-dore);
+  }
+  /* Sauge et dore disparaissent presque sur la couverture : au survol, la
+     languette et la planche passent au brun de reliure. */
+  .onglet:is(:hover, :focus-visible) .onglet__languette {
+    background-color: var(--c-brun-reliure);
+  }
+  .onglet:is(:hover, :focus-visible) :global(.illustration) {
+    color: var(--c-brun-reliure);
   }
   .onglet--a-venir {
     opacity: 0.7;

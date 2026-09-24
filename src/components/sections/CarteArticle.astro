@@ -12,7 +12,7 @@ interface Props {
 const { titre, href, chapitre, themeLabel, minutes, brouillon = false } = Astro.props;
 ---
 
-<a class="carte-article" href={href}>
+<a class="carte-article carte-lien" href={href}>
   <p class="carte-article__meta">
     <NumeroChapitre n={chapitre} /> - {themeLabel} - {minutes} min de lecture
   </p>
@@ -31,17 +31,13 @@ const { titre, href, chapitre, themeLabel, minutes, brouillon = false } = Astro.
     padding: clamp(1.5rem, 2.5vw, 2.25rem);
     text-decoration: none;
     color: var(--c-encre);
-    transition: border-color 160ms ease;
-  }
-  .carte-article:hover {
-    border-color: var(--c-brun-reliure);
   }
   .carte-article__meta {
     font-family: var(--f-mono);
     font-size: var(--t-label-size);
     letter-spacing: var(--t-label-ls);
     text-transform: uppercase;
-    color: var(--c-brun-reliure);
+    color: var(--c-label);
     margin: 0 0 1rem;
   }
   .carte-article h3 {
@@ -56,5 +52,9 @@ const { titre, href, chapitre, themeLabel, minutes, brouillon = false } = Astro.
     letter-spacing: var(--t-label-ls);
     text-transform: uppercase;
     color: var(--c-terre);
+  }
+  /* La terre ne tient que 2,8:1 sur la couverture. */
+  .carte-article:is(:hover, :focus-visible) .carte-article__brouillon {
+    color: var(--c-encre);
   }
 </style>
