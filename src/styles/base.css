@@ -345,10 +345,31 @@ a.carte-lien:focus-visible {
   margin-block-end: 0;
 }
 
+/* Variante : le texte a sa place habituelle, l'illustration au bord droit de
+   la section, l'espace entre les deux laisse libre. */
+.note-illustree--droite {
+  grid-template-columns: minmax(0, var(--rythme-colonne)) 1fr var(--illustration-largeur);
+}
+.note-illustree--droite > .illustration {
+  grid-column: 3;
+  grid-row: 1;
+}
+.note-illustree--droite > :not(.illustration) {
+  grid-column: 1;
+  grid-row: 1;
+}
+
 @media (max-width: 40rem) {
   .note-illustree {
     grid-template-columns: minmax(0, 1fr);
     row-gap: 1.5rem;
+  }
+  .note-illustree--droite > .illustration {
+    grid-column: 1;
+    justify-self: end;
+  }
+  .note-illustree--droite > :not(.illustration) {
+    grid-row: 2;
   }
 }
 
