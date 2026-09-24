@@ -43,7 +43,7 @@ const avecRegard = Astro.slots.has('regard');
      La reglure claire du papier y disparait, elle prend le brun de reliure. */
   .pont {
     --c-label: var(--c-encre);
-    --c-muted: color-mix(in oklch, var(--c-encre) 80%, var(--c-couverture));
+    --c-muted: var(--c-muted-couverture);
     --c-filet: var(--c-brun-reliure);
     background-color: var(--c-couverture);
     color: var(--c-encre);

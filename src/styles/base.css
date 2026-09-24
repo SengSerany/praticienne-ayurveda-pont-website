@@ -277,6 +277,27 @@ blockquote {
   }
 }
 
+/* Carte cliquable : au survol, elle prend la couleur de la couverture toilee,
+   comme un onglet que l'on tire du manuel. Sur ce fond, le gris secondaire et
+   les libelles passent aux teintes lisibles sur couverture. Seules les cartes
+   qui menent quelque part la portent : sur une carte inerte, le survol
+   promettrait un clic qui n'existe pas. */
+.carte-lien,
+.carte-lien :where(*) {
+  transition:
+    background-color var(--mouvement-doux),
+    border-color var(--mouvement-doux),
+    color var(--mouvement-doux);
+}
+
+a.carte-lien:hover,
+a.carte-lien:focus-visible {
+  --c-muted: var(--c-muted-couverture);
+  --c-label: var(--c-encre);
+  background-color: var(--c-couverture);
+  border-color: var(--c-couverture);
+}
+
 /* Note de bas de chapitre : un filet la detache du texte qui precede, au meme
    rythme que l'exergue, le gros bloc au-dessus du filet, le petit texte en
    dessous. Meme respiration partout ou ce motif revient. */

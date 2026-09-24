@@ -18,6 +18,9 @@
   /* Encre secondaire. L'ancienne valeur, rgba(45,42,38,0.42), plafonnait a
      2.36:1 sur le papier, sous le seuil WCAG AA. */
   --c-muted: oklch(50.5% 0.012 75);
+  /* Sur la couverture, le gris secondaire tombe a 3,1:1 ; ce melange d'encre
+     tient 5:1. */
+  --c-muted-couverture: color-mix(in oklch, var(--c-encre) 80%, var(--c-couverture));
 
   /* Couleur des surtitres et micro-libelles. Passe a l'encre sur les fonds
      couverture, ou le brun de reliure ne tient que 3.97:1. */
