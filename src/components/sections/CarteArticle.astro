@@ -21,11 +21,14 @@ const { titre, href, chapitre, themeLabel, minutes, brouillon = false } = Astro.
 </a>
 
 <style>
+  /* En colonne : la mention de brouillon tombe au pied de la carte, a la meme
+     hauteur d'une carte a l'autre, quelle que soit la longueur du titre. */
   .carte-article {
-    display: block;
+    display: flex;
+    flex-direction: column;
     background-color: var(--c-papier);
     border: 1px solid var(--c-creme);
-    padding: 1.5rem;
+    padding: clamp(1.5rem, 2.5vw, 2.25rem);
     text-decoration: none;
     color: var(--c-encre);
     transition: border-color 160ms ease;
@@ -39,14 +42,15 @@ const { titre, href, chapitre, themeLabel, minutes, brouillon = false } = Astro.
     letter-spacing: var(--t-label-ls);
     text-transform: uppercase;
     color: var(--c-brun-reliure);
-    margin: 0 0 0.5rem;
+    margin: 0 0 1rem;
   }
   .carte-article h3 {
     margin: 0;
   }
   .carte-article__brouillon {
-    display: inline-block;
-    margin-top: 0.75rem;
+    align-self: flex-start;
+    margin-top: auto;
+    padding-top: 2rem;
     font-family: var(--f-mono);
     font-size: var(--t-label-size);
     letter-spacing: var(--t-label-ls);
