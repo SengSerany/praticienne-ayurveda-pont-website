@@ -8,6 +8,7 @@ import Pratfall from '../components/sections/Pratfall.astro';
 import QuestionsJustes from '../components/sections/QuestionsJustes.astro';
 import Seuil from '../components/sections/Seuil.astro';
 import Citation from '../components/ui/Citation.astro';
+import Illustration from '../components/ui/Illustration.astro';
 import Photo from '../components/ui/Photo.astro';
 
 const description =
@@ -207,15 +208,23 @@ const questions = [
     surtitre="CELLES QUI ONT FAIT UN BOUT DE CHEMIN"
     titre="Ce qu'elles en disent, dans leurs mots, pas les miens."
   >
-    <p class="note-chapitre">
-      Les premiers accompagnements sont en cours. Je publierai les retours tels quels, sans les
-      retoucher, sans en choisir que les plus flatteurs.
-    </p>
-    <p>
-      En attendant, la preuve la plus honnête que je puisse vous offrir, c'est cette page elle-même
-      : des prix affichés, ce que je fais et ce que je ne fais pas, et aucune promesse que je ne
-      peux pas tenir.
-    </p>
+    <div class="note-illustree">
+      <Illustration
+        ref="ILLU-Presse"
+        alt="Presse d'herbier vue de dessus, planche à claire-voie sanglée sur une pile de feuilles, un brin de mélisse glissé sous une sangle"
+      />
+      <div>
+        <p class="note-chapitre">
+          Les premiers accompagnements sont en cours. Je publierai les retours tels quels, sans les
+          retoucher, sans en choisir que les plus flatteurs.
+        </p>
+        <p>
+          En attendant, la preuve la plus honnête que je puisse vous offrir, c'est cette page
+          elle-même : des prix affichés, ce que je fais et ce que je ne fais pas, et aucune promesse
+          que je ne peux pas tenir.
+        </p>
+      </div>
+    </div>
   </SectionEditoriale>
 
   <BandeauReassurance
