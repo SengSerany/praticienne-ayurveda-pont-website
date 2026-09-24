@@ -3,15 +3,18 @@ import Button from '../ui/Button.astro';
 import ClauseYmyl from '../ui/ClauseYmyl.astro';
 import Motif from '../ui/Motif.astro';
 import { ctaPrincipal } from '../../data/site';
+import { svgEnLigne } from '../../lib/svg';
 
 interface Props {
   titre: string;
   repli?: string;
 }
 const { titre, repli } = Astro.props;
+const planche = svgEnLigne('/planche-seuil.svg');
 ---
 
 <section class="seuil">
+  {planche && <div class="seuil__planche" set:html={planche} />}
   <Motif />
   <h2>{titre}</h2>
   <div class="seuil__corps"><slot /></div>
@@ -22,9 +25,34 @@ const { titre, repli } = Astro.props;
 
 <style>
   .seuil {
+    position: relative;
+    isolation: isolate;
     background-color: var(--c-terre);
     color: var(--c-papier);
     padding: var(--espace-section) var(--marge-page);
+  }
+  /* Planche d'herbier sous le texte, dans la moitie laissee vide. Sa boite
+     commence un peu avant la fin de la colonne de texte : le dessin, ancre en
+     bas a droite, retrecit avec le bloc au lieu de glisser sous le texte. En
+     mobile le texte prend toute la largeur, la planche s'efface. */
+  .seuil__planche {
+    position: absolute;
+    inset-block: 0;
+    inset-inline: calc(var(--marge-page) + 30rem) 0;
+    z-index: -1;
+    color: var(--c-couverture);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .seuil__planche :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  @media (max-width: 48rem) {
+    .seuil__planche {
+      display: none;
+    }
   }
   .seuil h2 {
     color: var(--c-papier);
