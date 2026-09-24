@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
-import Breadcrumb from '../components/ui/Breadcrumb.astro';
 import Photo from '../components/ui/Photo.astro';
 import Button from '../components/ui/Button.astro';
 import Motif from '../components/ui/Motif.astro';
@@ -53,13 +52,6 @@ const apports = [
   masquerCtaPrincipal={true}
 >
   <script type="application/ld+json" set:html={webPageJsonLd} is:inline />
-
-  <Breadcrumb
-    items={[
-      { name: 'Accueil', url: '/' },
-      { name: 'Professionnels de santé', url: '/professionnels-de-sante' },
-    ]}
-  />
 
   <section class="intro">
     <Eyebrow text="PROFESSIONNELS DE SANTÉ" />

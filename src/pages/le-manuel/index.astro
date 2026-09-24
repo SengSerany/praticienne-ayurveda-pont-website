@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Eyebrow from '../../components/ui/Eyebrow.astro';
-import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import OngletManuel from '../../components/sections/OngletManuel.astro';
 import CarteArticle from '../../components/sections/CarteArticle.astro';
 import BlocLettre from '../../components/sections/BlocLettre.astro';
@@ -21,16 +20,10 @@ const webPageJsonLd = buildWebPageJsonLd({
   description: manuelMeta.metaDescription,
   url,
 });
-const filAriane = [
-  { name: 'Accueil', url: '/' },
-  { name: 'Le manuel', url: '/le-manuel' },
-];
 ---
 
 <BaseLayout title={manuelMeta.title} description={manuelMeta.metaDescription}>
   <script type="application/ld+json" set:html={webPageJsonLd} is:inline />
-
-  <Breadcrumb items={filAriane} />
 
   <section class="promesse">
     <Eyebrow text="LE MANUEL" />

@@ -5,7 +5,6 @@ import SectionEditoriale from '../../components/page/SectionEditoriale.astro';
 import BandeauReassurance from '../../components/page/BandeauReassurance.astro';
 import Schema from '../../components/ui/Schema.astro';
 import ClauseYmyl from '../../components/ui/ClauseYmyl.astro';
-import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import OngletManuel from '../../components/sections/OngletManuel.astro';
 import Pont from '../../components/sections/Pont.astro';
 import Seuil from '../../components/sections/Seuil.astro';
@@ -40,13 +39,6 @@ const descriptionsHub: Record<string, string> = {
   description={description}
 >
   <script type="application/ld+json" set:html={webPageJsonLd} is:inline />
-
-  <Breadcrumb
-    items={[
-      { name: 'Accueil', url: '/' },
-      { name: "Ce que j'accompagne", url: '/sante-feminine' },
-    ]}
-  />
 
   <Hero
     variante="couverture"

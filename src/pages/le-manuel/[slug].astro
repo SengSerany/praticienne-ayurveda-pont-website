@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import NumeroChapitre from '../../components/ui/NumeroChapitre.astro';
 import Illustration from '../../components/ui/Illustration.astro';
 import EncadreYmylArticle from '../../components/sections/EncadreYmylArticle.astro';
@@ -35,11 +34,6 @@ const articleJsonLd = buildArticleJsonLd({
   url,
   datePublished: article.data.datePublication,
 });
-const filAriane = [
-  { name: 'Accueil', url: '/' },
-  { name: 'Le manuel', url: '/le-manuel' },
-  { name: article.data.titre, url: cheminArticle },
-];
 ---
 
 <BaseLayout
@@ -48,8 +42,6 @@ const filAriane = [
   noindex={article.data.brouillon}
 >
   <script type="application/ld+json" set:html={articleJsonLd} is:inline />
-
-  <Breadcrumb items={filAriane} />
 
   {article.data.brouillon && <p class="brouillon">Brouillon - a valider</p>}
 
