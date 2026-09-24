@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { minutesDeLecture, articlesPubliables, surtitreDeSection } from './manuel';
+import {
+  minutesDeLecture,
+  articlesPubliables,
+  surtitreDeSection,
+  filDepuisRecherche,
+  pageDeChapitres,
+} from './manuel';
 
 describe('surtitreDeSection', () => {
   it('prefixe le numero de chapitre avec le signe de section et un tiret espace', () => {
@@ -58,5 +64,54 @@ describe('articlesPubliables', () => {
     const copie = [...faux];
     articlesPubliables(faux, true);
     expect(faux).toEqual(copie);
+  });
+});
+
+describe('filDepuisRecherche', () => {
+  const fils = ['cycle', 'digestion'] as const;
+
+  it('retourne le fil demande quand il existe', () => {
+    expect(filDepuisRecherche('?fil=digestion', fils)).toBe('digestion');
+  });
+
+  it('ignore un fil inconnu', () => {
+    expect(filDepuisRecherche('?fil=astrologie', fils)).toBeNull();
+  });
+
+  it('retourne null sans parametre de fil', () => {
+    expect(filDepuisRecherche('', fils)).toBeNull();
+    expect(filDepuisRecherche('?autre=1', fils)).toBeNull();
+  });
+});
+
+describe('pageDeChapitres', () => {
+  const chapitres = Array.from({ length: 20 }, (_, i) => ({
+    n: i,
+    fil: i % 4 === 0 ? 'cycle' : 'digestion',
+  }));
+  const filDe = (c: { fil: string }) => c.fil;
+
+  it('montre neuf chapitres par page et compte le reste', () => {
+    const page = pageDeChapitres(chapitres, filDe, null, 1);
+    expect(page.visibles.map((c) => c.n)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+    expect(page.reste).toBe(11);
+    expect(page.total).toBe(20);
+  });
+
+  it("ajoute neuf chapitres par page jusqu'a epuisement", () => {
+    expect(pageDeChapitres(chapitres, filDe, null, 2).visibles).toHaveLength(18);
+    const fin = pageDeChapitres(chapitres, filDe, null, 3);
+    expect(fin.visibles).toHaveLength(20);
+    expect(fin.reste).toBe(0);
+  });
+
+  it("ne garde que le fil choisi, dans l'ordre recu", () => {
+    const page = pageDeChapitres(chapitres, filDe, 'cycle', 1);
+    expect(page.visibles.map((c) => c.n)).toEqual([0, 4, 8, 12, 16]);
+    expect(page.reste).toBe(0);
+  });
+
+  it('signale un fil sans chapitre', () => {
+    expect(pageDeChapitres(chapitres, filDe, 'inflammation', 1).total).toBe(0);
   });
 });

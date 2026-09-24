@@ -8,16 +8,18 @@ interface Props {
   themeLabel: string;
   minutes: number;
   brouillon?: boolean;
+  // Fil de lecture de l'article, pour le filtre des chapitres.
+  fil?: string;
 }
-const { titre, href, chapitre, themeLabel, minutes, brouillon = false } = Astro.props;
+const { titre, href, chapitre, themeLabel, minutes, brouillon = false, fil } = Astro.props;
 ---
 
-<a class="carte-article carte-lien" href={href}>
+<a class="carte-article carte-lien" href={href} data-fil={fil}>
   <p class="carte-article__meta">
     <NumeroChapitre n={chapitre} /> - {themeLabel} - {minutes} min de lecture
   </p>
   <h3>{titre}</h3>
-  {brouillon && <span class="carte-article__brouillon">Brouillon - a valider</span>}
+  {brouillon && <span class="carte-article__brouillon">Brouillon - à valider</span>}
 </a>
 
 <style>
@@ -31,6 +33,9 @@ const { titre, href, chapitre, themeLabel, minutes, brouillon = false } = Astro.
     padding: clamp(1.5rem, 2.5vw, 2.25rem);
     text-decoration: none;
     color: var(--c-encre);
+  }
+  .carte-article[hidden] {
+    display: none;
   }
   .carte-article__meta {
     font-family: var(--f-mono);

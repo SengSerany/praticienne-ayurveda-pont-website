@@ -31,65 +31,137 @@ const webPageJsonLd = buildWebPageJsonLd({
     {manuelMeta.promesse.map((p) => <p class="promesse__corps">{p}</p>)}
   </section>
 
-  <section class="portes">
-    <Eyebrow text="§ 01 - PAR OU COMMENCER" />
+  <section id="chapitres" class="portes">
+    <Eyebrow text="§ 01 - PAR OÙ COMMENCER" />
     <h2>Quatre portes. Choisis celle qui te parle aujourd'hui.</h2>
-    <div class="portes__grille">
+    <nav class="portes__grille" aria-label="Fils de lecture">
       {
         fils.map((fil) => (
-          <OngletManuel
-            titre={fil.titre}
-            resume={fil.accroche}
-            href="#chapitres"
-            illustrationRef={fil.illustrationRef}
-          />
+          <OngletManuel titre={fil.titre} href={`?fil=${fil.slug}#chapitres`} porte={fil.slug} />
         ))
       }
-    </div>
-  </section>
-
-  <section id="chapitres" class="chapitres">
-    <Eyebrow text="§ 02 - CHAPITRES EN AVANT" />
-    <h2>A lire en ce moment.</h2>
+    </nav>
+    <p class="chapitres__filtre" hidden>
+      Fil : <span class="chapitres__filtre-nom"></span> -
+      <a class="chapitres__tout" href="/le-manuel#chapitres">Tout afficher</a>
+    </p>
     {
       articles.length === 0 ? (
         <p class="chapitres__vide">Les premiers chapitres arrivent.</p>
       ) : (
-        <div class="chapitres__grille">
-          {articles.map((a) => (
-            <CarteArticle
-              titre={a.data.titre}
-              href={`/le-manuel/${a.id}`}
-              chapitre={a.data.chapitre}
-              themeLabel={filParSlug(a.data.theme).labelCourt}
-              minutes={minutesDeLecture(a.body ?? '')}
-              brouillon={a.data.brouillon}
-            />
-          ))}
-        </div>
+        <>
+          <div class="chapitres__grille">
+            {articles.map((a) => (
+              <CarteArticle
+                titre={a.data.titre}
+                href={`/le-manuel/${a.id}`}
+                chapitre={a.data.chapitre}
+                themeLabel={filParSlug(a.data.theme).labelCourt}
+                minutes={minutesDeLecture(a.body ?? '')}
+                brouillon={a.data.brouillon}
+                fil={a.data.theme}
+              />
+            ))}
+          </div>
+          <p class="chapitres__vide chapitres__vide-fil" hidden>
+            Les chapitres de ce fil arrivent.
+          </p>
+          <p class="chapitres__suite" hidden>
+            <button type="button" class="button button--outline chapitres__plus">
+              Voir plus
+            </button>
+          </p>
+        </>
       )
     }
   </section>
 
   <section class="garde-fil">
-    <Eyebrow text="§ 03 - GARDE LE FIL" />
+    <Eyebrow text="§ 02 - GARDE LE FIL" />
     <h2>Tu ne peux pas tout lire d'un coup. Garde le fil.</h2>
     <BlocLettre titre={manuelMeta.lettre.titre} promesse={manuelMeta.lettre.promesse} />
     <p class="microcopy">{manuelMeta.lettre.microcopy}</p>
   </section>
 
   <section class="aller-plus-loin">
-    <Eyebrow text="§ 04 - ALLER PLUS LOIN" />
+    <Eyebrow text="§ 03 - ALLER PLUS LOIN" />
     <h2>Envie d'aller plus loin que la lecture ?</h2>
     <p>
-      Si, a un moment, la lecture ne te suffit plus, si tu veux qu'on regarde ta situation a toi,
+      Si, à un moment, la lecture ne te suffit plus, si tu veux qu'on regarde ta situation à toi,
       ensemble, on peut simplement se parler. Trente minutes, gratuites et sans engagement.
     </p>
-    <Button href="/premier-echange" label="Premier echange" variant="outline" />
+    <Button href="/premier-echange" label="Premier échange" variant="outline" />
     <p class="ymyl">{manuelMeta.ymylPilier}</p>
     <p class="signature">{SITE.nom} - {SITE.baseline}</p>
   </section>
 </BaseLayout>
+
+<script>
+  import { THEMES } from '../../data/manuel';
+  import { filDepuisRecherche, pageDeChapitres } from '../../lib/manuel';
+
+  // Les portes filtrent les chapitres sur place, neuf par neuf, du plus recent au
+  // plus ancien (l'ordre de la page). Sans script, tout reste affiche et les
+  // portes menent a la liste complete.
+  const portes = [...document.querySelectorAll<HTMLAnchorElement>('[data-porte]')];
+  const cartes = [...document.querySelectorAll<HTMLElement>('.chapitres__grille [data-fil]')];
+  const etat = document.querySelector<HTMLElement>('.chapitres__filtre');
+  const nom = document.querySelector<HTMLElement>('.chapitres__filtre-nom');
+  const vide = document.querySelector<HTMLElement>('.chapitres__vide-fil');
+  const suite = document.querySelector<HTMLElement>('.chapitres__suite');
+  const plus = document.querySelector<HTMLButtonElement>('.chapitres__plus');
+  const tout = document.querySelector<HTMLAnchorElement>('.chapitres__tout');
+
+  let fil = filDepuisRecherche(location.search, THEMES);
+  let pages = 1;
+
+  const rendre = () => {
+    const { visibles, reste, total } = pageDeChapitres(cartes, (c) => c.dataset.fil, fil, pages);
+    for (const carte of cartes) carte.hidden = !visibles.includes(carte);
+    for (const porte of portes) {
+      if (porte.dataset.porte === fil) porte.setAttribute('aria-current', 'true');
+      else porte.removeAttribute('aria-current');
+    }
+    const choisie = portes.find((porte) => porte.dataset.porte === fil);
+    if (etat && nom) {
+      etat.hidden = fil === null;
+      nom.textContent = choisie?.querySelector('h4')?.textContent ?? '';
+    }
+    if (vide) vide.hidden = fil === null || total > 0;
+    if (suite) suite.hidden = reste === 0;
+    return visibles;
+  };
+
+  const choisir = (nouveau: string | null) => {
+    fil = nouveau;
+    pages = 1;
+    const recherche = fil === null ? location.pathname : `?fil=${fil}`;
+    history.replaceState(null, '', `${recherche}#chapitres`);
+    rendre();
+  };
+
+  for (const porte of portes) {
+    porte.addEventListener('click', (evenement) => {
+      evenement.preventDefault();
+      choisir(porte.dataset.porte ?? null);
+    });
+  }
+
+  tout?.addEventListener('click', (evenement) => {
+    evenement.preventDefault();
+    choisir(null);
+  });
+
+  // Le focus clavier passe au premier chapitre ajoute, pour ne pas le perdre en
+  // bas de la liste.
+  plus?.addEventListener('click', () => {
+    const avant = cartes.filter((carte) => !carte.hidden).length;
+    pages += 1;
+    rendre()[avant]?.focus();
+  });
+
+  rendre();
+</script>
 
 <style>
   section {
@@ -105,13 +177,41 @@ const webPageJsonLd = buildWebPageJsonLd({
     gap: 1.5rem;
     margin-top: 1.5rem;
   }
+  /* Les chapitres suivent les portes dans la meme section : trois colonnes,
+     neuf cartes par page, detachees des boutons de fil. */
   .chapitres__grille {
+    grid-template-columns: minmax(0, 1fr);
     gap: clamp(1.5rem, 2.5vw, 2rem);
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  }
+  @media (min-width: 40rem) {
+    .chapitres__grille {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 64rem) {
+    .chapitres__grille {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .chapitres__suite {
+    margin: clamp(2rem, 4vw, 3rem) 0 0;
+    max-width: none;
+    text-align: center;
   }
   .chapitres__vide {
     color: var(--c-muted);
     font-style: italic;
     margin-top: 1.5rem;
+  }
+  .chapitres__filtre {
+    margin: 1.5rem 0 0;
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-muted);
+  }
+  .chapitres__filtre-nom {
+    color: var(--c-encre);
   }
   .microcopy,
   .ymyl {
