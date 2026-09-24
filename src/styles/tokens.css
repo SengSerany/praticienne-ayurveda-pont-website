@@ -47,7 +47,11 @@
   --f-mono: 'JetBrains Mono', 'Courier New', Courier, monospace;
 
   /* Echelle typographique */
-  --t-h1-size: clamp(4.5rem, 10vw, 8.5rem);
+  /* Plafonne sur petit telephone : a 72 px, les mots longs des titres
+     (« accompagnement », « Perimenopause ») depassaient l'ecran. Le mot le plus
+     large fait 6,07 fois la taille de la police ; le plafond ne joue que sous
+     478 px de large. */
+  --t-h1-size: min(clamp(4.5rem, 10vw, 8.5rem), calc((100vw - 2rem) / 6.2));
   --t-h1-weight: 300;
   --t-h1-fvs: 'opsz' 144, 'WONK' 1;
   --t-h1-lh: 1;
