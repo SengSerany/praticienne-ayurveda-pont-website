@@ -5,6 +5,7 @@ import SectionEditoriale from '../components/page/SectionEditoriale.astro';
 import BandeauReassurance from '../components/page/BandeauReassurance.astro';
 import GrilleTarifs from '../components/page/GrilleTarifs.astro';
 import Pratfall from '../components/sections/Pratfall.astro';
+import QuestionsJustes from '../components/sections/QuestionsJustes.astro';
 import Seuil from '../components/sections/Seuil.astro';
 import Citation from '../components/ui/Citation.astro';
 import Photo from '../components/ui/Photo.astro';
@@ -12,34 +13,41 @@ import Photo from '../components/ui/Photo.astro';
 const description =
   'Peu de clientes, suivies en profondeur. Un bilan approfondi puis une trajectoire de 3 à 6 mois, prix affichés, complémentaire de votre suivi médical. La cause avant le symptôme.';
 
-const faq = [
+const questions = [
   {
-    q: 'Est-ce que ça remplace mon suivi médical ?',
-    r: "Non, à aucun moment. Mon accompagnement est complémentaire de votre médecine, il ne s'y substitue pas. Je lis vos analyses, je ne pose pas de diagnostic, et je vous oriente vers le bon praticien quand c'est nécessaire.",
+    question: 'Est-ce que ça remplace mon suivi médical ?',
+    reponse:
+      "Non, à aucun moment. Mon accompagnement est complémentaire de votre médecine, il ne s'y substitue pas. Je lis vos analyses, je ne pose pas de diagnostic, et je vous oriente vers le bon praticien quand c'est nécessaire.",
   },
   {
-    q: "Vous allez m'imposer un régime strict ?",
-    r: "Non. Je ne crois pas aux régimes-punitions, et une partie des personnes que j'accompagne viennent justement pour en sortir. Les recommandations sont modulables, adaptées à votre vie réelle, pas l'inverse.",
+    question: "Vous allez m'imposer un régime strict ?",
+    reponse:
+      "Non. Je ne crois pas aux régimes-punitions, et une partie des personnes que j'accompagne viennent justement pour en sortir. Les recommandations sont modulables, adaptées à votre vie réelle, pas l'inverse.",
   },
   {
-    q: "Et si mon endométriose m'empêche de tenir le rythme ?",
-    r: "Le rythme s'adapte au vôtre, pas au mien. Les créneaux sont flexibles, et les jours sans sont prévus dans la trajectoire. On avance au rythme du corps.",
+    question: "Et si mon endométriose m'empêche de tenir le rythme ?",
+    reponse:
+      "Le rythme s'adapte au vôtre, pas au mien. Les créneaux sont flexibles, et les jours sans sont prévus dans la trajectoire. On avance au rythme du corps.",
   },
   {
-    q: 'Vous me promettez des résultats ?',
-    r: "Non, et méfiez-vous de quiconque vous le promet. Ce que je vous promets, c'est de chercher la cause, de vous l'expliquer, et de viser ensemble un mieux vivre avec. Pour beaucoup, c'est déjà beaucoup.",
+    question: 'Vous me promettez des résultats ?',
+    reponse:
+      "Non, et méfiez-vous de quiconque vous le promet. Ce que je vous promets, c'est de chercher la cause, de vous l'expliquer, et de viser ensemble un mieux vivre avec. Pour beaucoup, c'est déjà beaucoup.",
   },
   {
-    q: 'En combien de temps verrai-je une différence ?',
-    r: "Je ne donne pas de promesse calendaire. Le cycle se rééquilibre sur un à plusieurs cycles, c'est le temps physiologique, pas un délai commercial. Je préfère être honnête là-dessus dès le départ.",
+    question: 'En combien de temps verrai-je une différence ?',
+    reponse:
+      "Je ne donne pas de promesse calendaire. Le cycle se rééquilibre sur un à plusieurs cycles, c'est le temps physiologique, pas un délai commercial. Je préfère être honnête là-dessus dès le départ.",
   },
   {
-    q: 'Et si le tarif est un frein pour moi ?',
-    r: "Je préfère en parler franchement. L'accompagnement est réglable en plusieurs fois, sans frais ; le bilan se déduit si vous continuez ; et un tarif réduit existe pour les étudiantes, les personnes en recherche d'emploi ou en situation de handicap. Si, malgré cela, ce n'est pas le moment, le manuel et la lettre restent gratuits, et seront toujours là.",
+    question: 'Et si le tarif est un frein pour moi ?',
+    reponse:
+      "Je préfère en parler franchement. L'accompagnement est réglable en plusieurs fois, sans frais ; le bilan se déduit si vous continuez ; et un tarif réduit existe pour les étudiantes, les personnes en recherche d'emploi ou en situation de handicap. Si, malgré cela, ce n'est pas le moment, le manuel et la lettre restent gratuits, et seront toujours là.",
   },
   {
-    q: 'Comment se passent les séances, à distance ou en cabinet ?',
-    r: "En visio (ce qui ouvre toute la francophonie et ménage les agendas) ou en cabinet à Paris, selon ce qui vous convient. Entre les séances, le lien se maintient par le cahier d'observation et la messagerie écrite (réponse sous 48 heures ouvrées).",
+    question: 'Comment se passent les séances, à distance ou en cabinet ?',
+    reponse:
+      "En visio (ce qui ouvre toute la francophonie et ménage les agendas) ou en cabinet à Paris, selon ce qui vous convient. Entre les séances, le lien se maintient par le cahier d'observation et la messagerie écrite (réponse sous 48 heures ouvrées).",
   },
 ];
 ---
@@ -223,16 +231,7 @@ const faq = [
     surtitre="LES QUESTIONS JUSTES"
     titre="C'est une question juste, je me la suis posée."
   >
-    <div class="faq">
-      {
-        faq.map((item) => (
-          <details>
-            <summary>{item.q}</summary>
-            <p>{item.r}</p>
-          </details>
-        ))
-      }
-    </div>
+    <QuestionsJustes questions={questions} />
   </SectionEditoriale>
 
   <Seuil
@@ -263,19 +262,6 @@ const faq = [
     margin-top: 1rem;
     font-family: var(--f-mono);
     font-size: var(--t-small-size);
-  }
-  .faq details {
-    border-bottom: 1px solid var(--c-creme);
-    padding: 1rem 0;
-    max-width: var(--rythme-colonne-large);
-  }
-  .faq summary {
-    cursor: pointer;
-    font-family: var(--f-display);
-    font-size: var(--t-h4-size);
-  }
-  .faq details p {
-    margin-top: 0.75rem;
   }
   .signature-niche {
     font-family: var(--f-mono);

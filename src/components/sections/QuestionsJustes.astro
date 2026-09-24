@@ -1,0 +1,148 @@
+---
+interface Question {
+  question: string;
+  reponse: string;
+}
+
+interface Props {
+  questions: Question[];
+}
+const { questions } = Astro.props;
+---
+
+<div class="questions">
+  {
+    questions.map((item) => (
+      <details class="questions__item">
+        <summary class="questions__question">
+          <span class="questions__intitule">{item.question}</span>
+          <span class="questions__signe" aria-hidden="true" />
+        </summary>
+        <div class="questions__reponse">
+          <p>{item.reponse}</p>
+        </div>
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  /* Les questions comme les entrees d'un manuel : filets forts en tete et en
+     pied, filets fins entre elles, un numero de folio en marge. Un signe plus
+     trace au trait remplace le triangle du navigateur et devient un moins a
+     l'ouverture. */
+  .questions {
+    --questions-folio: 2.75rem;
+    --questions-signe: 0.875rem;
+    max-width: var(--rythme-colonne-large);
+    margin-block: clamp(2rem, 4vw, 3rem);
+    border-block: 1px solid var(--c-filet-fort);
+    counter-reset: question;
+  }
+  /* Sur laptop et tablette a l'horizontale, la liste glisse d'un cinquieme vers
+     la droite et laisse a gauche la place d'un cartouche. */
+  @media (min-width: 64rem) {
+    .questions {
+      margin-inline-start: 20%;
+    }
+  }
+  .questions__item {
+    counter-increment: question;
+  }
+  .questions__item + .questions__item {
+    border-block-start: 1px solid var(--c-filet);
+  }
+
+  .questions__question {
+    display: grid;
+    grid-template-columns: var(--questions-folio) minmax(0, 1fr) var(--questions-signe);
+    column-gap: 1rem;
+    align-items: start;
+    padding-block: 1.25rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--f-display);
+    font-size: clamp(1.1875rem, 1rem + 0.6vw, 1.375rem);
+    font-variation-settings: var(--t-h4-fvs);
+    line-height: 1.3;
+    color: var(--c-encre);
+  }
+  .questions__question::-webkit-details-marker {
+    display: none;
+  }
+  .questions__question::before {
+    content: counter(question, decimal-leading-zero) / '';
+    align-self: baseline;
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    font-weight: var(--t-label-weight);
+    letter-spacing: var(--t-label-ls);
+    color: var(--c-terre);
+  }
+  .questions__intitule {
+    align-self: baseline;
+    text-wrap: balance;
+    transition: color var(--mouvement-vif);
+  }
+  .questions__question:hover .questions__intitule {
+    color: var(--c-brun-reliure);
+  }
+
+  /* Le signe se cale sur le milieu de la premiere ligne de la question. */
+  .questions__signe {
+    position: relative;
+    width: var(--questions-signe);
+    height: var(--questions-signe);
+    margin-block-start: calc((1lh - var(--questions-signe)) / 2);
+  }
+  .questions__signe::before,
+  .questions__signe::after {
+    content: '';
+    position: absolute;
+    background-color: var(--c-brun-reliure);
+    transition: transform var(--mouvement-doux);
+  }
+  .questions__signe::before {
+    inset-inline: 0;
+    inset-block-start: calc(50% - 0.5px);
+    height: 1px;
+  }
+  .questions__signe::after {
+    inset-block: 0;
+    inset-inline-start: calc(50% - 0.5px);
+    width: 1px;
+  }
+  .questions__item[open] .questions__signe::after {
+    transform: scaleY(0);
+  }
+
+  .questions__reponse {
+    padding-inline: calc(var(--questions-folio) + 1rem) calc(var(--questions-signe) + 1rem);
+    padding-block-end: 1.5rem;
+  }
+  .questions__reponse p {
+    max-width: var(--rythme-colonne);
+    margin: 0;
+  }
+
+  /* Ouverture en fondu la ou le navigateur sait animer une hauteur automatique ;
+     ailleurs, la reponse s'ouvre d'un coup, sans perte. */
+  @supports (interpolate-size: allow-keywords) {
+    .questions__item {
+      interpolate-size: allow-keywords;
+    }
+    .questions__item::details-content {
+      block-size: 0;
+      overflow: clip;
+      opacity: 0;
+      transition:
+        block-size var(--mouvement-doux),
+        opacity var(--mouvement-doux),
+        content-visibility var(--mouvement-doux) allow-discrete;
+    }
+    .questions__item[open]::details-content {
+      block-size: auto;
+      opacity: 1;
+    }
+  }
+</style>
