@@ -62,6 +62,14 @@ const colonnes = [
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
+  /* Colonnes empilees : chaque intitule prend le meme air au-dessus de lui,
+     sous le titre de section comme apres la liste qui precede. */
+  @media (width < 48rem) {
+    .pratfall {
+      row-gap: 3.5rem;
+      margin-block-start: 3.5rem;
+    }
+  }
 
   .pratfall__label {
     position: relative;
