@@ -287,6 +287,14 @@ blockquote {
   color: var(--c-muted);
 }
 
+/* Seule sous son titre, la note n'a aucun texte a detacher : ni filet, ni
+   respiration propre, elle suit le titre comme un paragraphe. */
+.note-chapitre:first-child {
+  margin-block-start: 0;
+  padding-block-start: 0;
+  border-block-start: 0;
+}
+
 /* Un seul vocabulaire de bouton pour les liens d'appel a l'action et pour les
    envois de formulaire, qui sont des <button> et n'heritaient pas du composant. */
 .button {
