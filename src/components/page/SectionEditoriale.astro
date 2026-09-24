@@ -8,8 +8,10 @@ interface Props {
   titre: string;
   // Place le media de marge en regard du texte, a droite par defaut.
   media?: 'droite' | 'gauche';
+  // Compose le texte sur deux colonnes, a la largeur du media pose dessous.
+  colonnes?: 1 | 2;
 }
-const { numero, surtitre, titre, media } = Astro.props;
+const { numero, surtitre, titre, media, colonnes = 1 } = Astro.props;
 const eyebrow = surtitreDeSection(surtitre, numero);
 ---
 
@@ -18,6 +20,7 @@ const eyebrow = surtitreDeSection(surtitre, numero);
     'section-editoriale',
     media && 'section-editoriale--regard',
     media === 'gauche' && 'section-editoriale--regard-gauche',
+    colonnes === 2 && 'section-editoriale--deux-colonnes',
   ]}
 >
   <header class="section-editoriale__tete">
@@ -50,6 +53,24 @@ const eyebrow = surtitreDeSection(surtitre, numero);
   }
   .section-editoriale__marge:empty {
     display: none;
+  }
+
+  /* Texte sur deux colonnes : il coule de l'une a l'autre comme dans un livre,
+     les hauteurs s'equilibrent seules. La largeur de la section remplace alors
+     la mesure d'une colonne unique. Le conteneur multicolonne garde la marge de
+     son dernier paragraphe, d'ou sa remise a zero : l'ecart jusqu'au media
+     reste celui des autres sections. */
+  @media (min-width: 64rem) {
+    .section-editoriale--deux-colonnes .section-editoriale__corps {
+      columns: 2;
+      column-gap: clamp(2.5rem, 4vw, 4rem);
+    }
+    .section-editoriale--deux-colonnes .section-editoriale__corps > :global(*) {
+      max-width: none;
+    }
+    .section-editoriale--deux-colonnes .section-editoriale__corps > :global(:last-child) {
+      margin-block-end: 0;
+    }
   }
 
   /* Media en regard : le titre tient toute la largeur, puis le texte et le
