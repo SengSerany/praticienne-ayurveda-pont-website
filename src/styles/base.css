@@ -284,25 +284,23 @@ blockquote {
   }
 }
 
-/* Carte cliquable : au survol, elle prend la couleur de la couverture toilee,
-   comme un onglet que l'on tire du manuel. Sur ce fond, le gris secondaire et
-   les libelles passent aux teintes lisibles sur couverture. Seules les cartes
-   qui menent quelque part la portent : sur une carte inerte, le survol
-   promettrait un clic qui n'existe pas. */
-.carte-lien,
-.carte-lien :where(*) {
+/* Carte cliquable : au survol, son filet se teinte et double d'epaisseur. Le
+   second pixel est trace vers l'interieur par une ombre, pour que rien ne
+   bouge dans la carte. Une terre adoucie de couverture, pas le brun de
+   reliure, trop dur a 6,4:1 : ce melange tient environ 3:1 sur le papier.
+   Seules les cartes qui menent quelque part la portent : sur une carte
+   inerte, le survol promettrait un clic qui n'existe pas. */
+.carte-lien {
+  --carte-contour: color-mix(in oklch, var(--c-terre) 65%, var(--c-couverture));
   transition:
-    background-color var(--mouvement-doux),
-    border-color var(--mouvement-doux),
-    color var(--mouvement-doux);
+    border-color var(--mouvement-vif),
+    box-shadow var(--mouvement-vif);
 }
 
 a.carte-lien:hover,
 a.carte-lien:focus-visible {
-  --c-muted: var(--c-muted-couverture);
-  --c-label: var(--c-encre);
-  background-color: var(--c-couverture);
-  border-color: var(--c-couverture);
+  border-color: var(--carte-contour);
+  box-shadow: inset 0 0 0 1px var(--carte-contour);
 }
 
 /* Note de bas de chapitre : un filet la detache du texte qui precede, au meme
