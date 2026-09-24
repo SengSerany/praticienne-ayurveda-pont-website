@@ -10,11 +10,12 @@ interface Props {
   media?: 'droite' | 'gauche';
   // Compose le texte sur deux colonnes, a la largeur du media pose dessous.
   colonnes?: 1 | 2;
-  // Decale le texte dans la moitie droite, sur la grille des deux colonnes.
-  texte?: 'gauche' | 'droite';
-  // Decale aussi le surtitre et le titre, par exception : d'ordinaire ils
-  // gardent toute la largeur.
-  tete?: 'gauche' | 'droite';
+  // Decale le texte dans la moitie droite, sur la grille des deux colonnes, ou
+  // le centre sur la page.
+  texte?: 'gauche' | 'droite' | 'centre';
+  // Decale ou centre aussi le surtitre et le titre, par exception : d'ordinaire
+  // ils gardent toute la largeur, alignes a gauche.
+  tete?: 'gauche' | 'droite' | 'centre';
 }
 const {
   numero,
@@ -36,6 +37,8 @@ const eyebrow = surtitreDeSection(surtitre, numero);
     colonnes === 2 && 'section-editoriale--deux-colonnes',
     texte === 'droite' && 'section-editoriale--texte-droite',
     tete === 'droite' && 'section-editoriale--tete-droite',
+    texte === 'centre' && 'section-editoriale--texte-centre',
+    tete === 'centre' && 'section-editoriale--tete-centre',
   ]}
 >
   <header class="section-editoriale__tete">
@@ -99,6 +102,18 @@ const eyebrow = surtitreDeSection(surtitre, numero);
     .section-editoriale--tete-droite .section-editoriale__tete {
       margin-inline-start: calc(50% + var(--gouttiere-texte) / 2);
     }
+  }
+
+  /* Section centree, par exception : chaque bloc du corps garde sa mesure et
+     se centre sur la page ; un bloc qui a sa propre lecture, comme une table,
+     garde son alignement interne. */
+  .section-editoriale--tete-centre .section-editoriale__tete,
+  .section-editoriale--tete-centre h2,
+  .section-editoriale--texte-centre .section-editoriale__corps {
+    text-align: center;
+  }
+  .section-editoriale--texte-centre .section-editoriale__corps > :global(*) {
+    margin-inline: auto;
   }
 
   /* Media en regard : le titre tient toute la largeur, puis le texte et le
