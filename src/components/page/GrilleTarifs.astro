@@ -6,12 +6,17 @@ import { offres, reglesTarifs } from '../../data/prix';
   <ul class="tarifs__liste">
     {
       offres.map((offre) => (
-        <li class="tarifs__offre">
-          <div class="tarifs__entete">
-            <h4>{offre.nom}</h4>
-            <span class="tarifs__prix">{offre.prix}</span>
+        <li class:list={['tarifs__offre', { 'tarifs__offre--mise-en-avant': offre.mention }]}>
+          {offre.mention && <span class="tarifs__mention">{offre.mention}</span>}
+          <div class="tarifs__ligne">
+            <h3 class="tarifs__nom">{offre.nom}</h3>
+            <span class="tarifs__guides" aria-hidden="true" />
+            <p class="tarifs__prix">{offre.prix}</p>
           </div>
-          <p>{offre.description}</p>
+          <div class="tarifs__suite">
+            <p class="tarifs__description">{offre.description}</p>
+            {offre.equivalent && <p class="tarifs__equivalent">{offre.equivalent}</p>}
+          </div>
           {offre.note && <p class="tarifs__note">{offre.note}</p>}
         </li>
       ))
@@ -23,39 +28,159 @@ import { offres, reglesTarifs } from '../../data/prix';
 </div>
 
 <style>
+  /* Une carte de tarifs de manuel : filets forts en tete et en pied, filets
+     fins entre les offres, le nom relie a son prix par des points de conduite,
+     comme les lignes d'une table des matieres. Elle garde la mesure du texte. */
+  .tarifs {
+    max-width: var(--rythme-colonne);
+    margin-block: clamp(2rem, 4vw, 3rem);
+    text-align: start;
+  }
   .tarifs__liste,
   .tarifs__regles {
     list-style: none;
+    margin: 0;
     padding: 0;
   }
+  .tarifs__liste {
+    border-block: 1px solid var(--c-filet-fort);
+  }
+
   .tarifs__offre {
-    padding: 1.25rem 0;
-    border-bottom: 1px solid var(--c-creme);
+    position: relative;
+    padding-block: 1.5rem;
   }
-  .tarifs__entete {
+  .tarifs__offre + .tarifs__offre {
+    border-block-start: 1px solid var(--c-filet);
+  }
+
+  /* Premiere ligne : le nom, les points de conduite qui prennent tout l'espace
+     libre, le prix. Seconde ligne : la description, et sous le prix son
+     equivalent, qui n'ecrase donc plus les points de conduite. */
+  .tarifs__ligne {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.5rem;
     align-items: baseline;
+    gap: 0.75rem;
   }
-  .tarifs__entete h4 {
+  .tarifs__nom,
+  .tarifs__prix {
     margin: 0;
+    font-family: var(--f-display);
+    font-size: clamp(1.25rem, 1rem + 0.8vw, 1.5rem);
+    font-style: normal;
+    font-weight: 400;
+    font-variation-settings: var(--t-h4-fvs);
+    line-height: 1.25;
+    letter-spacing: 0;
+    color: var(--c-encre);
+  }
+  .tarifs__nom {
+    flex: 0 1 auto;
+    text-wrap: balance;
+  }
+  .tarifs__guides {
+    flex: 1 1 2rem;
+    min-width: 2rem;
+    height: 0.25rem;
+    background-image: radial-gradient(circle, var(--c-filet-fort) 0.75px, transparent 1.25px);
+    background-size: 0.375rem 0.25rem;
+    background-repeat: repeat-x;
   }
   .tarifs__prix {
-    font-family: var(--f-display);
-    font-size: var(--t-h4-size);
+    flex: none;
+    font-variant-numeric: lining-nums tabular-nums;
+    white-space: nowrap;
     color: var(--c-terre);
   }
+  /* Sur telephone, « L'accompagnement » ne tient pas a cote de son prix : le
+     nom prend sa ligne, les points de conduite menent au prix sur la suivante. */
+  @media (max-width: 28rem) {
+    .tarifs__ligne {
+      flex-wrap: wrap;
+      row-gap: 0.25rem;
+    }
+    .tarifs__nom {
+      flex-basis: 100%;
+    }
+  }
+
+  .tarifs__suite {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 1.5rem;
+    margin-block-start: 0.5rem;
+  }
+  .tarifs__description {
+    flex: 1 1 16rem;
+  }
+  .tarifs__description,
   .tarifs__note {
+    max-width: 30rem;
+    margin: 0;
     font-size: var(--t-small-size);
+    line-height: var(--t-small-lh);
     color: var(--c-muted);
   }
-  .tarifs__regles {
-    margin-top: 1.5rem;
-    font-size: var(--t-small-size);
+  .tarifs__equivalent {
+    margin: 0 0 0 auto;
+    font-family: var(--f-mono);
+    font-size: var(--t-caption-size);
+    line-height: var(--t-caption-lh);
+    letter-spacing: var(--t-caption-ls);
+    white-space: nowrap;
     color: var(--c-muted);
+  }
+  .tarifs__note {
+    margin-block-start: 0.375rem;
+    font-family: var(--f-quote);
+    font-size: 1.0625rem;
+    font-style: italic;
+  }
+
+  /* L'offre recommandee porte la languette des onglets sur son filet, et sa
+     mention en surtitre. */
+  .tarifs__mention {
+    display: block;
+    margin: 0 0 0.625rem;
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    font-weight: var(--t-label-weight);
+    line-height: var(--t-label-lh);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-label);
+  }
+  .tarifs__offre--mise-en-avant::after {
+    content: '';
+    position: absolute;
+    inset-block-start: -2px;
+    inset-inline-start: 0;
+    width: 2.5rem;
+    height: 3px;
+    background-color: var(--c-couverture);
+  }
+
+  /* Les conditions, en notes : le trait de repere des listes du manuel. */
+  .tarifs__regles {
     display: grid;
-    gap: 0.5rem;
+    gap: 0.625rem;
+    margin-block-start: 1.5rem;
+    font-size: var(--t-small-size);
+    line-height: var(--t-small-lh);
+    color: var(--c-muted);
+  }
+  .tarifs__regles li {
+    position: relative;
+    padding-inline-start: 1.5rem;
+  }
+  .tarifs__regles li::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: calc(var(--t-small-lh) * 0.5em);
+    width: 0.75rem;
+    height: 1px;
+    background-color: var(--c-terre);
   }
 </style>
