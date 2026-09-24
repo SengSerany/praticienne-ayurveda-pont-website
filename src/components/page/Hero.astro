@@ -15,6 +15,8 @@ interface Props {
   cta?: CTA;
   microcopy?: string;
   variante?: 'couverture' | 'papier';
+  // Par exception, le titre prend toute la largeur du hero au lieu de sa colonne.
+  titrePleineLargeur?: boolean;
 }
 const {
   eyebrow,
@@ -24,10 +26,13 @@ const {
   cta,
   microcopy,
   variante = 'couverture',
+  titrePleineLargeur = false,
 } = Astro.props;
 ---
 
-<section class:list={['hero', `hero--${variante}`]}>
+<section
+  class:list={['hero', `hero--${variante}`, titrePleineLargeur && 'hero--titre-pleine-largeur']}
+>
   <div class="hero__corps">
     {eyebrow && <Eyebrow text={eyebrow} />}
     <h1>{titre}</h1>
@@ -62,6 +67,10 @@ const {
     .hero {
       grid-template-columns: 1.4fr 1fr;
       align-items: center;
+    }
+    /* Le texte garde sa mesure propre, seul le titre profite de la largeur. */
+    .hero--titre-pleine-largeur .hero__corps {
+      grid-column: 1 / -1;
     }
   }
   .hero--couverture {
