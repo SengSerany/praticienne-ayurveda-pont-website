@@ -10,8 +10,21 @@ interface Props {
   media?: 'droite' | 'gauche';
   // Compose le texte sur deux colonnes, a la largeur du media pose dessous.
   colonnes?: 1 | 2;
+  // Decale le texte dans la moitie droite, sur la grille des deux colonnes.
+  texte?: 'gauche' | 'droite';
+  // Decale aussi le surtitre et le titre, par exception : d'ordinaire ils
+  // gardent toute la largeur.
+  tete?: 'gauche' | 'droite';
 }
-const { numero, surtitre, titre, media, colonnes = 1 } = Astro.props;
+const {
+  numero,
+  surtitre,
+  titre,
+  media,
+  colonnes = 1,
+  texte = 'gauche',
+  tete = 'gauche',
+} = Astro.props;
 const eyebrow = surtitreDeSection(surtitre, numero);
 ---
 
@@ -21,6 +34,8 @@ const eyebrow = surtitreDeSection(surtitre, numero);
     media && 'section-editoriale--regard',
     media === 'gauche' && 'section-editoriale--regard-gauche',
     colonnes === 2 && 'section-editoriale--deux-colonnes',
+    texte === 'droite' && 'section-editoriale--texte-droite',
+    tete === 'droite' && 'section-editoriale--tete-droite',
   ]}
 >
   <header class="section-editoriale__tete">
@@ -42,6 +57,7 @@ const eyebrow = surtitreDeSection(surtitre, numero);
      qui se suivent doublaient leur espacement. Une marge unique remplace les
      deux paddings qui s'empilaient, d'ou le double du palier normal. */
   .section-editoriale {
+    --gouttiere-texte: clamp(2.5rem, 4vw, 4rem);
     padding-inline: var(--marge-page);
     margin-block: calc(var(--espace-section) * 2);
   }
@@ -63,13 +79,24 @@ const eyebrow = surtitreDeSection(surtitre, numero);
   @media (min-width: 64rem) {
     .section-editoriale--deux-colonnes .section-editoriale__corps {
       columns: 2;
-      column-gap: clamp(2.5rem, 4vw, 4rem);
+      column-gap: var(--gouttiere-texte);
     }
     .section-editoriale--deux-colonnes .section-editoriale__corps > :global(*) {
       max-width: none;
     }
     .section-editoriale--deux-colonnes .section-editoriale__corps > :global(:last-child) {
       margin-block-end: 0;
+    }
+  }
+
+  /* Texte decale a droite, sans media en regard : le texte prend la moitie
+     droite, au depart exact de la seconde colonne du texte sur deux colonnes.
+     Les sections d'une page tiennent sur une grille. Le titre reste a gauche,
+     sauf exception ou il suit le texte sur la meme ligne de depart. */
+  @media (min-width: 64rem) {
+    .section-editoriale--texte-droite .section-editoriale__corps,
+    .section-editoriale--tete-droite .section-editoriale__tete {
+      margin-inline-start: calc(50% + var(--gouttiere-texte) / 2);
     }
   }
 
