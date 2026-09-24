@@ -31,8 +31,14 @@ const svg = src ? svgEnLigne(src) : undefined;
 </figure>
 
 <style>
+  /* Chaque schema s'affiche a la taille nominale de son fichier, jamais
+     au-dela, et retrecit si sa colonne est plus etroite : sa densite decide de
+     sa taille, pas la colonne qui le porte. La legende se cale sur la largeur
+     du dessin sans jamais l'elargir. */
   .schema {
     margin: 0;
+    inline-size: fit-content;
+    max-inline-size: 100%;
   }
   /* Le SVG arrive par set:html, donc hors du scope Astro, et il echappe a la
      regle img de base.css. Sans ca il deborde sur mobile. */
@@ -42,6 +48,8 @@ const svg = src ? svgEnLigne(src) : undefined;
     height: auto;
   }
   .schema-placeholder {
+    inline-size: 34rem;
+    max-inline-size: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,6 +66,7 @@ const svg = src ? svgEnLigne(src) : undefined;
     color: var(--c-brun-reliure);
   }
   .schema figcaption {
+    contain: inline-size;
     font-family: var(--f-mono);
     font-size: var(--t-caption-size);
     color: var(--c-muted);
