@@ -45,9 +45,13 @@ const eyebrow = surtitreDeSection(surtitre, numero);
   <div class="section-editoriale__corps">
     <slot />
   </div>
-  <div class="section-editoriale__marge">
-    <slot name="marge" />
-  </div>
+  {
+    Astro.slots.has('marge') && (
+      <div class="section-editoriale__marge">
+        <slot name="marge" />
+      </div>
+    )
+  }
 </section>
 
 <style>
@@ -66,9 +70,6 @@ const eyebrow = surtitreDeSection(surtitre, numero);
      qui porte deja sa propre respiration, garde la sienne. */
   .section-editoriale__marge {
     margin-block-start: calc(var(--rythme-para) * 2);
-  }
-  .section-editoriale__marge:empty {
-    display: none;
   }
 
   /* Texte sur deux colonnes : il coule de l'une a l'autre comme dans un livre,
