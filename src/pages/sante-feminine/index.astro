@@ -6,7 +6,6 @@ import BandeauReassurance from '../../components/page/BandeauReassurance.astro';
 import Schema from '../../components/ui/Schema.astro';
 import ClauseYmyl from '../../components/ui/ClauseYmyl.astro';
 import OngletManuel from '../../components/sections/OngletManuel.astro';
-import Pont from '../../components/sections/Pont.astro';
 import Seuil from '../../components/sections/Seuil.astro';
 import { passages } from '../../data/passages';
 import { SITE } from '../../data/site';
@@ -116,9 +115,9 @@ const descriptionsHub: Record<string, string> = {
     />
   </SectionEditoriale>
 
-  <Pont
+  <SectionEditoriale
     numero="03"
-    eyebrow="POURQUOI ME FAIRE CONFIANCE"
+    surtitre="POURQUOI ME FAIRE CONFIANCE"
     titre="Une lecture exigeante, et complémentaire de votre médecine."
   >
     <p>
@@ -134,20 +133,20 @@ const descriptionsHub: Record<string, string> = {
       Je ne pose pas de diagnostic, et je ne remplace ni votre médecin, ni votre gynécologue, ni
       votre sage-femme. Je travaille à côté d'eux.
     </p>
-    <p><a href="/qui-je-suis">Qui je suis</a></p>
-  </Pont>
-
-  <BandeauReassurance
-    items={[
-      'Dix ans en laboratoire de référence (CNRGS)',
-      'Lecture critique de vos bilans',
-      'Complémentaire de votre suivi médical',
-    ]}
-  />
-
-  <div class="clause-zone">
-    <ClauseYmyl />
-  </div>
+    <p class="confiance__lien"><a href="/qui-je-suis">Qui je suis</a></p>
+    <div class="confiance__ruban">
+      <BandeauReassurance
+        items={[
+          'Dix ans en laboratoire de référence (CNRGS)',
+          'Lecture critique de vos bilans',
+          'Complémentaire de votre suivi médical',
+        ]}
+      />
+    </div>
+    <div class="confiance__clause">
+      <ClauseYmyl />
+    </div>
+  </SectionEditoriale>
 
   <Seuil
     titre="Commençons par votre histoire."
@@ -176,7 +175,21 @@ const descriptionsHub: Record<string, string> = {
     gap: 1rem;
     margin-top: 1.5rem;
   }
-  .clause-zone {
-    padding: 1.5rem clamp(1rem, 4vw, 3rem);
+  /* Le ruban resume les preuves de la section : il la ferme, juste sous le
+     renvoi, au lieu de flotter seul entre deux sections. Il sort de la marge
+     de page pour garder la largeur des autres rubans du site. La clause le
+     suit, centree comme lui. */
+  .confiance__lien,
+  .confiance__ruban {
+    margin-block-start: calc(var(--rythme-para) * 2);
+  }
+  .confiance__ruban {
+    margin-inline: calc(var(--marge-page) * -1);
+  }
+  .confiance__clause {
+    display: flex;
+    justify-content: center;
+    margin-block-start: 1.5rem;
+    text-align: center;
   }
 </style>
