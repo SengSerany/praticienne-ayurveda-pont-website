@@ -8,12 +8,12 @@
     <input id="pe-email" name="email" type="email" required />
   </p>
   <p class="form-pe__champ">
-    <label for="pe-prenom">Votre prenom <span class="form-pe__optionnel">(optionnel)</span></label>
+    <label for="pe-prenom">Votre prénom <span class="form-pe__optionnel">(optionnel)</span></label>
     <input id="pe-prenom" name="prenom" type="text" maxlength="100" />
   </p>
   <p class="form-pe__champ">
     <label for="pe-message">
-      Ce qui vous amene <span class="form-pe__optionnel">(optionnel, meme une ligne suffit)</span>
+      Ce qui vous amène <span class="form-pe__optionnel">(optionnel, même une ligne suffit)</span>
     </label>
     <textarea id="pe-message" name="message" rows="4" maxlength="5000"></textarea>
   </p>
@@ -27,14 +27,27 @@
   />
   <button type="submit" class="button button--filled">Envoyer mon message</button>
   <p class="form-pe__rgpd">
-    Vos informations me servent uniquement a vous repondre. Elles ne sont ni revendues, ni utilisees
-    pour autre chose. Vous pouvez demander leur suppression a tout moment.
+    Vos informations me servent uniquement à vous répondre. Elles ne sont ni revendues, ni utilisées
+    pour autre chose. Vous pouvez demander leur suppression à tout moment.
   </p>
 </form>
 
 <style>
+  /* Le formulaire se detache du texte qui l'introduit, le bouton des champs, la
+     mention de confidentialite du bouton : trois respirations nettes. */
   .form-pe {
     max-width: var(--rythme-colonne);
+    margin-block-start: calc(var(--rythme-para) * 2);
+  }
+  .form-pe .button {
+    margin-block-start: 1.25rem;
+  }
+  /* Bouton inverse : la terre au repos, l'encre au survol. */
+  .form-pe .button--filled {
+    background-color: var(--c-terre);
+  }
+  .form-pe .button--filled:hover {
+    background-color: var(--c-encre);
   }
   .form-pe__champ {
     display: flex;
@@ -57,7 +70,7 @@
   .form-pe input,
   .form-pe textarea {
     padding: 0.75rem 1rem;
-    border: 1px solid var(--c-creme);
+    border: 1px solid var(--c-contour-champ);
     background-color: var(--c-papier);
     font-family: var(--f-body);
     font-size: var(--t-body-size);
@@ -71,6 +84,6 @@
   .form-pe__rgpd {
     font-size: var(--t-caption-size);
     color: var(--c-muted);
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
 </style>
