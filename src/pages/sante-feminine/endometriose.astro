@@ -7,7 +7,6 @@ import Photo from '../../components/ui/Photo.astro';
 import Schema from '../../components/ui/Schema.astro';
 import Illustration from '../../components/ui/Illustration.astro';
 import ClauseYmyl from '../../components/ui/ClauseYmyl.astro';
-import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import Pratfall from '../../components/sections/Pratfall.astro';
 import BlocLettre from '../../components/sections/BlocLettre.astro';
 import Seuil from '../../components/sections/Seuil.astro';
@@ -37,14 +36,6 @@ const articles = [
   description={description}
 >
   <script type="application/ld+json" set:html={medicalJsonLd} is:inline />
-
-  <Breadcrumb
-    items={[
-      { name: 'Accueil', url: '/' },
-      { name: "Ce que j'accompagne", url: '/sante-feminine' },
-      { name: 'Endométriose', url: '/sante-feminine/endometriose' },
-    ]}
-  />
 
   <Hero
     variante="papier"

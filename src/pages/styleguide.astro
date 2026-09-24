@@ -5,7 +5,6 @@ import Eyebrow from '../components/ui/Eyebrow.astro';
 import ClauseYmyl from '../components/ui/ClauseYmyl.astro';
 import Motif from '../components/ui/Motif.astro';
 import NumeroChapitre from '../components/ui/NumeroChapitre.astro';
-import Breadcrumb from '../components/ui/Breadcrumb.astro';
 import Seuil from '../components/sections/Seuil.astro';
 import Pont from '../components/sections/Pont.astro';
 import Preuve from '../components/sections/Preuve.astro';
@@ -45,13 +44,6 @@ const conditionsDemo = [
 ---
 
 <BaseLayout title="Styleguide" description="Reference interne du design system." noindex={true}>
-  <Breadcrumb
-    items={[
-      { name: 'Accueil', url: '/' },
-      { name: 'Styleguide', url: '/styleguide' },
-    ]}
-  />
-
   <Eyebrow text="Reference interne" />
   <h1>Styleguide</h1>
   <p class="lead">Preuve de tenue du design system « Manuel Relié ».</p>
