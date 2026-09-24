@@ -1,6 +1,7 @@
 ---
 import Button from '../ui/Button.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
+import { svgEnLigne } from '../../lib/svg';
 
 interface CTA {
   label: string;
@@ -17,6 +18,8 @@ interface Props {
   variante?: 'couverture' | 'papier';
   // Par exception, le titre prend toute la largeur du hero au lieu de sa colonne.
   titrePleineLargeur?: boolean;
+  // Planche SVG de public/ posee en fond, a droite du texte, par exemple '/planche-premier-echange.svg'.
+  planche?: string;
 }
 const {
   eyebrow,
@@ -27,12 +30,20 @@ const {
   microcopy,
   variante = 'couverture',
   titrePleineLargeur = false,
+  planche,
 } = Astro.props;
+const plancheEnLigne = planche ? svgEnLigne(planche) : undefined;
 ---
 
 <section
-  class:list={['hero', `hero--${variante}`, titrePleineLargeur && 'hero--titre-pleine-largeur']}
+  class:list={[
+    'hero',
+    `hero--${variante}`,
+    titrePleineLargeur && 'hero--titre-pleine-largeur',
+    plancheEnLigne && 'hero--planche',
+  ]}
 >
+  {plancheEnLigne && <div class="hero__planche" set:html={plancheEnLigne} />}
   <div class="hero__corps">
     {eyebrow && <Eyebrow text={eyebrow} />}
     <h1>{titre}</h1>
@@ -85,6 +96,34 @@ const {
   .hero--papier {
     background-color: var(--c-papier);
     padding-block-end: 0;
+  }
+  /* Grande planche au trait sous le texte, comme celle de Seuil. Sa boite part
+     un peu avant la fin de la colonne de texte ; le dessin, ancre a droite,
+     deborde du cadre et le hero coupe ce qui depasse. En mobile le texte prend
+     toute la largeur, la planche s'efface. */
+  .hero--planche {
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+  }
+  .hero__planche {
+    display: none;
+    position: absolute;
+    inset-block: 0;
+    inset-inline: 46% 0;
+    z-index: -1;
+    color: var(--c-sauge);
+    pointer-events: none;
+  }
+  .hero__planche :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  @media (min-width: 52rem) {
+    .hero__planche {
+      display: block;
+    }
   }
   .hero h1 {
     margin-bottom: 0.667em;
