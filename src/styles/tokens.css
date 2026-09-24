@@ -29,6 +29,10 @@
   /* Filets. Un manuel relie se tient par ses reglures, pas par ses ombres. */
   --c-filet: oklch(84% 0.022 76);
   --c-filet-fort: oklch(70% 0.03 60);
+  /* Contour des champs de formulaire. Le creme ne tenait que 1,35:1 et les
+     champs passaient inapercus ; ce filet fort assombri tient 3,1:1 sur le
+     papier, le minimum pour qu'on repere un champ. */
+  --c-contour-champ: color-mix(in oklch, var(--c-filet-fort) 80%, var(--c-encre));
 
   /* Couleurs fonctionnelles (primaire + fond) */
   --c-succes: oklch(60.6% 0.062 144.8); /* #6b8c6b */
