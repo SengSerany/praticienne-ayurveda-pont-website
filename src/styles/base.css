@@ -204,6 +204,13 @@ blockquote {
   grid-column: 2;
 }
 
+/* Serie en liste : chaque entree tient toute la largeur, le chiffre se lit
+   comme celui d'un sommaire et prend du champ avant son texte. Les series en
+   colonnes etroites gardent leur texte au plus pres. */
+.grille-cartes--liste > * {
+  column-gap: clamp(1rem, 2.5vw, 2rem);
+}
+
 /* Serie qui n'est pas une suite de chapitres : ni reglure ni chiffre. Un seul
    encadre teinte, partage en compartiments par des filets, comme un encart de
    manuel. Trois cadres separes faisaient trois boites d'interface ; un bloc
