@@ -28,7 +28,7 @@ export const offres: Offre[] = [
   {
     cle: 'accompagnement-3',
     nom: "L'accompagnement 3 mois",
-    description: 'Bilan, 3 séances de suivi, carnet de notes relu, messagerie.',
+    description: "Bilan, 3 séances de suivi, cahier d'observation relu, messagerie.",
     prix: '490 €',
     equivalent: 'soit environ 38 € par semaine',
     mention: 'Le plus choisi',
