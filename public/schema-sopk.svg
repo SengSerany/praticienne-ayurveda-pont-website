@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="72 30 356 462" width="356" height="462" role="img" aria-labelledby="schema-sopk-titre schema-sopk-desc">
+  <title id="schema-sopk-titre">Sucre, insuline et cycle</title>
+  <desc id="schema-sopk-desc">Une chaîne de trois maillons, de haut en bas. Quand le corps répond mal au sucre, l'insuline monte, et le cycle finit par se dérégler en bout de chaîne. Une flèche courbe repart du cycle et remonte jusqu'au sucre, le premier maillon. Le sucre est figuré par un carré, l'insuline par un rectangle, le cycle par un cercle.</desc>
+
+  <g fill="none" stroke="var(--c-encre, #2d2a26)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+    <rect vector-effect="non-scaling-stroke" x="118" y="44" width="64" height="64" rx="4"/>
+    <rect vector-effect="non-scaling-stroke" x="94" y="210" width="112" height="56" rx="10"/>
+    <circle vector-effect="non-scaling-stroke" cx="150" cy="404" r="38"/>
+  </g>
+
+  <g fill="none" stroke="var(--c-terre, #8f5d4e)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+    <path vector-effect="non-scaling-stroke" d="M150 156L150 198M150 198L154.8 188.1M150 198L145.2 188.1"/>
+    <path vector-effect="non-scaling-stroke" d="M150 314L150 354M150 354L154.8 344.1M150 354L145.2 344.1"/>
+  </g>
+
+  <g fill="none" stroke="var(--c-encre, #2d2a26)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+    <path vector-effect="non-scaling-stroke" d="M194.1 380.5Q345 250 196 76M196 76L198.8 86.6M196 76L206.1 80.4"/>
+  </g>
+
+  <g fill="var(--c-encre, #2d2a26)" font-family="var(--f-mono, JetBrains Mono, monospace)" font-size="20" letter-spacing="4.4" text-anchor="middle">
+    <text x="150" y="140">SUCRE</text>
+    <text x="150" y="298">INSULINE</text>
+    <text x="150" y="478">CYCLE</text>
+    <text x="350" y="246">REMONTER</text>
+  </g>
+</svg>
