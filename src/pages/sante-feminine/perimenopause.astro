@@ -117,15 +117,35 @@ const articles = [
       labelCest="Ce qu'il peut"
       labelCestPas="Ce qu'il ne peut pas"
       cest={[
-        "Aider à apaiser les bouffées de chaleur et l'irritabilité.",
-        "Soutenir l'hydratation et la nutrition des tissus qui s'assèchent.",
-        'Améliorer la qualité de votre sommeil et calmer la charge nerveuse.',
-        'Vous apprendre à lire vos signaux, pour ajuster au fil de la transition.',
+        {
+          titre: 'Apaiser la chaleur',
+          detail: "Aider à calmer les bouffées de chaleur et l'irritabilité.",
+        },
+        {
+          titre: 'Nourrir les tissus',
+          detail: "Soutenir l'hydratation et la nutrition des tissus qui s'assèchent.",
+        },
+        {
+          titre: 'Mieux dormir',
+          detail: 'Améliorer la qualité du sommeil et calmer la charge nerveuse.',
+        },
+        { titre: 'Lire vos signaux', detail: 'Pour ajuster au fil de la transition.' },
       ]}
       cestPas={[
-        "« Arrêter » la ménopause. C'est une étape naturelle, pas une maladie à guérir.",
-        'Remplacer votre suivi gynécologique, ni un traitement hormonal de la ménopause choisi avec votre médecin.',
-        'Se substituer à un avis médical : tout saignement inhabituel après une longue absence de règles doit toujours être vérifié médicalement, et je vous y orienterai.',
+        {
+          titre: '« Arrêter » la ménopause',
+          detail: "C'est une étape naturelle, pas une maladie à guérir.",
+        },
+        {
+          titre: 'Remplacer votre suivi',
+          detail:
+            'Ni votre suivi gynécologique, ni un traitement hormonal choisi avec votre médecin.',
+        },
+        {
+          titre: "Tenir lieu d'avis médical",
+          detail:
+            'Tout saignement inhabituel après une longue absence de règles doit être vérifié médicalement, et je vous y orienterai.',
+        },
       ]}
     />
     <p class="cta-intermediaire">

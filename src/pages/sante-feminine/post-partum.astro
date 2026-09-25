@@ -113,15 +113,28 @@ const articles = [
       labelCest="Ce qu'il peut"
       labelCestPas="Ce qu'il ne peut pas"
       cest={[
-        'Soutenir votre reconstitution par une alimentation chaude et nourrissante.',
-        'Aider à restaurer la vitalité et le sommeil, dans la mesure du possible.',
-        "Accompagner la digestion et la période d'allaitement, côté nutrition.",
-        "Vous apprendre à repérer vos propres signaux de fatigue, avant l'épuisement.",
+        { titre: 'Vous reconstituer', detail: 'Par une alimentation chaude et nourrissante.' },
+        { titre: 'Retrouver de la vitalité', detail: 'Et du sommeil, dans la mesure du possible.' },
+        {
+          titre: 'Accompagner la digestion',
+          detail: "Et la période d'allaitement, côté nutrition.",
+        },
+        { titre: 'Repérer vos signaux de fatigue', detail: "Pour agir avant l'épuisement." },
       ]}
       cestPas={[
-        'Remplacer votre suivi postnatal, votre sage-femme ou votre rééducation périnéale.',
-        "Se substituer à un avis médical : une tristesse ou une anxiété qui s'installent ne sont pas « juste de la fatigue », elles relèvent d'un accompagnement médical, et je vous y orienterai sans hésiter.",
-        "Faire de vous une mère parfaite. Personne ne l'est, et ce n'est pas l'objectif.",
+        {
+          titre: 'Remplacer votre suivi postnatal',
+          detail: 'Ni votre sage-femme, ni votre rééducation périnéale.',
+        },
+        {
+          titre: "Tenir lieu d'avis médical",
+          detail:
+            "Une tristesse ou une anxiété qui s'installent ne sont pas « juste de la fatigue » : elles relèvent d'un accompagnement médical, et je vous y orienterai sans hésiter.",
+        },
+        {
+          titre: 'Faire de vous une mère parfaite',
+          detail: "Personne ne l'est, et ce n'est pas l'objectif.",
+        },
       ]}
     />
     <p class="cta-intermediaire">
