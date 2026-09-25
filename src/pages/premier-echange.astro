@@ -100,13 +100,28 @@ const description =
       labelCest="Sans doute pour vous si"
       labelCestPas="Sans doute pas pour vous si"
       cest={[
-        'Vous voulez comprendre la cause de ce que vous vivez, pas seulement faire taire un symptôme.',
-        'Vous êtes prête à mettre des choses en place, à votre rythme.',
-        'Vous cherchez un accompagnement dans la durée, pas une réponse instantanée.',
+        {
+          titre: 'Vous cherchez la cause',
+          detail: 'Comprendre ce que vous vivez, pas seulement faire taire un symptôme.',
+        },
+        {
+          titre: 'Vous êtes prête à agir',
+          detail: 'Mettre des choses en place, à votre rythme.',
+        },
+        {
+          titre: 'Vous visez la durée',
+          detail: "Un accompagnement qui s'installe, pas une réponse instantanée.",
+        },
       ]}
       cestPas={[
-        'Vous attendez une solution miracle, immédiate et sans effort.',
-        "Vous cherchez un diagnostic médical : c'est le rôle de votre médecin, pas le mien.",
+        {
+          titre: 'Vous attendez un miracle',
+          detail: 'Une solution immédiate et sans effort : je ne vous la promettrai pas.',
+        },
+        {
+          titre: 'Vous cherchez un diagnostic',
+          detail: "C'est le rôle de votre médecin, pas le mien.",
+        },
       ]}
     />
     <p>Dans le doute, écrivez-moi : je vous orienterai au mieux.</p>
