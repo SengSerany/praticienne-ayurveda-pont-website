@@ -45,19 +45,23 @@ const plancheEnLigne = planche ? svgEnLigne(planche) : undefined;
 >
   {plancheEnLigne && <div class="hero__planche" set:html={plancheEnLigne} />}
   <div class="hero__corps">
-    {eyebrow && <Eyebrow text={eyebrow} />}
-    <h1>{titre}</h1>
-    {sousLignes.map((ligne) => <p class="hero__sous-ligne" set:html={ligne} />)}
-    {signature && <p class="hero__signature">{signature}</p>}
-    {
-      cta && (
-        <p class="hero__cta">
-          <Button href={cta.href} label={cta.label} variant={cta.variant ?? 'outline'} />
-          {microcopy && <span class="hero__microcopy">{microcopy}</span>}
-        </p>
-      )
-    }
-    <div class="hero__texte"><slot /></div>
+    <div class="hero__tete">
+      {eyebrow && <Eyebrow text={eyebrow} />}
+      <h1>{titre}</h1>
+    </div>
+    <div class="hero__suite">
+      {sousLignes.map((ligne) => <p class="hero__sous-ligne" set:html={ligne} />)}
+      {signature && <p class="hero__signature">{signature}</p>}
+      {
+        cta && (
+          <p class="hero__cta">
+            <Button href={cta.href} label={cta.label} variant={cta.variant ?? 'outline'} />
+            {microcopy && <span class="hero__microcopy">{microcopy}</span>}
+          </p>
+        )
+      }
+      <div class="hero__texte"><slot /></div>
+    </div>
   </div>
   {
     Astro.slots.has('media') && (
@@ -79,8 +83,18 @@ const plancheEnLigne = planche ? svgEnLigne(planche) : undefined;
       grid-template-columns: 1.4fr 1fr;
       align-items: center;
     }
-    /* Le texte garde sa mesure propre, seul le titre profite de la largeur. */
+    /* Seuls le surtitre et le titre profitent de toute la largeur ; le texte
+       garde sa colonne, avec le media a sa droite. Sans ecart de rangee et
+       aligne en haut, le texte reste a sa distance habituelle du titre, celle
+       de sa marge, et le media part de la meme ligne que lui. */
+    .hero--titre-pleine-largeur {
+      row-gap: 0;
+      align-items: start;
+    }
     .hero--titre-pleine-largeur .hero__corps {
+      display: contents;
+    }
+    .hero--titre-pleine-largeur .hero__tete {
       grid-column: 1 / -1;
     }
   }
