@@ -120,15 +120,34 @@ const articles = [
       labelCest="Ce qu'il peut"
       labelCestPas="Ce qu'il ne peut pas"
       cest={[
-        "Soutenir le travail d'élimination du foie, malmené par les années de pilule.",
-        'Aider à réunir les conditions du retour de votre cycle.',
-        "Apaiser l'acné rebond en travaillant le terrain, pas seulement la surface.",
-        'Restaurer la vitalité, le sommeil, et vous apprendre à lire vos signaux.',
+        {
+          titre: 'Soutenir le foie',
+          detail: "Son travail d'élimination, malmené par les années de pilule.",
+        },
+        {
+          titre: 'Préparer le retour du cycle',
+          detail: "Réunir les conditions pour qu'il reparte.",
+        },
+        {
+          titre: "Apaiser l'acné rebond",
+          detail: 'En travaillant le terrain, pas seulement la surface.',
+        },
+        {
+          titre: 'Restaurer la vitalité et le sommeil',
+          detail: 'Et vous apprendre à lire vos signaux.',
+        },
       ]}
       cestPas={[
-        'Garantir un retour de règles à une date fixe. Votre corps répond à son rythme.',
-        'Remplacer un bilan hormonal ou un suivi de fertilité.',
-        'Se substituer à un avis médical : une aménorrhée qui se prolonge mérite toujours un bilan, et je vous y encouragerai.',
+        {
+          titre: 'Garantir une date',
+          detail: 'Le retour des règles suit le rythme de votre corps.',
+        },
+        { titre: 'Remplacer un bilan', detail: 'Ni un bilan hormonal, ni un suivi de fertilité.' },
+        {
+          titre: "Tenir lieu d'avis médical",
+          detail:
+            'Une aménorrhée qui se prolonge mérite toujours un bilan, et je vous y encouragerai.',
+        },
       ]}
     />
     <p class="cta-intermediaire">
@@ -160,6 +179,8 @@ const articles = [
   <SectionEditoriale
     numero="05"
     surtitre="CE QU'ELLES EN DISENT"
+    texte="droite"
+    tete="droite"
     titre="Dans leurs mots, pas les miens."
   >
     <p class="note-chapitre">

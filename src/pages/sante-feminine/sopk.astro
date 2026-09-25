@@ -119,15 +119,32 @@ const articles = [
       labelCest="Ce qu'il peut"
       labelCestPas="Ce qu'il ne peut pas"
       cest={[
-        "Soutenir un métabolisme au ralenti et la sensibilité à l'insuline, par l'hygiène de vie.",
-        'Aider votre cycle à retrouver un rythme plus régulier.',
-        "Apaiser l'inflammation et soutenir la digestion.",
-        'Calmer la charge nerveuse, et vous apprendre à lire vos signaux.',
+        {
+          titre: 'Soutenir le métabolisme',
+          detail: "Un métabolisme au ralenti et la sensibilité à l'insuline, par l'hygiène de vie.",
+        },
+        {
+          titre: 'Aider le cycle à se réguler',
+          detail: 'Retrouver, peu à peu, un rythme plus régulier.',
+        },
+        { titre: "Apaiser l'inflammation", detail: 'Et soutenir la digestion, souvent ralentie.' },
+        { titre: 'Calmer la charge nerveuse', detail: 'Et vous apprendre à lire vos signaux.' },
       ]}
       cestPas={[
-        "Faire disparaître le SOPK. C'est un terrain, pas une maladie qui se guérit, et je ne vous mentirai pas là-dessus.",
-        'Remplacer votre suivi gynécologique ou endocrinien : le SOPK demande un suivi médical régulier, et je vous y encouragerai.',
-        'Promettre un retour de cycle à date fixe. Votre corps répond à son rythme.',
+        {
+          titre: 'Faire disparaître le SOPK',
+          detail:
+            "C'est un terrain, pas une maladie qui se guérit, et je ne vous mentirai pas là-dessus.",
+        },
+        {
+          titre: 'Remplacer votre suivi médical',
+          detail:
+            'Gynécologique ou endocrinien : le SOPK demande un suivi régulier, et je vous y encouragerai.',
+        },
+        {
+          titre: 'Promettre une date',
+          detail: 'Le retour du cycle suit le rythme de votre corps.',
+        },
       ]}
     />
     <p class="cta-intermediaire">
@@ -157,6 +174,8 @@ const articles = [
   <SectionEditoriale
     numero="05"
     surtitre="CE QU'ELLES EN DISENT"
+    texte="droite"
+    tete="droite"
     titre="Dans leurs mots, pas les miens."
   >
     <p class="note-chapitre">

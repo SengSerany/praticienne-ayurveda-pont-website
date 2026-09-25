@@ -118,16 +118,32 @@ const articles = [
       labelCest="Ce qu'il peut"
       labelCestPas="Ce qu'il ne peut pas"
       cest={[
-        "Aider à apaiser l'inflammation au quotidien.",
-        'Soutenir votre digestion, souvent malmenée.',
-        'Améliorer la qualité de votre sommeil et calmer la charge nerveuse.',
-        'Vous apprendre à lire vos signaux, cycle après cycle.',
+        { titre: "Apaiser l'inflammation", detail: 'Aider à la calmer, au quotidien.' },
+        { titre: 'Soutenir la digestion', detail: "Souvent malmenée par l'endométriose." },
+        {
+          titre: 'Mieux dormir',
+          detail: 'Améliorer la qualité du sommeil et calmer la charge nerveuse.',
+        },
+        { titre: 'Lire vos signaux', detail: 'Apprendre à les reconnaître, cycle après cycle.' },
       ]}
       cestPas={[
-        "Faire disparaître l'endométriose. Ce n'est pas une maladie qui se guérit, et je ne vous mentirai pas là-dessus.",
-        'Remplacer une chirurgie, ni votre suivi gynécologique ou hormonal.',
-        'Promettre un calendrier. Votre corps répond à son rythme, sur un à plusieurs cycles.',
-        "Se substituer à votre suivi médical : un symptôme nouveau ou qui s'aggrave mérite toujours l'avis de votre médecin, et je vous y orienterai sans hésiter.",
+        {
+          titre: "Faire disparaître l'endométriose",
+          detail: "Ce n'est pas une maladie qui se guérit, et je ne vous mentirai pas là-dessus.",
+        },
+        {
+          titre: 'Remplacer un traitement',
+          detail: 'Ni une chirurgie, ni votre suivi gynécologique ou hormonal.',
+        },
+        {
+          titre: 'Promettre un calendrier',
+          detail: 'Votre corps répond à son rythme, sur un à plusieurs cycles.',
+        },
+        {
+          titre: "Tenir lieu d'avis médical",
+          detail:
+            "Un symptôme nouveau ou qui s'aggrave mérite toujours l'avis de votre médecin, et je vous y orienterai sans hésiter.",
+        },
       ]}
     />
     <p class="cta-intermediaire">
@@ -158,6 +174,8 @@ const articles = [
   <SectionEditoriale
     numero="05"
     surtitre="CE QU'ELLES EN DISENT"
+    texte="droite"
+    tete="droite"
     titre="Dans leurs mots, pas les miens."
   >
     <p class="note-chapitre">
