@@ -7,12 +7,14 @@ interface Props {
   prioritaire?: boolean;
 }
 const { ref, alt, src, ratio = '4 / 3', prioritaire = false } = Astro.props;
+const [largeur, hauteur] = ratio.split('/').map((valeur) => Number(valeur.trim()));
+const portrait = hauteur > largeur;
 ---
 
 {
   src ? (
     <img
-      class="photo"
+      class:list={['photo', portrait && 'photo--portrait']}
       src={src}
       alt={alt}
       style={`aspect-ratio: ${ratio}`}
@@ -21,7 +23,12 @@ const { ref, alt, src, ratio = '4 / 3', prioritaire = false } = Astro.props;
       decoding="async"
     />
   ) : (
-    <div class="photo-placeholder" style={`aspect-ratio: ${ratio}`} role="img" aria-label={alt}>
+    <div
+      class:list={['photo-placeholder', portrait && 'photo--portrait']}
+      style={`aspect-ratio: ${ratio}`}
+      role="img"
+      aria-label={alt}
+    >
       <span class="photo-placeholder__ref">{ref}</span>
     </div>
   )

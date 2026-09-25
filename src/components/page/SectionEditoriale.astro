@@ -74,6 +74,12 @@ const eyebrow = surtitreDeSection(surtitre, numero);
   .section-editoriale__marge {
     margin-block-start: calc(var(--rythme-para) * 2);
   }
+  /* Une photo verticale posee sous le texte ne prend pas toute la largeur :
+     sans plafond, celle de l'accueil montait a 1070 x 1426 px a 1280, plus
+     haute que l'ecran. En regard du texte, sa colonne la borne deja. */
+  .section-editoriale__marge :global(.photo--portrait) {
+    max-inline-size: 24rem;
+  }
 
   /* Texte sur deux colonnes : il coule de l'une a l'autre comme dans un livre,
      les hauteurs s'equilibrent seules. La largeur de la section remplace alors
@@ -156,6 +162,9 @@ const eyebrow = surtitreDeSection(surtitre, numero);
       grid-area: marge;
       max-inline-size: 34rem;
       margin-block-start: 0;
+    }
+    .section-editoriale--regard .section-editoriale__marge :global(.photo--portrait) {
+      max-inline-size: none;
     }
   }
 </style>
