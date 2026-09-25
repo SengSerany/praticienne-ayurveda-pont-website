@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="22 38 316 392" width="316" height="392" role="img" aria-labelledby="schema-apres-pilule-titre schema-apres-pilule-desc">
+  <title id="schema-apres-pilule-titre">Foie, axe hormonal et cycle</title>
+  <desc id="schema-apres-pilule-desc">Deux chemins convergent vers le cycle, en bas. À gauche, le foie, qui fait le tri des hormones, figuré par son contour. À droite, l'axe hormonal, qui se remet en route relais après relais, figuré par trois petits cercles reliés de haut en bas. Quand les deux suivent, le cycle peut revenir.</desc>
+
+  <g fill="none" stroke="var(--c-encre, #2d2a26)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(39, 96)">
+      <path vector-effect="non-scaling-stroke" d="M 6 26 C 8 12 26 4 50 4 C 76 4 104 12 113 24 C 116 29 112 35 104 39 C 88 47 66 58 46 62 C 28 66 10 54 6 38 Z"/>
+      <path vector-effect="non-scaling-stroke" d="M 52 5 C 48 20 49 32 56 44"/>
+    </g>
+    <circle vector-effect="non-scaling-stroke" cx="262" cy="110" r="11"/>
+    <circle vector-effect="non-scaling-stroke" cx="262" cy="146" r="11"/>
+    <circle vector-effect="non-scaling-stroke" cx="262" cy="182" r="11"/>
+    <circle vector-effect="non-scaling-stroke" cx="180" cy="342" r="40"/>
+  </g>
+
+  <g fill="none" stroke="var(--c-encre, #2d2a26)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+    <path vector-effect="non-scaling-stroke" d="M262 121L262 135M262 157L262 171"/>
+    <path vector-effect="non-scaling-stroke" d="M110 176L152.4 297.9M152.4 297.9L153.7 287M152.4 297.9L144.6 290.2"/>
+    <path vector-effect="non-scaling-stroke" d="M256 205L207.6 297.9M207.6 297.9L216.4 291.4M207.6 297.9L207.9 286.9"/>
+  </g>
+
+  <g fill="var(--c-encre, #2d2a26)" font-family="var(--f-mono, JetBrains Mono, monospace)" font-size="20" letter-spacing="4.4" text-anchor="middle">
+    <text x="100" y="82">FOIE</text>
+    <text x="262" y="60">AXE</text>
+    <text x="262" y="82">HORMONAL</text>
+    <text x="180" y="418">CYCLE</text>
+  </g>
+</svg>
