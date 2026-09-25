@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="12 46 332 364" width="332" height="364" role="img" aria-labelledby="schema-perimenopause-titre schema-perimenopause-desc">
+  <title id="schema-perimenopause-titre">Chaleur et sécheresse, et ce qui les tempère</title>
+  <desc id="schema-perimenopause-desc">Deux flèches montent depuis le bas : la chaleur et la sécheresse, qui s'installent avec la périménopause. Elles s'arrêtent sur un trait horizontal. Au-dessus, deux flèches descendent sur ce trait : la fraîcheur, qui tempère la chaleur, et le gras, qui tempère la sécheresse.</desc>
+
+  <g fill="none" stroke="var(--c-encre, #2d2a26)" stroke-width="1.2" stroke-linecap="round">
+    <path vector-effect="non-scaling-stroke" d="M44 190L300 190"/>
+  </g>
+
+  <g fill="none" stroke="var(--c-encre, #2d2a26)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+    <path vector-effect="non-scaling-stroke" d="M92 90L92 176M92 176L96.8 166.1M92 176L87.2 166.1M252 90L252 176M252 176L256.8 166.1M252 176L247.2 166.1"/>
+  </g>
+
+  <g fill="none" stroke="var(--c-terre, #8f5d4e)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+    <path vector-effect="non-scaling-stroke" d="M92 364L92 204M92 204L87.2 213.9M92 204L96.8 213.9M252 364L252 204M252 204L247.2 213.9M252 204L256.8 213.9"/>
+  </g>
+
+  <g fill="var(--c-encre, #2d2a26)" font-family="var(--f-mono, JetBrains Mono, monospace)" font-size="20" letter-spacing="4.4" text-anchor="middle">
+    <text x="92" y="70">FRAÎCHEUR</text>
+    <text x="92" y="398">CHALEUR</text>
+    <text x="252" y="70">GRAS</text>
+    <text x="252" y="398">SÉCHERESSE</text>
+  </g>
+</svg>
