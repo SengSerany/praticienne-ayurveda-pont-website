@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 44 284 392" width="284" height="392" role="img" aria-labelledby="schema-post-partum-titre schema-post-partum-desc">
+  <title id="schema-post-partum-titre">Le grand vide et ce qui le comble</title>
+  <desc id="schema-post-partum-desc">Un grand bol ouvert, presque vide : c'est l'espace laissé dans le corps après la naissance. Deux flèches s'y versent par le haut, la chaleur et le gras nourrissant, qui viennent le combler. Un trait près du fond montre qu'il se remplit peu à peu.</desc>
+
+  <g fill="none" stroke="var(--c-encre, #2d2a26)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+    <path vector-effect="non-scaling-stroke" d="M56 196L82.8 350Q88 380 118 380L246 380Q276 380 281.2 350L308 196"/>
+  </g>
+
+  <g fill="none" stroke="var(--c-encre, #2d2a26)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+    <path vector-effect="non-scaling-stroke" d="M122 94L122 182M122 182L126.8 172.1M122 182L117.2 172.1M242 94L242 182M242 182L246.8 172.1M242 182L237.2 172.1"/>
+    <path vector-effect="non-scaling-stroke" d="M93 340L271 340"/>
+  </g>
+
+  <g fill="var(--c-encre, #2d2a26)" font-family="var(--f-mono, JetBrains Mono, monospace)" font-size="20" letter-spacing="4.4" text-anchor="middle">
+    <text x="122" y="72">CHALEUR</text>
+    <text x="242" y="72">GRAS</text>
+    <text x="182" y="418">LE GRAND VIDE</text>
+  </g>
+</svg>
