@@ -1,6 +1,5 @@
 ---
 import Pont from './Pont.astro';
-import ClauseYmyl from '../ui/ClauseYmyl.astro';
 
 interface Props {
   numero?: string;
@@ -11,5 +10,4 @@ const { numero, titre } = Astro.props;
 
 <Pont numero={numero} eyebrow="LE PONT" titre={titre}>
   <slot />
-  <ClauseYmyl />
 </Pont>

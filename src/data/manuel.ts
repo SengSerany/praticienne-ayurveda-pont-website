@@ -54,9 +54,9 @@ export const manuelMeta = {
     "Parce que la consultation réussie, finalement, c'est celle au terme de laquelle tu n'as plus besoin de moi.",
   ],
   lettre: {
-    titre: 'Garde le fil. Un chapitre par mois.',
+    titre: 'Un chapitre de fond, une fois par mois.',
     promesse:
-      "Une fois par mois, je t'envoie un chapitre de fond, clair, documenté, sans rien à vendre. Pour commencer, un petit outil gratuit pour mieux comprendre ton terrain : quelques questions, un retour utile à la fin.",
+      "Je te l'envoie clair et documenté. Pour commencer, un petit outil gratuit pour mieux comprendre ton terrain : quelques questions, un retour utile à la fin.",
     microcopy: 'Jamais de vente. Désabonnement en un clic.',
   },
   ymylPilier: 'Les contenus de ce manuel sont informatifs et ne remplacent pas un avis médical.',
