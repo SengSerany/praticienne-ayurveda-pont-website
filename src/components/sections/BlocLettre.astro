@@ -40,6 +40,12 @@ const { titre, promesse } = Astro.props;
     max-width: var(--rythme-colonne-large);
     margin-inline: auto;
   }
+  /* Pose directement dans la page, le bloc prend la marge d'une section : sans
+     elle, il collait au Seuil des pages condition. Glisse dans une section,
+     comme sur le manuel ou un chapitre, il suit la mise en page de celle-ci. */
+  :global(.page) > .bloc-lettre {
+    margin-block: calc(var(--espace-section) * 2);
+  }
   .bloc-lettre__label {
     display: block;
     font-family: var(--f-mono);
