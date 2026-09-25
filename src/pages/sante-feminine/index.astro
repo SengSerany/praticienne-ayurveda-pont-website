@@ -4,6 +4,7 @@ import Hero from '../../components/page/Hero.astro';
 import SectionEditoriale from '../../components/page/SectionEditoriale.astro';
 import BandeauReassurance from '../../components/page/BandeauReassurance.astro';
 import Schema from '../../components/ui/Schema.astro';
+import Photo from '../../components/ui/Photo.astro';
 import ClauseYmyl from '../../components/ui/ClauseYmyl.astro';
 import OngletManuel from '../../components/sections/OngletManuel.astro';
 import Seuil from '../../components/sections/Seuil.astro';
@@ -45,6 +46,14 @@ const descriptionsHub: Record<string, string> = {
     eyebrow="AYURVEDA & SANTÉ FÉMININE"
     titre="Votre santé hormonale a une histoire, apprenons à la lire."
   >
+    <Photo
+      slot="media"
+      ref="PHOTO-13"
+      src="/photo-13.webp"
+      alt="Pièce aux murs clairs, volet de bois ouvert, bottes d'herbes posées sur du papier au coin d'une table"
+      ratio="3 / 4"
+      prioritaire
+    />
     <p>
       Vos hormones ne travaillent jamais seules. Elles dialoguent en permanence avec votre
       digestion, votre système nerveux, votre foie, votre sommeil. Quand l'une se dérègle, c'est
