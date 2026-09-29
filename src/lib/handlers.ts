@@ -16,7 +16,7 @@ export interface HandlerResult {
 }
 
 const ERREUR_GENERIQUE =
-  "Une erreur est survenue, votre demande n'a pas pu etre traitee. Reessayez dans un instant.";
+  "Une erreur est survenue, votre demande n'a pas pu être traitée. Réessayez dans un instant.";
 
 function echappe(valeur: string): string {
   return valeur.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -46,8 +46,8 @@ export async function handlePremierEchange(
   const notif = await brevoSendTransactional(
     config,
     {
-      subject: 'Nouveau premier echange',
-      htmlContent: `<p>Email : ${echappe(input.email)}</p><p>Prenom : ${echappe(input.prenom ?? '')}</p><p>Message : ${echappe(input.message ?? '')}</p>`,
+      subject: 'Nouveau premier échange',
+      htmlContent: `<p>Email : ${echappe(input.email)}</p><p>Prénom : ${echappe(input.prenom ?? '')}</p><p>Message : ${echappe(input.message ?? '')}</p>`,
     },
     fetchImpl,
   );
@@ -78,5 +78,5 @@ export async function handleLettre(
     return { status: 502, error: ERREUR_GENERIQUE };
   }
   logger.info('lettre inscription', {});
-  return { status: 200, message: 'Verifiez votre boite mail pour confirmer votre inscription.' };
+  return { status: 200, message: 'Vérifiez votre boîte mail pour confirmer votre inscription.' };
 }
