@@ -126,6 +126,8 @@
   /* Arrondie au pixel : les filets fins qui en dependent tombent alors sur un
      pixel plein, au lieu d'etre etales sur deux a certaines largeurs. */
   --marge-page: round(clamp(1rem, 4vw, 3rem), 1px);
+  /* Ecart entre deux colonnes de texte, et depart du texte decale a droite. */
+  --gouttiere-texte: clamp(2.5rem, 4vw, 4rem);
   --rythme-para: 1.5em;
   --espace-section-serre: clamp(2.25rem, 5vw, 3.5rem);
   --espace-section: clamp(3rem, 8vw, 6rem);
