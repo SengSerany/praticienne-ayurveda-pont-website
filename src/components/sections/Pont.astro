@@ -6,14 +6,24 @@ interface Props {
   numero?: string;
   eyebrow?: string;
   titre: string;
+  // Compose le texte sur deux colonnes, sur toute la largeur de la section.
+  colonnes?: 1 | 2;
 }
-const { numero, eyebrow, titre } = Astro.props;
+const { numero, eyebrow, titre, colonnes = 1 } = Astro.props;
 const surtitre = eyebrow ? surtitreDeSection(eyebrow, numero) : undefined;
 const avecOuverture = Astro.slots.has('ouverture');
 const avecRegard = Astro.slots.has('regard');
 ---
 
-<section class:list={['pont', { 'pont--double-page': avecOuverture || avecRegard }]}>
+<section
+  class:list={[
+    'pont',
+    {
+      'pont--double-page': avecOuverture || avecRegard,
+      'pont--deux-colonnes': colonnes === 2,
+    },
+  ]}
+>
   <header class="pont__tete">
     {surtitre && <Eyebrow text={surtitre} />}
     <h2>{titre}</h2>
@@ -74,6 +84,20 @@ const avecRegard = Astro.slots.has('regard');
   .pont :global(a) {
     color: var(--c-encre);
     text-decoration-color: var(--c-brun-reliure);
+  }
+
+  /* Texte sur deux colonnes, sur toute la largeur de la section : il coule de
+     l'une a l'autre comme dans un livre, meme ecart que les sections sur deux
+     colonnes. En dessous de 64rem, une seule colonne. */
+  @media (min-width: 64rem) {
+    .pont--deux-colonnes .pont__corps {
+      max-width: none;
+      columns: 2;
+      column-gap: var(--gouttiere-texte);
+    }
+    .pont--deux-colonnes .pont__corps > :global(*) {
+      max-width: none;
+    }
   }
   .pont :global(a:hover) {
     color: var(--c-brun-reliure);
