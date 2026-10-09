@@ -41,10 +41,11 @@ describe('handlePremierEchange', () => {
 });
 
 describe('handleLettre', () => {
-  it('declenche le double opt-in, notifie Celine et renvoie 200', async () => {
+  it('declenche le double opt-in, notifie Celine et redirige vers la page merci', async () => {
     const f = okFetch();
     const r = await handleLettre({ email: 'a@b.fr' }, config, f);
-    expect(r.status).toBe(200);
+    expect(r.status).toBe(303);
+    expect(r.redirect).toBe('/la-lettre/merci');
     expect(f).toHaveBeenCalledTimes(2);
     const [premier, second] = f.mock.calls.map(([url]) => String(url));
     expect(premier).toMatch(/doubleOptinConfirmation$/);
@@ -57,7 +58,7 @@ describe('handleLettre', () => {
         : new Response('{}', { status: 201 }),
     );
     const r = await handleLettre({ email: 'a@b.fr' }, config, f);
-    expect(r.status).toBe(200);
+    expect(r.status).toBe(303);
   });
   it('ne notifie pas si le double opt-in echoue', async () => {
     const f = vi.fn(async () => new Response('{}', { status: 500 }));

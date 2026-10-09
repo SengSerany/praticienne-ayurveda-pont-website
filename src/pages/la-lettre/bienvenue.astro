@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/page/Hero.astro';
+
+const description = 'Votre inscription à la lettre est confirmée.';
+---
+
+<BaseLayout title="C'est confirmé, bienvenue" description={description} noindex={true}>
+  <Hero variante="papier" eyebrow="LA LETTRE" titre="C'est confirmé." titrePleineLargeur>
+    <p>
+      Bienvenue. La prochaine lettre arrivera directement dans votre boîte mail : une fois par mois,
+      un chapitre de fond, de la cause au geste. Jamais de vente.
+    </p>
+  </Hero>
+</BaseLayout>

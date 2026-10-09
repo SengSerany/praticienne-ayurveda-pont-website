@@ -13,8 +13,8 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   };
   const config = brevoConfigDepuisEnv(env);
   const result = await handleLettre(input, config);
-  if (result.status === 200) {
-    return redirect('/la-lettre?inscrite=1', 303);
+  if (result.status === 303 && result.redirect) {
+    return redirect(result.redirect, 303);
   }
   return new Response(result.error ?? 'Erreur', {
     status: result.status,
