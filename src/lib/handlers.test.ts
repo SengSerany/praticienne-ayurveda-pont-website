@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { handlePremierEchange, handleLettre } from './handlers';
+import { handlePremierEchange, handleLettre, handleGuide } from './handlers';
 
 const config = {
   apiKey: 'k',
@@ -69,5 +69,77 @@ describe('handleLettre', () => {
   it('rejette le honeypot en 400', async () => {
     const r = await handleLettre({ email: 'a@b.fr', honeypot: 'x' }, config, okFetch());
     expect(r.status).toBe(400);
+  });
+});
+
+describe('handleGuide', () => {
+  const guide = { slug: 'exemple', titre: 'Exemple', lien: 'https://x.fr/guides/exemple.pdf' };
+  const configGuide = { ...config, listGuidesId: 9, guideTemplateId: 4 };
+  const urls = (f: ReturnType<typeof okFetch>) => f.mock.calls.map(([url]) => String(url));
+  const corps = (f: ReturnType<typeof okFetch>, i: number) =>
+    JSON.parse((f.mock.calls[i][1] as RequestInit).body as string);
+
+  it('ajoute le contact a la liste, envoie le guide, notifie Celine et redirige', async () => {
+    const f = okFetch();
+    const r = await handleGuide({ email: 'a@b.fr', prenom: 'Marie' }, guide, configGuide, f);
+    expect(r.status).toBe(303);
+    expect(r.redirect).toBe('/guides/exemple/merci');
+    expect(urls(f)).toEqual([
+      'https://api.brevo.com/v3/contacts',
+      'https://api.brevo.com/v3/smtp/email',
+      'https://api.brevo.com/v3/smtp/email',
+    ]);
+    expect(corps(f, 0).listIds).toEqual([9]);
+    expect(corps(f, 1)).toMatchObject({
+      templateId: 4,
+      to: [{ email: 'a@b.fr', name: 'Marie' }],
+      params: { titre: 'Exemple', lien: 'https://x.fr/guides/exemple.pdf' },
+    });
+    expect(corps(f, 2).to[0].email).toBe('c@x.fr');
+  });
+
+  it("envoie le guide meme si l'ajout du contact echoue", async () => {
+    const f = vi.fn(async (url: RequestInfo | URL, _init?: RequestInit) =>
+      String(url).endsWith('/contacts')
+        ? new Response('{}', { status: 500 })
+        : new Response('{}', { status: 201 }),
+    );
+    const r = await handleGuide({ email: 'a@b.fr' }, guide, configGuide, f);
+    expect(r.status).toBe(303);
+  });
+
+  it("renvoie une erreur si l'envoi du guide echoue, sans notifier", async () => {
+    const f = vi.fn(async (url: RequestInfo | URL, _init?: RequestInit) =>
+      String(url).endsWith('/smtp/email')
+        ? new Response('{}', { status: 500 })
+        : new Response('{}', { status: 201 }),
+    );
+    const r = await handleGuide({ email: 'a@b.fr' }, guide, configGuide, f);
+    expect(r.status).toBe(502);
+    expect(f).toHaveBeenCalledTimes(2);
+  });
+
+  it('reste un succes si seule la notification echoue', async () => {
+    let envois = 0;
+    const f = vi.fn(async (url: RequestInfo | URL, _init?: RequestInit) => {
+      if (String(url).endsWith('/smtp/email')) envois += 1;
+      return new Response('{}', { status: envois === 2 ? 500 : 201 });
+    });
+    const r = await handleGuide({ email: 'a@b.fr' }, guide, configGuide, f);
+    expect(r.status).toBe(303);
+  });
+
+  it('renvoie 500 sans modele de guide configure', async () => {
+    const r = await handleGuide({ email: 'a@b.fr' }, guide, config, okFetch());
+    expect(r.status).toBe(500);
+  });
+
+  it('rejette une adresse invalide ou le honeypot sans appeler brevo', async () => {
+    const f = okFetch();
+    expect((await handleGuide({ email: 'x' }, guide, configGuide, f)).status).toBe(400);
+    expect(
+      (await handleGuide({ email: 'a@b.fr', honeypot: 'x' }, guide, configGuide, f)).status,
+    ).toBe(400);
+    expect(f).not.toHaveBeenCalled();
   });
 });

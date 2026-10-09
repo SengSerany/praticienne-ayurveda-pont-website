@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import { liens } from '../data/liens';
+import { liensVisibles } from '../lib/liens';
+import { SITE } from '../data/site';
+
+const visibles = liensVisibles(liens, SITE.lance);
+const misEnAvant = visibles.filter((lien) => lien.couverture);
+const ordinaires = visibles.filter((lien) => !lien.couverture);
+const description = `Les liens de ${SITE.nom}, ${SITE.baseline} : le guide offert, et bientôt le site.`;
+---
+
+<BaseLayout title="Liens" description={description} sansNavigation>
+  <section class="liens">
+    <header class="liens__tete">
+      <Eyebrow text={SITE.baseline} />
+      <h1>{SITE.nom}</h1>
+      <p class="liens__accroche">
+        L'Ayurveda éprouvée au service de la santé féminine : la cause avant le symptôme.
+      </p>
+    </header>
+
+    {
+      misEnAvant.map((lien) => (
+        <a class="lien lien--guide" href={lien.href}>
+          <img class="lien__couverture" src={lien.couverture} alt="" width="840" height="1189" />
+          <span class="lien__texte">
+            {lien.surtitre && <span class="lien__surtitre">{lien.surtitre}</span>}
+            <span class="lien__titre">{lien.titre}</span>
+            <span class="lien__detail">{lien.detail}</span>
+            {lien.action && <span class="lien__action">{lien.action}</span>}
+          </span>
+        </a>
+      ))
+    }
+
+    {
+      ordinaires.length > 0 && (
+        <ul class="liens__liste">
+          {ordinaires.map((lien) => (
+            <li>
+              <a class="lien" href={lien.href}>
+                <span class="lien__texte">
+                  <span class="lien__titre">{lien.titre}</span>
+                  <span class="lien__detail">{lien.detail}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {!SITE.lance && <p class="liens__note">Le site complet ouvre prochainement.</p>}
+  </section>
+</BaseLayout>
+
+<style>
+  /* Une colonne etroite, la largeur d'un ecran de telephone : on arrive ici depuis
+     la bio Instagram. Le guide offert, seul objet mis en avant, se pose sur un
+     papier plus profond, sa couverture toilee en vignette. Les autres liens se
+     rangent comme une table des matieres, entre filets. */
+  .liens {
+    max-width: 34rem;
+    min-height: calc(100svh - 2 * var(--espace-section));
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .liens__tete h1 {
+    font-size: var(--t-h2-size);
+    margin-block-end: 0.5rem;
+  }
+  .liens__accroche {
+    color: var(--c-muted);
+    margin: 0 0 2.5rem;
+  }
+  .liens__liste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--c-filet);
+  }
+  .liens__liste > li {
+    border-bottom: 1px solid var(--c-filet);
+  }
+  .lien {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+    padding: 1.25rem 0;
+    color: var(--c-encre);
+    text-decoration: none;
+  }
+  .lien__texte {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .lien__surtitre {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    color: var(--c-label);
+  }
+  .lien__titre {
+    font-family: var(--f-display);
+    font-size: var(--t-h4-size);
+    line-height: 1.2;
+  }
+  .lien__detail {
+    font-size: var(--t-small-size);
+    color: var(--c-muted);
+  }
+  .lien:hover .lien__titre {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+  .lien--guide {
+    padding: 1.25rem;
+    background-color: var(--c-papier-profond);
+  }
+  .lien--guide + .liens__liste {
+    margin-top: 1.5rem;
+  }
+  .lien--guide .lien__detail {
+    font-family: var(--f-quote);
+    font-style: italic;
+    font-size: var(--t-body-size);
+    color: var(--c-encre);
+  }
+  .lien__action {
+    margin-top: 0.4rem;
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+    color: var(--c-brun-reliure);
+  }
+  .lien__couverture {
+    flex: 0 0 auto;
+    width: 5.5rem;
+    height: auto;
+    border: 1px solid var(--c-filet-fort);
+  }
+  .liens__note {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-muted);
+    margin-top: 2rem;
+  }
+</style>

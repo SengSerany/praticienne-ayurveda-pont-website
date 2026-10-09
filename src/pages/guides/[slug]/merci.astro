@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Hero from '../../../components/page/Hero.astro';
+import Button from '../../../components/ui/Button.astro';
+import { guides, type Guide } from '../../../data/guides';
+import { SITE } from '../../../data/site';
+
+export function getStaticPaths() {
+  return guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }));
+}
+
+interface Props {
+  guide: Guide;
+}
+const { guide } = Astro.props;
+---
+
+<BaseLayout
+  title="C'est envoyé, le guide arrive"
+  description={`Le guide « ${guide.titre} » est en route vers ta boîte mail.`}
+  noindex={true}
+  sansNavigation={!SITE.lance}
+>
+  <Hero
+    variante="papier"
+    eyebrow="GUIDE OFFERT, C'EST ENVOYÉ"
+    titre="C'est dans ta boîte mail."
+    titrePleineLargeur
+  >
+    <p>
+      Je viens de t'envoyer « {guide.titre} ». Tu peux aussi le télécharger tout de suite, et le garder
+      sous la main pendant ton prochain cycle.
+    </p>
+    <p><Button href={guide.fichier} label="Télécharger le guide" /></p>
+    <p class="indesirables">
+      Rien reçu d'ici quelques minutes ? Regarde dans tes courriers indésirables ou dans l'onglet
+      Promotions.
+    </p>
+    <p class="retour"><a href="/liens">Revenir aux liens</a></p>
+  </Hero>
+</BaseLayout>
+
+<style>
+  .indesirables {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-muted);
+  }
+  .retour {
+    margin-top: 2rem;
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+  }
+</style>

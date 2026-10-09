@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+import SectionEditoriale from '../../components/page/SectionEditoriale.astro';
+import FormulaireGuide from '../../components/page/FormulaireGuide.astro';
+import ClauseYmyl from '../../components/ui/ClauseYmyl.astro';
+import { guides, titreComplet, type Guide } from '../../data/guides';
+import { SITE } from '../../data/site';
+
+export function getStaticPaths() {
+  return guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }));
+}
+
+interface Props {
+  guide: Guide;
+}
+const { guide } = Astro.props;
+const description = `Guide offert de ${guide.nombrePages} pages. ${guide.accroche}`;
+---
+
+<BaseLayout
+  title={`Guide offert : ${guide.titre}`}
+  description={description}
+  sansNavigation={!SITE.lance}
+>
+  <section class="guide">
+    <div class="guide__texte">
+      <Eyebrow text={`Guide offert - ${guide.nombrePages} pages`} />
+      <h1>{guide.titre}</h1>
+      <p class="guide__sous-titre">{guide.sousTitre}</p>
+      <p class="lead">{guide.accroche}</p>
+    </div>
+    <img
+      class="guide__couverture"
+      src={guide.couverture}
+      alt={`Couverture du guide « ${titreComplet(guide)} »`}
+      width="840"
+      height="1189"
+    />
+    <div class="guide__formulaire">
+      <FormulaireGuide slug={guide.slug} />
+    </div>
+  </section>
+
+  <SectionEditoriale
+    numero="01"
+    surtitre="CE QUE TU TROUVERAS DEDANS"
+    titre="Cinq gestes simples, et un carnet pour observer."
+  >
+    <p>
+      <strong>Pour commencer, {guide.ouverture.titre.toLowerCase()}.</strong>
+      {guide.ouverture.detail}
+    </p>
+    <ol class="liste-manuel rituels">
+      {guide.rituels.map((rituel) => <li>{rituel}</li>)}
+    </ol>
+    <p>
+      <strong>Pour finir, {guide.cloture.titre.toLowerCase()}.</strong>
+      {guide.cloture.detail}
+    </p>
+    <ClauseYmyl sujet="Ce guide" />
+  </SectionEditoriale>
+</BaseLayout>
+
+<style>
+  .guide {
+    display: grid;
+    grid-template-areas: 'texte' 'couverture' 'formulaire';
+    gap: clamp(2rem, 5vw, 3rem);
+    padding-inline: var(--marge-page);
+    margin-block-end: var(--espace-section);
+  }
+  .guide__texte {
+    grid-area: texte;
+    max-width: var(--rythme-colonne);
+  }
+  .guide__texte h1 {
+    margin-block-end: 0.2em;
+  }
+  .guide__sous-titre {
+    font-family: var(--f-quote);
+    font-style: italic;
+    font-size: var(--t-h3-size);
+    line-height: 1.3;
+    margin: 0 0 1.5rem;
+  }
+  .guide__couverture {
+    grid-area: couverture;
+    display: block;
+    width: min(62%, 17rem);
+    height: auto;
+    border: 1px solid var(--c-filet);
+  }
+  .guide__formulaire {
+    grid-area: formulaire;
+  }
+  .rituels {
+    margin-block: 1.5rem;
+  }
+  .rituels > li {
+    font-family: var(--f-display);
+    font-size: var(--t-h4-size);
+  }
+  /* Les chiffres romains du sommaire du guide : Fraunces en terre, a la taille
+     du titre, et non le folio mono des listes du manuel. */
+  .rituels > li {
+    padding-left: 3.25rem;
+  }
+  .rituels > li::before {
+    content: counter(entree-manuel, upper-roman);
+    top: 0;
+    font-family: var(--f-display);
+    font-size: inherit;
+    letter-spacing: normal;
+  }
+  @media (min-width: 52rem) {
+    .guide {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      grid-template-areas:
+        'texte couverture'
+        'formulaire couverture';
+      column-gap: var(--gouttiere-texte);
+      align-items: start;
+    }
+    .guide__couverture {
+      width: 100%;
+      max-width: 26rem;
+      justify-self: end;
+    }
+  }
+</style>

@@ -1,5 +1,10 @@
 import { describe, it, expect, vi } from 'vitest';
-import { brevoUpsertContact, brevoDoubleOptIn, brevoSendTransactional } from './brevo';
+import {
+  brevoUpsertContact,
+  brevoDoubleOptIn,
+  brevoSendTemplate,
+  brevoSendTransactional,
+} from './brevo';
 
 const config = {
   apiKey: 'k',
@@ -61,5 +66,25 @@ describe('brevoSendTransactional', () => {
     expect(url).toBe('https://api.brevo.com/v3/smtp/email');
     const body = JSON.parse((init as RequestInit).body as string);
     expect(body.to[0].email).toBe('celine@x.fr');
+  });
+});
+
+describe('brevoSendTemplate', () => {
+  it('envoie le modele a la destinataire avec ses parametres', async () => {
+    const f = mockFetch(201);
+    const r = await brevoSendTemplate(
+      config,
+      { templateId: 4, destinataire: { email: 'a@b.fr' }, params: { lien: 'https://x.fr' } },
+      f,
+    );
+    expect(r.ok).toBe(true);
+    const [url, init] = f.mock.calls[0];
+    expect(url).toBe('https://api.brevo.com/v3/smtp/email');
+    const body = JSON.parse((init as RequestInit).body as string);
+    expect(body).toEqual({
+      templateId: 4,
+      to: [{ email: 'a@b.fr' }],
+      params: { lien: 'https://x.fr' },
+    });
   });
 });
