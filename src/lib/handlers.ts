@@ -48,6 +48,7 @@ export async function handlePremierEchange(
     {
       subject: 'Nouveau premier échange',
       htmlContent: `<p>Email : ${echappe(input.email)}</p><p>Prénom : ${echappe(input.prenom ?? '')}</p><p>Message : ${echappe(input.message ?? '')}</p>`,
+      replyTo: { email: input.email, name: input.prenom || undefined },
     },
     fetchImpl,
   );

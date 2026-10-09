@@ -8,7 +8,10 @@ const config = {
   doiTemplateId: 3,
   doiRedirectUrl: 'https://x.fr',
 };
-const okFetch = () => vi.fn(async () => new Response('{}', { status: 201 }));
+const okFetch = () =>
+  vi.fn(
+    async (_url: RequestInfo | URL, _init?: RequestInit) => new Response('{}', { status: 201 }),
+  );
 
 describe('handlePremierEchange', () => {
   it('rejette une entree invalide sans appeler brevo', async () => {
@@ -23,6 +26,13 @@ describe('handlePremierEchange', () => {
     expect(r.status).toBe(303);
     expect(r.redirect).toBe('/confirmation');
     expect(f).toHaveBeenCalledTimes(2);
+  });
+  it('fait repondre la notification directement a la visiteuse', async () => {
+    const f = okFetch();
+    await handlePremierEchange({ email: 'a@b.fr', prenom: 'Marie' }, config, f);
+    const notif = f.mock.calls.find(([url]) => String(url).endsWith('/smtp/email'));
+    const body = JSON.parse((notif![1] as RequestInit).body as string);
+    expect(body.replyTo).toEqual({ email: 'a@b.fr', name: 'Marie' });
   });
   it('renvoie 500 si la cle api manque', async () => {
     const r = await handlePremierEchange({ email: 'a@b.fr' }, { apiKey: '' }, okFetch());
