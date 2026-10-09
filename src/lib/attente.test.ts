@@ -35,4 +35,14 @@ describe('cheminSousAttente', () => {
     expect(cheminSousAttente('/bientot.html')).toBe(false);
     expect(cheminSousAttente('/api/lettre')).toBe(false);
   });
+
+  it('laisse visibles la page de liens et les guides, sous-pages comprises', () => {
+    expect(cheminSousAttente('/liens.html')).toBe(false);
+    expect(cheminSousAttente('/guides/5-rituels-cycle.html')).toBe(false);
+    expect(cheminSousAttente('/guides/5-rituels-cycle/merci')).toBe(false);
+  });
+
+  it('ne confond pas une page publique avec une page qui commence pareil', () => {
+    expect(cheminSousAttente('/liens-utiles')).toBe(true);
+  });
 });

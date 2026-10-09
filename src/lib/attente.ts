@@ -19,8 +19,13 @@ export function siteEnAttente({ lance, branche, forcage }: ContexteDeBuild): boo
   return !lance && branche === BRANCHE_PUBLIQUE;
 }
 
+// Pages visibles malgre l'attente, avec leurs sous-pages : la page de liens de la
+// bio Instagram et les guides offerts, que Celine diffuse deja.
+export const CHEMINS_PUBLICS = ['/liens', '/guides'];
+
 // Les formulaires restent servis : seules les pages cedent la place a l'attente.
 export function cheminSousAttente(pathname: string): boolean {
   const chemin = cheminPropre(pathname);
-  return chemin !== CHEMIN_ATTENTE && !chemin.startsWith('/api/');
+  if (chemin === CHEMIN_ATTENTE || chemin.startsWith('/api/')) return false;
+  return !CHEMINS_PUBLICS.some((public_) => chemin === public_ || chemin.startsWith(`${public_}/`));
 }
