@@ -48,8 +48,11 @@ const description =
   <section class="abonnement">
     <Eyebrow text="§ 02 - RECEVEZ LA PREMIÈRE" />
     <h2>Laissez-moi votre adresse, je m'occupe du reste.</h2>
-    <p class="lettre-confirme" hidden>
+    <p class="lettre-confirme" data-etat="inscrite" hidden>
       Merci. Vérifiez votre boîte mail pour confirmer votre inscription.
+    </p>
+    <p class="lettre-confirme" data-etat="confirmee" hidden>
+      C'est confirmé, merci. La prochaine lettre arrivera directement dans votre boîte mail.
     </p>
     <FormulaireLettre cta="S'abonner" />
     <p class="abonnement__medical">
@@ -57,10 +60,14 @@ const description =
     </p>
   </section>
 
+  <!-- `inscrite` vient du formulaire, `confirmee` du lien de confirmation envoye par Brevo
+       (BREVO_DOI_REDIRECT_URL). -->
   <script is:inline>
-    if (location.search.includes('inscrite=1')) {
-      const el = document.querySelector('.lettre-confirme');
-      if (el) el.hidden = false;
+    {
+      const parametres = new URLSearchParams(location.search);
+      for (const message of document.querySelectorAll('.lettre-confirme')) {
+        if (parametres.get(message.dataset.etat) === '1') message.hidden = false;
+      }
     }
   </script>
 </BaseLayout>
