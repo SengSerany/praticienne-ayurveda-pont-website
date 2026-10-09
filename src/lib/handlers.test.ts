@@ -41,10 +41,28 @@ describe('handlePremierEchange', () => {
 });
 
 describe('handleLettre', () => {
-  it('declenche le double opt-in et renvoie 200', async () => {
+  it('declenche le double opt-in, notifie Celine et renvoie 200', async () => {
     const f = okFetch();
     const r = await handleLettre({ email: 'a@b.fr' }, config, f);
     expect(r.status).toBe(200);
+    expect(f).toHaveBeenCalledTimes(2);
+    const [premier, second] = f.mock.calls.map(([url]) => String(url));
+    expect(premier).toMatch(/doubleOptinConfirmation$/);
+    expect(second).toMatch(/smtp\/email$/);
+  });
+  it('reste un succes si seule la notification echoue', async () => {
+    const f = vi.fn(async (url: RequestInfo | URL) =>
+      String(url).endsWith('/smtp/email')
+        ? new Response('{}', { status: 500 })
+        : new Response('{}', { status: 201 }),
+    );
+    const r = await handleLettre({ email: 'a@b.fr' }, config, f);
+    expect(r.status).toBe(200);
+  });
+  it('ne notifie pas si le double opt-in echoue', async () => {
+    const f = vi.fn(async () => new Response('{}', { status: 500 }));
+    const r = await handleLettre({ email: 'a@b.fr' }, config, f);
+    expect(r.status).toBe(502);
     expect(f).toHaveBeenCalledOnce();
   });
   it('rejette le honeypot en 400', async () => {
