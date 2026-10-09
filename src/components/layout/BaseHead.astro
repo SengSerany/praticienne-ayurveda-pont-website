@@ -1,5 +1,5 @@
 ---
-import { buildPageTitle } from '../../lib/seo';
+import { buildCanonicalUrl, buildPageTitle } from '../../lib/seo';
 import { SITE } from '../../data/site';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 }
 const { title, description, noindex = false } = Astro.props;
 const pageTitle = buildPageTitle(title);
-const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const canonical = buildCanonicalUrl(Astro.url.pathname, SITE.url);
 ---
 
 <meta charset="utf-8" />

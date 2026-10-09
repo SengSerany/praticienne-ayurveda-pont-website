@@ -4,6 +4,13 @@ export function buildPageTitle(title?: string): string {
   return title ? `${title} | ${SUFFIXE_MARQUE}` : SUFFIXE_MARQUE;
 }
 
+// Au build, les pages sont ecrites en fichiers (`sopk.html`) et Astro.url le
+// reflete ; l'adresse servie, elle, n'a ni extension ni slash final.
+export function buildCanonicalUrl(pathname: string, site: string): string {
+  const chemin = pathname.replace(/\.html$/, '').replace(/\/index$/, '/');
+  return new URL(chemin || '/', site).href;
+}
+
 export interface PersonJsonLdInput {
   name: string;
   jobTitle: string;
