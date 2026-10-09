@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/page/Hero.astro';
+
+const description = 'Votre inscription à la lettre attend votre confirmation.';
+---
+
+<BaseLayout
+  title="Plus qu'un clic pour recevoir la lettre"
+  description={description}
+  noindex={true}
+>
+  <Hero
+    variante="papier"
+    eyebrow="LA LETTRE, UNE DERNIÈRE ÉTAPE"
+    titre="Plus qu'un clic."
+    titrePleineLargeur
+  >
+    <p>
+      Je viens de vous envoyer un email. Cliquez sur « Je confirme mon inscription » : sans ce clic,
+      la lettre ne vous parviendra pas.
+    </p>
+    <p class="indesirables">
+      Rien reçu d'ici quelques minutes ? Regardez dans vos courriers indésirables ou dans l'onglet
+      Promotions.
+    </p>
+  </Hero>
+</BaseLayout>
+
+<style>
+  .indesirables {
+    font-family: var(--f-mono);
+    font-size: var(--t-small-size);
+    color: var(--c-muted);
+  }
+</style>

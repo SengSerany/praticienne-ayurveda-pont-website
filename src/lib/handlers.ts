@@ -11,7 +11,6 @@ import { logger } from './logger';
 export interface HandlerResult {
   status: number;
   redirect?: string;
-  message?: string;
   error?: string;
 }
 
@@ -92,5 +91,5 @@ export async function handleLettre(
     logger.error('lettre notification echec', { status: notif.status });
   }
   logger.info('lettre inscription', {});
-  return { status: 200, message: 'Vérifiez votre boîte mail pour confirmer votre inscription.' };
+  return { status: 303, redirect: '/la-lettre/merci' };
 }
