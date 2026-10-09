@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Illustration from '../components/ui/Illustration.astro';
+import { SITE } from '../data/site';
+
+const description = `Le site de ${SITE.nom}, ${SITE.baseline}, ouvre prochainement.`;
+---
+
+<BaseLayout title="Sous presse" description={description} noindex={true} sansNavigation>
+  <section class="attente">
+    <div class="attente__texte">
+      <Eyebrow text={`${SITE.nom} - ${SITE.baseline}`} />
+      <h1>Sous presse.</h1>
+      <p class="lead">Le manuel est encore à l'atelier.</p>
+      <p>
+        J'y prépare un lieu pour comprendre ce qui se joue dans votre corps, par l'Ayurveda éprouvée
+        : la cause avant le symptôme. Il ouvrira prochainement.
+      </p>
+    </div>
+    <div class="attente__planche">
+      <Illustration ref="ILLU-Presse" alt="" decoratif />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Une page seule, sans menu ni pied : elle occupe l'ecran, rembourrage du main
+     deduit. Deux elements, le texte et la presse d'herbier, jamais plus. */
+  .attente {
+    min-height: calc(100svh - 2 * var(--espace-section));
+    display: grid;
+    align-content: center;
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+  .attente__texte {
+    max-width: var(--rythme-colonne);
+  }
+  .attente__texte h1 {
+    margin-block-end: 0.3em;
+  }
+  .attente__texte .lead {
+    margin-block-end: 1rem;
+  }
+  .attente__planche {
+    --illustration-largeur: clamp(11rem, 42vw, 15rem);
+    --illustration-marge: 0;
+  }
+  @media (min-width: 52rem) {
+    .attente {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      align-items: center;
+    }
+    .attente__planche {
+      --illustration-largeur: clamp(16rem, 30vw, 28rem);
+      justify-self: center;
+    }
+  }
+</style>

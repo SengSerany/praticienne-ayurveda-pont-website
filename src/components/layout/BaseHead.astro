@@ -17,7 +17,7 @@ const canonical = buildCanonicalUrl(Astro.url.pathname, SITE.url);
 <title>{pageTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
-{(noindex || !SITE.indexable) && <meta name="robots" content="noindex, nofollow" />}
+{(noindex || !SITE.lance) && <meta name="robots" content="noindex, nofollow" />}
 <meta property="og:type" content="website" />
 <meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={description} />
