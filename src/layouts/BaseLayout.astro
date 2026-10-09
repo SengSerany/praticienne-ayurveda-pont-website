@@ -21,8 +21,16 @@ interface Props {
   description: string;
   noindex?: boolean;
   masquerCtaPrincipal?: boolean;
+  // Page seule, sans menu ni pied de page : la page d'attente n'a nulle part ou mener.
+  sansNavigation?: boolean;
 }
-const { title, description, noindex, masquerCtaPrincipal = false } = Astro.props;
+const {
+  title,
+  description,
+  noindex,
+  masquerCtaPrincipal = false,
+  sansNavigation = false,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -32,11 +40,11 @@ const { title, description, noindex, masquerCtaPrincipal = false } = Astro.props
     <Analytics />
   </head>
   <body>
-    <Header masquerCtaPrincipal={masquerCtaPrincipal} />
+    {!sansNavigation && <Header masquerCtaPrincipal={masquerCtaPrincipal} />}
     <main class="page">
       <slot />
     </main>
-    <Footer />
+    {!sansNavigation && <Footer />}
   </body>
 </html>
 
