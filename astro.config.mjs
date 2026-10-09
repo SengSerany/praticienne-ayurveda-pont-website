@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, sessionDrivers } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
 import { SITE } from './src/data/site.ts';
 import { siteEnAttente } from './src/lib/attente.ts';
@@ -19,6 +19,10 @@ export default defineConfig({
   // Cloudflare redirigent `/sopk` vers `/sopk/`, a l'inverse de trailingSlash.
   build: { format: 'file' },
   output: 'static',
+  // Le site n'utilise pas les sessions Astro. Sans pilote explicite, l'adaptateur
+  // declare un KV `SESSION` sans identifiant : Wrangler le cree en production,
+  // mais les apercus de branche le refusent (erreur 10021).
+  session: { driver: sessionDrivers.lruCache() },
   adapter: cloudflare({ platformProxy: { enabled: true } }),
   vite: {
     define: { 'import.meta.env.SITE_EN_ATTENTE': JSON.stringify(enAttente) },
