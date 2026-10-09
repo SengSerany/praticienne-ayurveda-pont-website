@@ -64,7 +64,7 @@ export async function brevoDoubleOptIn(
 
 export async function brevoSendTransactional(
   config: BrevoConfig,
-  email: { subject: string; htmlContent: string },
+  email: { subject: string; htmlContent: string; replyTo?: { email: string; name?: string } },
   fetchImpl: FetchLike = fetch,
 ): Promise<BrevoResult> {
   const res = await fetchImpl(`${BASE}/smtp/email`, {
@@ -73,6 +73,7 @@ export async function brevoSendTransactional(
     body: JSON.stringify({
       sender: { name: 'Site Celine Lefevre', email: config.notifEmail },
       to: [{ email: config.notifEmail }],
+      replyTo: email.replyTo,
       subject: email.subject,
       htmlContent: email.htmlContent,
     }),

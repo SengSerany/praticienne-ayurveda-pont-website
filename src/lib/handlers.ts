@@ -48,6 +48,7 @@ export async function handlePremierEchange(
     {
       subject: 'Nouveau premier échange',
       htmlContent: `<p>Email : ${echappe(input.email)}</p><p>Prénom : ${echappe(input.prenom ?? '')}</p><p>Message : ${echappe(input.message ?? '')}</p>`,
+      replyTo: { email: input.email, name: input.prenom || undefined },
     },
     fetchImpl,
   );
@@ -76,6 +77,19 @@ export async function handleLettre(
   if (!doi.ok) {
     logger.error('lettre doi echec', { status: doi.status });
     return { status: 502, error: ERREUR_GENERIQUE };
+  }
+  // L'inscription est deja partie : un echec de la notification a Celine ne
+  // doit pas la faire echouer aux yeux de la visiteuse.
+  const notif = await brevoSendTransactional(
+    config,
+    {
+      subject: 'Nouvelle inscription à la lettre',
+      htmlContent: `<p>Email : ${echappe(input.email)}</p><p>L'inscription sera effective quand cette personne aura cliqué le lien de confirmation reçu par email.</p>`,
+    },
+    fetchImpl,
+  );
+  if (!notif.ok) {
+    logger.error('lettre notification echec', { status: notif.status });
   }
   logger.info('lettre inscription', {});
   return { status: 200, message: 'Vérifiez votre boîte mail pour confirmer votre inscription.' };
