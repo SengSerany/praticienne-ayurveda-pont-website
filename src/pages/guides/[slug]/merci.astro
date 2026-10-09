@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Hero from '../../../components/page/Hero.astro';
-import Button from '../../../components/ui/Button.astro';
 import { guides, type Guide } from '../../../data/guides';
 import { SITE } from '../../../data/site';
 
@@ -28,10 +27,9 @@ const { guide } = Astro.props;
     titrePleineLargeur
   >
     <p>
-      Je viens de t'envoyer « {guide.titre} ». Tu peux aussi le télécharger tout de suite, et le garder
-      sous la main pendant ton prochain cycle.
+      Je viens de t'envoyer « {guide.titre} ». Ouvre l'email « Ton guide offert est arrivé » : le lien
+      pour le télécharger t'y attend, et tu pourras y revenir quand tu veux.
     </p>
-    <p><Button href={guide.fichier} label="Télécharger le guide" /></p>
     <p class="indesirables">
       Rien reçu d'ici quelques minutes ? Regarde dans tes courriers indésirables ou dans l'onglet
       Promotions.
