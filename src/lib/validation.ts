@@ -30,6 +30,20 @@ export function validatePremierEchange(input: PremierEchangeInput): ValidationRe
   return { ok: errors.length === 0, errors };
 }
 
+export interface GuideInput {
+  email: string;
+  prenom?: string;
+  honeypot?: string;
+}
+
+export function validateGuide(input: GuideInput): ValidationResult {
+  const errors: string[] = [];
+  if (input.honeypot) errors.push('honeypot');
+  if (!isValidEmail(input.email)) errors.push('email');
+  if (input.prenom && input.prenom.length > 100) errors.push('prenom');
+  return { ok: errors.length === 0, errors };
+}
+
 export function validateLettre(input: LettreInput): ValidationResult {
   const errors: string[] = [];
   if (input.honeypot) errors.push('honeypot');

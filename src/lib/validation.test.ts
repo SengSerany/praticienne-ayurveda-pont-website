@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isValidEmail, validatePremierEchange, validateLettre } from './validation';
+import { isValidEmail, validatePremierEchange, validateLettre, validateGuide } from './validation';
 
 describe('isValidEmail', () => {
   it('accepte un email valide', () => {
@@ -33,5 +33,17 @@ describe('validateLettre', () => {
   });
   it('rejette honeypot rempli', () => {
     expect(validateLettre({ email: 'a@b.fr', honeypot: 'x' }).ok).toBe(false);
+  });
+});
+
+describe('validateGuide', () => {
+  it('accepte une adresse seule ou avec un prenom', () => {
+    expect(validateGuide({ email: 'a@b.fr' }).ok).toBe(true);
+    expect(validateGuide({ email: 'a@b.fr', prenom: 'Marie' }).ok).toBe(true);
+  });
+  it('refuse le honeypot, une adresse invalide et un prenom trop long', () => {
+    expect(validateGuide({ email: 'a@b.fr', honeypot: 'x' }).errors).toEqual(['honeypot']);
+    expect(validateGuide({ email: 'x' }).errors).toEqual(['email']);
+    expect(validateGuide({ email: 'a@b.fr', prenom: 'x'.repeat(101) }).errors).toEqual(['prenom']);
   });
 });

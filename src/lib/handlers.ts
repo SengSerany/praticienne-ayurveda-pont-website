@@ -1,10 +1,17 @@
 import type { BrevoConfig } from './brevo';
-import { brevoUpsertContact, brevoDoubleOptIn, brevoSendTransactional } from './brevo';
+import {
+  brevoUpsertContact,
+  brevoDoubleOptIn,
+  brevoSendTemplate,
+  brevoSendTransactional,
+} from './brevo';
 import {
   validatePremierEchange,
   validateLettre,
+  validateGuide,
   type PremierEchangeInput,
   type LettreInput,
+  type GuideInput,
 } from './validation';
 import { logger } from './logger';
 
@@ -92,4 +99,69 @@ export async function handleLettre(
   }
   logger.info('lettre inscription', {});
   return { status: 303, redirect: '/la-lettre/merci' };
+}
+
+export interface GuideDemande {
+  slug: string;
+  titre: string;
+  lien: string;
+}
+
+export async function handleGuide(
+  input: GuideInput,
+  guide: GuideDemande,
+  config: BrevoConfig,
+  fetchImpl: typeof fetch = fetch,
+): Promise<HandlerResult> {
+  const validation = validateGuide(input);
+  if (!validation.ok) {
+    return { status: 400, error: 'Merci de renseigner une adresse email valide.' };
+  }
+  if (!config.apiKey || !config.guideTemplateId) {
+    logger.warn('guide non configure', {
+      raison: 'BREVO_API_KEY ou BREVO_GUIDE_TEMPLATE_ID manquante',
+    });
+    return { status: 500, error: ERREUR_GENERIQUE };
+  }
+  const prenom = input.prenom || undefined;
+  // Le guide part meme si l'ajout a la liste echoue : c'est ce que la visiteuse attend.
+  const contact = await brevoUpsertContact(
+    config,
+    {
+      email: input.email,
+      attributes: prenom ? { PRENOM: prenom } : undefined,
+      listIds: config.listGuidesId ? [config.listGuidesId] : undefined,
+    },
+    fetchImpl,
+  );
+  if (!contact.ok) {
+    logger.error('guide contact echec', { status: contact.status, guide: guide.slug });
+  }
+  const envoi = await brevoSendTemplate(
+    config,
+    {
+      templateId: config.guideTemplateId,
+      destinataire: { email: input.email, name: prenom },
+      params: { titre: guide.titre, lien: guide.lien },
+    },
+    fetchImpl,
+  );
+  if (!envoi.ok) {
+    logger.error('guide envoi echec', { status: envoi.status, guide: guide.slug });
+    return { status: 502, error: ERREUR_GENERIQUE };
+  }
+  const notif = await brevoSendTransactional(
+    config,
+    {
+      subject: 'Nouvelle demande du guide',
+      htmlContent: `<p>Guide : ${echappe(guide.titre)}</p><p>Email : ${echappe(input.email)}</p><p>Prénom : ${echappe(input.prenom ?? '')}</p>`,
+      replyTo: { email: input.email, name: prenom },
+    },
+    fetchImpl,
+  );
+  if (!notif.ok) {
+    logger.error('guide notification echec', { status: notif.status, guide: guide.slug });
+  }
+  logger.info('guide envoye', { guide: guide.slug });
+  return { status: 303, redirect: `/guides/${guide.slug}/merci` };
 }

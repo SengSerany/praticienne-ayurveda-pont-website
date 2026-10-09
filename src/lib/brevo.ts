@@ -4,6 +4,8 @@ export interface BrevoConfig {
   notifEmail?: string;
   doiTemplateId?: number;
   doiRedirectUrl?: string;
+  listGuidesId?: number;
+  guideTemplateId?: number;
 }
 
 export interface BrevoResult {
@@ -56,6 +58,30 @@ export async function brevoDoubleOptIn(
       includeListIds: config.listLettreId ? [config.listLettreId] : [],
       templateId: config.doiTemplateId,
       redirectionUrl: config.doiRedirectUrl,
+    }),
+  });
+  const ok = res.status >= 200 && res.status < 300;
+  return { ok, status: res.status };
+}
+
+// Envoie a une visiteuse un modele redige dans Brevo : l'expediteur, l'objet et
+// la mise en page vivent dans le modele, seuls les parametres viennent du site.
+export async function brevoSendTemplate(
+  config: BrevoConfig,
+  envoi: {
+    templateId: number;
+    destinataire: { email: string; name?: string };
+    params?: Record<string, string>;
+  },
+  fetchImpl: FetchLike = fetch,
+): Promise<BrevoResult> {
+  const res = await fetchImpl(`${BASE}/smtp/email`, {
+    method: 'POST',
+    headers: headers(config),
+    body: JSON.stringify({
+      templateId: envoi.templateId,
+      to: [envoi.destinataire],
+      params: envoi.params,
     }),
   });
   const ok = res.status >= 200 && res.status < 300;
