@@ -1,0 +1,89 @@
+---
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+---
+
+<form class="form-guide" method="post" action="/api/guide">
+  <input type="hidden" name="guide" value={slug} />
+  <p class="form-guide__champ">
+    <label for="guide-prenom">Ton prénom <span class="form-guide__aide">(optionnel)</span></label>
+    <input id="guide-prenom" name="prenom" type="text" maxlength="100" autocomplete="given-name" />
+  </p>
+  <p class="form-guide__champ">
+    <label for="guide-email">Ton email <span class="form-guide__aide">(requis)</span></label>
+    <input
+      id="guide-email"
+      name="email"
+      type="email"
+      required
+      autocomplete="email"
+      placeholder="prenom@exemple.fr"
+    />
+  </p>
+  <input
+    type="text"
+    name="site"
+    class="form-guide__hp"
+    tabindex="-1"
+    autocomplete="off"
+    aria-hidden="true"
+  />
+  <button type="submit" class="button button--filled">Recevoir le guide</button>
+  <p class="form-guide__rgpd">
+    Ton adresse me sert uniquement à t'envoyer le guide. Elle n'est ni revendue, ni utilisée pour
+    autre chose, et tu peux demander sa suppression à tout moment.
+  </p>
+</form>
+
+<style>
+  .form-guide {
+    max-width: 28rem;
+  }
+  .form-guide__champ {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 0 0 1rem;
+  }
+  .form-guide label {
+    font-family: var(--f-mono);
+    font-size: var(--t-label-size);
+    letter-spacing: var(--t-label-ls);
+    text-transform: uppercase;
+    color: var(--c-brun-reliure);
+  }
+  .form-guide__aide {
+    color: var(--c-muted);
+  }
+  .form-guide input {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--c-contour-champ);
+    background-color: var(--c-papier);
+    font-family: var(--f-body);
+    font-size: var(--t-body-size);
+  }
+  .form-guide__hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+  }
+  .form-guide .button {
+    width: 100%;
+    margin-block-start: 0.5rem;
+  }
+  /* Meme bouton que le premier echange : la terre au repos, l'encre au survol. */
+  .form-guide .button--filled {
+    background-color: var(--c-terre);
+  }
+  .form-guide .button--filled:hover {
+    background-color: var(--c-encre);
+  }
+  .form-guide__rgpd {
+    font-size: var(--t-caption-size);
+    color: var(--c-muted);
+    margin-top: 1rem;
+  }
+</style>
