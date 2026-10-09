@@ -9,6 +9,9 @@ export const SITE = {
   url: 'https://celine-lefevre-ayurveda.fr',
   // Adresse du canal professionnel, distincte du Premier echange. A confirmer par Celine.
   emailPro: 'contact-pro@celine-lefevre-ayurveda.fr',
+  // Le site est en ligne avant d'etre valide par Celine : aucune page ne doit
+  // etre indexee tant qu'il ne l'est pas. Passer a true au lancement.
+  indexable: false,
 };
 
 export const navPrincipale: NavItem[] = [
