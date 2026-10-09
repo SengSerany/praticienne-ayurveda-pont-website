@@ -1,5 +1,32 @@
 import { describe, it, expect } from 'vitest';
-import { buildArticleJsonLd, buildPageTitle, buildPersonJsonLd, buildWebPageJsonLd } from './seo';
+import {
+  buildArticleJsonLd,
+  buildCanonicalUrl,
+  buildPageTitle,
+  buildPersonJsonLd,
+  buildWebPageJsonLd,
+} from './seo';
+
+describe('buildCanonicalUrl', () => {
+  const site = 'https://celine-lefevre-ayurveda.fr';
+
+  it("retire l'extension des pages ecrites en fichiers au build", () => {
+    expect(buildCanonicalUrl('/sante-feminine/sopk.html', site)).toBe(
+      'https://celine-lefevre-ayurveda.fr/sante-feminine/sopk',
+    );
+  });
+
+  it("ramene la page d'accueil a la racine", () => {
+    expect(buildCanonicalUrl('/index.html', site)).toBe('https://celine-lefevre-ayurveda.fr/');
+    expect(buildCanonicalUrl('/', site)).toBe('https://celine-lefevre-ayurveda.fr/');
+  });
+
+  it('laisse intacte une adresse deja propre, comme en dev', () => {
+    expect(buildCanonicalUrl('/approche', site)).toBe(
+      'https://celine-lefevre-ayurveda.fr/approche',
+    );
+  });
+});
 
 describe('buildArticleJsonLd', () => {
   it('produit un schema Article avec dates ISO et auteur Celine', () => {
