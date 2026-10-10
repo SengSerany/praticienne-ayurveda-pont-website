@@ -398,8 +398,11 @@ a.carte-lien:focus-visible {
   color: var(--c-papier);
 }
 
+/* La couleur est redonnee au survol : sinon a:hover, plus specifique, passe le
+   texte en terre sur le fond terre. */
 .button--filled:hover {
   background-color: var(--c-terre);
+  color: var(--c-papier);
 }
 
 .button--outline {
