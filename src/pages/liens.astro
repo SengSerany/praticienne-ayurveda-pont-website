@@ -75,8 +75,14 @@ const description = `Les liens de ${SITE.nom}, ${SITE.baseline} : le guide offer
     flex-direction: column;
     justify-content: center;
   }
+  /* Le h1 du site force la taille optique des tres grands titres (opsz 144) : a
+     cette taille, ses delies devenaient des fils. Ici la taille optique suit la
+     taille reelle, et la graisse remonte d'un cran. */
   .liens__tete h1 {
     font-size: var(--t-h2-size);
+    font-weight: 350;
+    letter-spacing: var(--t-h2-ls);
+    font-variation-settings: 'WONK' 1;
     margin-block-end: 0.5rem;
   }
   .liens__accroche {
