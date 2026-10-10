@@ -1,4 +1,5 @@
 import { guides } from './guides';
+import { SITE } from './site';
 
 // Page de liens, l'adresse a mettre en bio Instagram. Un lien `avantLancement`
 // s'affiche tout de suite ; les autres attendent `SITE.lance`. Rendre visible
@@ -16,6 +17,14 @@ export interface Lien {
 }
 
 const [guideCycle] = guides;
+
+// Visible avant comme apres le lancement : la reservation passe par l'agenda de
+// Celine, pas par une page du site.
+export const appelDecouverte = {
+  action: 'Réserver un appel découverte',
+  detail: '30 minutes, gratuit et sans engagement.',
+  href: SITE.reservation,
+};
 
 export const liens: Lien[] = [
   {

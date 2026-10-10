@@ -9,6 +9,8 @@ export const SITE = {
   url: 'https://celine-lefevre-ayurveda.fr',
   // Adresse du canal professionnel, distincte du Premier echange. A confirmer par Celine.
   emailPro: 'contact-pro@celine-lefevre-ayurveda.fr',
+  // Agenda de Celine pour l'appel decouverte gratuit de 30 minutes.
+  reservation: 'https://calendly.com/celine-lefevre06/appel-decouverte---ayurveda-',
   // Le site est en ligne avant d'etre valide par Celine. Tant qu'il n'est pas
   // lance, aucune page n'est indexee et l'adresse publique ne montre que la page
   // d'attente (voir src/lib/attente.ts). Passer a true au lancement.
