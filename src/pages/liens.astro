@@ -1,14 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
-import { liens } from '../data/liens';
+import Button from '../components/ui/Button.astro';
+import { appelDecouverte, liens } from '../data/liens';
 import { liensVisibles } from '../lib/liens';
 import { SITE } from '../data/site';
 
 const visibles = liensVisibles(liens, SITE.lance);
 const misEnAvant = visibles.filter((lien) => lien.couverture);
 const ordinaires = visibles.filter((lien) => !lien.couverture);
-const description = `Les liens de ${SITE.nom}, ${SITE.baseline} : le guide offert, et bientôt le site.`;
+const description = `Les liens de ${SITE.nom}, ${SITE.baseline} : le guide offert, l'appel découverte, et bientôt le site.`;
 ---
 
 <BaseLayout title="Liens" description={description} sansNavigation>
@@ -34,6 +35,11 @@ const description = `Les liens de ${SITE.nom}, ${SITE.baseline} : le guide offer
         </a>
       ))
     }
+
+    <p class="liens__rendez-vous">
+      <Button href={appelDecouverte.href} label={appelDecouverte.action} />
+      <span class="liens__rendez-vous-detail">{appelDecouverte.detail}</span>
+    </p>
 
     {
       ordinaires.length > 0 && (
@@ -123,8 +129,23 @@ const description = `Les liens de ${SITE.nom}, ${SITE.baseline} : le guide offer
     padding: 1.25rem;
     background-color: var(--c-papier-profond);
   }
-  .lien--guide + .liens__liste {
-    margin-top: 1.5rem;
+  .liens__rendez-vous {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1.5rem 0 0;
+  }
+  .liens__rendez-vous :global(.button) {
+    text-align: center;
+  }
+  .liens__rendez-vous-detail {
+    font-family: var(--f-quote);
+    font-style: italic;
+    color: var(--c-label);
+    text-align: center;
+  }
+  .liens__rendez-vous + .liens__liste {
+    margin-top: 2rem;
   }
   .lien--guide .lien__detail {
     font-family: var(--f-quote);
